@@ -4,9 +4,11 @@
   box-sizing: border-box;
 }
 
-/*h4 {
-  color: orange;
-}*/
+body {
+  background-color: #569C9F;
+  padding-top: 50px;
+  color: white
+}
 
 .Site {
   display: flex;
@@ -50,13 +52,13 @@
   font-family: 'Catamaran', 'Helvetica', 'Arial', 'sans-serif';
   font-weight: 300;
   letter-spacing: 1px;
-  font-size: 2em;
+  font-size: 5em;
   /* while fixed */
 }
 
 .navbar-default .navbar-header .navbar-brand {
   font-family: 'Arial', 'sans-serif';
-  font-size: 0.6em;
+  font-size: 1em;
   color: #31002e;
   font-weight: 200;
   text-transform: uppercase;
@@ -70,7 +72,7 @@
 
 .navbar-default .navbar-header .navbar-toggle {
   font-family: 'Arial', 'sans-serif';
-  font-size: 0.6em;
+  font-size: 1em;
   color: #31002e;
   font-weight: 200;
   text-transform: uppercase;
@@ -81,7 +83,7 @@
   font-family: 'Arial', 'sans-serif';
   text-transform: uppercase;
   letter-spacing: 2px;
-  font-size: 0.6em;
+  font-size: 1em;
   font-weight: 200;
   color: #31002e;
   padding: 20px 25px;

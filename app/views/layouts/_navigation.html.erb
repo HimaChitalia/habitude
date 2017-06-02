@@ -1,0 +1,26 @@
+ <nav style="background-color: #ffffff" id="main_nav" class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div >
+      <!-- Main nav bar -->
+      <ul class="navbar-left nav navbar-nav pull-left">
+        <li>
+          <%= link_to "Home", root_path %>
+        </li>
+      </ul>
+      <ul class="navbar-right nav navbar-nav pull-right">
+        <% if logged_in? %>
+          <li>
+            <%= link_to "Log Out", destroy_session_path, :method => :delete %>
+          </li>
+        <% else %>
+          <li>
+            <%= link_to "Sign In", new_session_path %>
+          </li>
+          <li>
+            <%= link_to "Sign Up", new_user_path %>
+          </li>
+        <% end %>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
