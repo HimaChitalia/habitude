@@ -1,0 +1,175 @@
+*, *:before, *:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/*h4 {
+  color: orange;
+}*/
+
+.Site {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.Site-content {
+  flex: 1;
+}
+
+#main-content {
+  padding-top: 50px;
+  font-size: 1em;
+}
+
+#footer {
+  /*background-color: white;
+  color: #111111;
+  position: relative;*/
+  /*z-index: 1*/
+  /*bottom: 0;
+  left: 0;
+  width: 100%;*/
+  /*height: 20px;*/
+  /*align-content: center;*/
+  text-align: center;
+}
+
+/*///// NAVBAR ////*/
+
+
+/* while header */
+
+.navbar-default {
+  background-color: #111111;
+  border-color: transparent;
+  -webkit-transition: all 0.35s;
+  -moz-transition: all 0.35s;
+  transition: all 0.35s;
+  font-family: 'Catamaran', 'Helvetica', 'Arial', 'sans-serif';
+  font-weight: 300;
+  letter-spacing: 1px;
+  font-size: 2em;
+  /* while fixed */
+}
+
+.navbar-default .navbar-header .navbar-brand {
+  font-family: 'Arial', 'sans-serif';
+  font-size: 0.6em;
+  color: #31002e;
+  font-weight: 200;
+  text-transform: uppercase;
+  padding: 20px 25px;
+}
+
+.navbar-default .navbar-header .navbar-brand:hover,
+.navbar-default .navbar-header .navbar-brand:focus {
+  color: #FF0000;
+}
+
+.navbar-default .navbar-header .navbar-toggle {
+  font-family: 'Arial', 'sans-serif';
+  font-size: 0.6em;
+  color: #31002e;
+  font-weight: 200;
+  text-transform: uppercase;
+  padding: 20px 25px;
+}
+
+.navbar-default .nav > li > a {
+  font-family: 'Arial', 'sans-serif';
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 0.6em;
+  font-weight: 200;
+  color: #31002e;
+  padding: 20px 25px;
+}
+
+.navbar-default .nav > li > a:focus {
+  color: #FF0000;
+}
+
+.navbar-default .nav > li > a:hover,
+.navbar-default .nav > li > a:focus:hover {
+  color: #FF0000;
+}
+
+.navbar-default .nav > li.active > a {
+  color: #FF0000;
+  background-color: #111111;
+}
+
+.navbar-default .nav > li.active > a:focus {
+  color: #FF0000;
+  background-color: #111111;
+}
+
+.navbar-default .nav > li.active > a:hover,
+.navbar-default .nav > li.active > a:focus:hover {
+  background-color: #111111;
+}
+
+.navbar-default .nav > li > a.selected {
+  color: #fff;
+  background-color: black;
+}
+
+.navbar-default .affix {
+  background-color: #111111;
+}
+
+.navbar-default .affix .navbar-header .navbar-brand:hover,
+.navbar-default .affix .navbar-header .navbar-brand:focus {
+  color: #FF0000;
+}
+
+.navbar-default .affix .nav > li.active > a {
+  color: #FF0000;
+}
+
+.navbar-default .affix .nav > li.active > a:focus {
+  color: #FF0000;
+}
+
+.navbar-default .affix .nav > li > a:hover,
+.navbar-default .affix .nav > li > a:active,
+.navbar-default .affix .nav > li > a:focus,
+.navbar-default .affix .nav > li > a:focus:hover {
+  color: #FF0000;
+}
+
+/*/// CLEARFIX ////*/
+
+
+.clearfix:after {
+  content: ".";
+  display: block;
+  clear: both;
+  visibility: hidden;
+  height: 0;
+  line-height: 0;
+}
+
+
+/*//// LINKS /////*/
+
+a:link {
+    color: #66FFFF;
+}
+
+/* visited link */
+a:visited {
+    color: pink;
+}
+
+/* mouse over link */
+a:hover {
+    background-color: gray;
+}
+
+/* selected link */
+a:active {
+    color: orange;
+}
