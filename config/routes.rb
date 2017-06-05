@@ -2,14 +2,15 @@ Rails.application.routes.draw do
   # resources :users
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
- get '/signup' => "registrations#new", as: :new_user
- post '/users/create', to: "registrations#create", as: :create_new_user
+ # get '/signup' => "registrations#new", as: :new_user
+ # post '/registrations/create', to: "registrations#create", as: :create_new_user
 
- get '/signin' => "sessions#new", as: :new_session
- post '/sessions/create', to: "sessions#create", as: :create_new_session
+ get '/login' => "sessions#new", as: :new_session
+ post '/login', to: "sessions#create", as: :create_new_session
+ get '/logout' => 'sessions#destroy'
  delete '/signout' => "sessions#destroy", as: :destroy_session
 
- resources :users, only: [:show, :destroy, :edit, :update]
+ resources :users
 
 
  # get 'users/:id' => "users#show" as: :show_user
