@@ -3,6 +3,9 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
+    unless authorize @users
+      redirect_to '/', notice: 'Only moderator can view this page.'
+    end
   end
 
   def new
@@ -11,53 +14,49 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    respond_to do |format|
-      if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
-      else
-        format.html { render :new }
-      end
+    @user.role = 3
+    if @user.save
+      binding.pry
+      session[:user_id] = @user.id
+      redirect_to @user, notice: 'User was successfully created.'
+    else
+      render :new
     end
   end
 
   def show
-  end
-
-  def new
-    @user = User.new
+    authorize @user
   end
 
   def edit
   end
 
-
-  def create
-    @user = User.new(user_params)
-
-    respond_to do |format|
-      if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
-      else
-        format.html { render :new }
-      end
-    end
-  end
-
   def update
-    respond_to do |format|
+    if authorize @user
       if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
+        redirect_to @user, notice: 'User was successfully updated.'
       else
-        format.html { render :edit }
+        render :edit
       end
+    else
+      redirect_to '/', notice: "You are not authorised to update profile of #{@user.name}"
     end
   end
 
   def destroy
+    authorize @user
     @user.destroy
-    respond_to do |format|
-      format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
+    redirect_to users_url, notice: 'User was successfully destroyed.'
+  end
+
+  def change_account_role
+    @user = User.find_by(id: params[:id])
+    if @user && @user.update(role: params[:role].to_i)
+      flash[:notification] = "#{@user.name} is now a #{@user.role}!"
+    else
+      flash[:notification] = "There was an issue with this request!"
     end
+    redirect_to users_path
   end
 
   private

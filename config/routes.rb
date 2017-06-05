@@ -12,6 +12,8 @@ Rails.application.routes.draw do
  delete '/signout' => "sessions#destroy", as: :destroy_session
  get 'auth/google_oauth2/callback' => 'sessions#create'
 
+ put '/users/:id/change_account_role', to: 'users#change_account_role', as: 'change_account_role'
+
  # get 'auth/:provider/callback', to: 'sessions#create'
  # get 'auth/failure', to: redirect('/')
 

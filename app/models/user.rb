@@ -2,6 +2,12 @@ class User < ApplicationRecord
 
   has_secure_password
 
+  validates :password, length: { in: 6..20 }
+  validates :username, :email, uniqueness: true
+  validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
+
+  enum role: [:viewer, :user, :admin, :owner]
+
   has_many :habits
   has_many :goals, through: :habits
   has_many :ideas, through: :habits

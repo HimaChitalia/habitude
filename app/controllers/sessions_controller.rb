@@ -12,6 +12,7 @@ class SessionsController < ApplicationController
         redirect_to user_path(user), notice: "You have successfully logged in"
       else
         user.name = request.env["omniauth.auth"]['info']['name']
+        user.role = 3
         user.oauth_token = auth.credentials.token
         user.oauth_expires_at = Time.at(auth.credentials.expires_at)
         user.password = SecureRandom.hex

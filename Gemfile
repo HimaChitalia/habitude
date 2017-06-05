@@ -36,6 +36,7 @@ gem 'omniauth'
 gem 'omniauth-google-oauth2'
 gem 'figaro'
 gem 'dotenv'
+gem 'pundit'
 
 gem 'pry'
 gem 'tux'
