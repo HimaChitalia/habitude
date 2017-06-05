@@ -5,3 +5,38 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+10.times do
+  User.create(
+    name: Faker::Name.name,
+    email: Faker::Internet.email, 
+    password: SecureRandom.hex,
+    admin: [true, false].sample
+  )
+end
+
+10.times do
+  Recipe.create(
+    name: Faker::Lorem.sentence,
+    instructions: Faker::Lorem.paragraph(2),
+    user_id: rand(1..10),
+    time_in_minutes: rand(1..90)
+  )
+end
+
+20.times do
+  RecipeIngredient.create(
+    quantity: "#{rand(1..4)} #{["cups", "tablespoons", "teaspoons", "grams"].sample}",
+    ingredient_id: rand(1..10),
+    recipe_id: rand(1..10)
+  )
+end
+
+20.times do
+  Comment.new(
+    recipe_id: rand(1..10),
+    user_id: rand(1..10),
+    rating: 6,
+    description: Faker::Lorem.sentence
+  )
+end

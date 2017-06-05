@@ -10,19 +10,51 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170605153620) do
+ActiveRecord::Schema.define(version: 20170605182949) do
+
+  create_table "goals", force: :cascade do |t|
+    t.string   "discription"
+    t.integer  "habit_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["habit_id"], name: "index_goals_on_habit_id"
+  end
 
   create_table "habits", force: :cascade do |t|
+    t.string   "name"
+    t.string   "discription"
+    t.integer  "user_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["user_id"], name: "index_habits_on_user_id"
+  end
+
+  create_table "ideas", force: :cascade do |t|
+    t.string   "content"
+    t.integer  "habit_id"
+    t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["habit_id"], name: "index_ideas_on_habit_id"
+    t.index ["user_id"], name: "index_ideas_on_user_id"
+  end
+
+  create_table "milestones", force: :cascade do |t|
+    t.string   "discription"
+    t.integer  "habit_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["habit_id"], name: "index_milestones_on_habit_id"
   end
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
     t.string   "email"
     t.string   "password_digest"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.string   "oauth_token"
+    t.datetime "oauth_expires_at"
   end
 
 end
