@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  # before_filter :skip_password_attribute, only: :change_role
 
   def index
     @users = User.all
@@ -54,12 +53,9 @@ class UsersController < ApplicationController
   end
 
   def change_role
-    binding.pry
     @user = User.find_by(id: params[:id])
-    @user.skip_password_validation = true
     if @user.email.present? && @user.name.present?
        @user.role = params[:role].to_i
-       binding.pry
        @user.save!
       "#{@user.name} is now a #{@user.role}!"
     else

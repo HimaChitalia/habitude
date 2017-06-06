@@ -1,20 +1,13 @@
 class User < ApplicationRecord
 
-  attr_accessor :skip_password_validation
-
   has_secure_password
 
   validate :validate_password_length
 
-  # validates :password, length: { minimum: 6 }, unless: :skip_password_validation
-  # validates :password, :presence => true,
-  #                      :confirmation => true,
-  #                      :length => { minimum: 6 },
-  #                      :unless => :already_has_password?
   validates :name, :email, uniqueness: true
   validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
 
-  enum role: [:viewer, :user, :admin, :owner]
+  enum role: [:viewer, :user, :admin, :moderator, :owner]
 
   has_many :habits
   has_many :goals, through: :habits
