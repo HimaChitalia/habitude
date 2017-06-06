@@ -8,7 +8,7 @@
       <th>Name</th>
       <th>Email</th>
       <th>Role</th>
-      <th colspan="4"></th>
+      <th colspan="8"></th>
     </tr>
   </thead>
 
@@ -18,6 +18,7 @@
         <td><%= user.name %></td>
         <td><%= user.email %></td>
         <td><%= user.role %></td>
+        <td>       </td>
         <% if user.role_before_type_cast < 2 %>
           <td><%= link_to "Upgrade To Admin", { controller: 'users', id: user.id, role: 2, action: "change_role" }, method: :put %></td>
         <% elsif user.role_before_type_cast < 3%>
@@ -27,14 +28,19 @@
         <% else %>
           <td></td>
         <% end %>
+        <td>       </td>
         <td><%= link_to 'Show', user %></td>
+        <td>       </td>
         <td><%= link_to 'Edit', edit_user_path(user) %></td>
-        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>       </td>
+        <% unless user.role_before_type_cast == 4 %>
+           <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
+<br><br><br>
 
-<%= link_to 'New User', new_user_path %>
+<%= button_to "Create a New User", new_user_path, :method => "get" %>
