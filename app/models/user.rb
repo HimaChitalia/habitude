@@ -7,6 +7,10 @@ class User < ApplicationRecord
   validate :validate_password_length
 
   # validates :password, length: { minimum: 6 }, unless: :skip_password_validation
+  validates :password, :presence => true,
+                       :confirmation => true,
+                       :length => { minimum: 6 },
+                       :unless => :already_has_password?
   validates :name, :email, :password, uniqueness: true
   validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
 
@@ -25,7 +29,17 @@ class User < ApplicationRecord
    end
  end
 
-  def validate_password_length
-    !password_digest_changed? || password_digest.length >= 6
+ def already_has_password?
+   if password_digest.present?
+   end
+ end
+
+  # def validate_password_length
+  #   !password_digest_changed? || password_digest.length >= 6
+  # end
+
+  def password_digest_changed
+    if params[:uesr][:password].present?
+    end
   end
 end
