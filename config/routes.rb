@@ -12,7 +12,7 @@ Rails.application.routes.draw do
  delete '/signout' => "sessions#destroy", as: :destroy_session
 
 
- put '/users/:id/change_account_role', to: 'users#change_account_role', as: 'change_account_role'
+ put '/users/:id/change_role', to: 'users#change_role', as: 'change_role'
 
  # get 'auth/google_oauth2/callback' => 'sessions#create'
  # get 'auth/:provider/callback', to: 'sessions#create'

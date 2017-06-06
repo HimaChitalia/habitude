@@ -1,9 +1,13 @@
 class User < ApplicationRecord
 
+  attr_accessor :skip_password_validation
+
   has_secure_password
 
-  validates :password, length: { in: 6..20 }
-  validates :username, :email, uniqueness: true
+  validate :validate_password_length
+
+  # validates :password, length: { minimum: 6 }, unless: :skip_password_validation
+  validates :name, :email, :password, uniqueness: true
   validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
 
   enum role: [:viewer, :user, :admin, :owner]
@@ -13,10 +17,15 @@ class User < ApplicationRecord
   has_many :ideas, through: :habits
 
   def self.find_or_create_by_omniauth(auth_hash)
-     self.where(email: auth_hash[‘info’][‘email’]).first_or_create do |u|
-     u.name = auth_hash[‘info’][‘name’]
+   self.where(email: auth_hash[:email]).first_or_create do |u|
+     u.name = auth_hash[:name]
      u.password = SecureRandom.hex
-     end
+     u.role = 2
+     u.save
+   end
  end
 
+  def validate_password_length
+    !password_digest_changed? || password_digest.length >= 6
+  end
 end

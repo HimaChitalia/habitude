@@ -4,27 +4,18 @@ class SessionsController < ApplicationController
   def create
 
     if request.env["omniauth.auth"].present?
-      user = User.find_or_create_by_omniauth(email: request.env["omniauth.auth"]['info']['email'])
-      if user.id.present?
-        user.oauth_token = auth.credentials.token
-        user.oauth_expires_at = Time.at(auth.credentials.expires_at)
+      auth_hash = request.env["omniauth.auth"]['info']
+      user = User.find_or_create_by_omniauth(auth_hash)
+      if user.valid?
         session[:user_id] = user.id
         redirect_to user_path(user), notice: "You have successfully logged in"
       else
-        user.name = request.env["omniauth.auth"]['info']['name']
-        user.role = 3
-        user.oauth_token = auth.credentials.token
-        user.oauth_expires_at = Time.at(auth.credentials.expires_at)
-        user.password = SecureRandom.hex
-        user.save
-        session[:user_id] = user.id
-        redirect_to user_path(user), notice: "You have successfully logged in"
+        redirect_to '/', notice: "Error occured. Please try again"
       end
     end
 
     if params[:email].present?
       user = User.find_by(email: params[:email])
-      binding.pry
       if user && user.authenticate(params[:password])
         session[:user_id] = user.id
         redirect_to user_path(user), notice: "You have successfully logged in"

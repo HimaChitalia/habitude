@@ -39,6 +39,7 @@ gem 'omniauth-facebook'
 gem 'figaro'
 gem 'dotenv'
 gem 'pundit'
+gem 'faker'
 
 gem 'pry'
 gem 'tux'

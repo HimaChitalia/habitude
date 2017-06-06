@@ -18,10 +18,12 @@
         <td><%= user.name %></td>
         <td><%= user.email %></td>
         <td><%= user.role %></td>
-        <% if user.role != "admin" || user.role != "owner" %>
-          <td><%= link_to "Upgrade To Admin", { controller: 'users', id: user.id, role: 2, action: "change_account_role" }, method: :put %></td>
+        <% if user.role_before_type_cast < 2 %>
+          <td><%= link_to "Upgrade To Admin", { controller: 'users', id: user.id, role: 2, action: "change_role" }, method: :put %></td>
+        <% elsif user.role_before_type_cast < 3%>
+          <td><%= link_to "Upgrade To Owner", { controller: 'users', id: user.id, role: 3, action: "change_role" }, method: :put %></td>
         <% else %>
-            <td><%= link_to "Downgrade to user", { controller: 'users', id: user.id, role:1, action: "change_account_role" }, method: :put %></td>
+          <td></td>
         <% end %>
         <td><%= link_to 'Show', user %></td>
         <td><%= link_to 'Edit', edit_user_path(user) %></td>

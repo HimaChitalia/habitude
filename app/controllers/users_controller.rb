@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  # before_filter :skip_password_attribute, only: :change_role
 
   def index
     @users = User.all
@@ -14,9 +15,8 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    @user.role = 3
+    @user.role = 2
     if @user.save
-      binding.pry
       session[:user_id] = @user.id
       redirect_to @user, notice: 'User was successfully created.'
     else
@@ -33,10 +33,14 @@ class UsersController < ApplicationController
 
   def update
     if authorize @user
-      if @user.update(user_params)
-        redirect_to @user, notice: 'User was successfully updated.'
+      if @user.authenticate(params[:user][:old_password])
+        if @user.update(user_params)
+          redirect_to @user, notice: 'User was successfully updated.'
+        else
+          render :edit
+        end
       else
-        render :edit
+        render :edit, notice: "Please enter a valid password to update your profile, #{@user.name}"
       end
     else
       redirect_to '/', notice: "You are not authorised to update profile of #{@user.name}"
@@ -49,12 +53,17 @@ class UsersController < ApplicationController
     redirect_to users_url, notice: 'User was successfully destroyed.'
   end
 
-  def change_account_role
+  def change_role
+    binding.pry
     @user = User.find_by(id: params[:id])
-    if @user && @user.update(role: params[:role].to_i)
-      flash[:notification] = "#{@user.name} is now a #{@user.role}!"
+    @user.skip_password_validation = true
+    if @user.email.present? && @user.name.present?
+       @user.role = params[:role].to_i
+       binding.pry
+       @user.save!
+      "#{@user.name} is now a #{@user.role}!"
     else
-      flash[:notification] = "There was an issue with this request!"
+      "There was an issue with this request!"
     end
     redirect_to users_path
   end
@@ -67,4 +76,10 @@ class UsersController < ApplicationController
     def user_params
       params.require(:user).permit(:name, :email, :password, :password_confirmation)
     end
+
+    def skip_password_attribute
+    if params[:password].blank? && params[:password_validation].blank?
+      params.except!(:password, :password_validation)
+    end
+  end
 end
