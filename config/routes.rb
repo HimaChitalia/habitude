@@ -5,7 +5,6 @@ Rails.application.routes.draw do
 
  # get '/signup' => "registrations#new", as: :new_user
  # post '/registrations/create', to: "registrations#create", as: :create_new_user
-
  get '/auth/facebook/callback' => 'sessions#create'
  get '/login' => "sessions#new", as: :new_session
  post '/login', to: "sessions#create", as: :create_new_session
