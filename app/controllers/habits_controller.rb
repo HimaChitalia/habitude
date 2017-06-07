@@ -17,15 +17,10 @@ class HabitsController < ApplicationController
 
   def create
     @habit = Habit.new(habit_params)
-
-    respond_to do |format|
-      if @habit.save
-        format.html { redirect_to @habit, notice: 'Habit was successfully created.' }
-        format.json { render :show, status: :created, location: @habit }
-      else
-        format.html { render :new }
-        format.json { render json: @habit.errors, status: :unprocessable_entity }
-      end
+    if @habit.save
+      redirect_to @habit, notice: 'Habit was successfully created.'
+    else
+      render :new
     end
   end
 
@@ -55,6 +50,6 @@ class HabitsController < ApplicationController
     end
 
     def habit_params
-      params.fetch(:habit, {})
+      params.required(:habit).permit(:name, :description, :category_id)
     end
 end

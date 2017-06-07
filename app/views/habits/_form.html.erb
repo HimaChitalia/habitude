@@ -11,6 +11,20 @@
     </div>
   <% end %>
 
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :description %>
+    <%= f.text_field :description %>
+  </div>
+
+  Select a Category:
+  <%= f.collection_select :category_id, Category.order(:name),:id,:name %>
+  <br/> <br/>
+
   <div class="actions">
     <%= f.submit %>
   </div>

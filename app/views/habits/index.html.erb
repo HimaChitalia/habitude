@@ -10,11 +10,14 @@
   </thead>
 
   <tbody>
-    <% @habits.each do |habit| %>
+    <% @habits.each.with_index(1) do |habit, index| %>
       <tr>
+        <td><%= index %>.  <%= link_to habit.name, habit %></td>
         <td><%= link_to 'Show', habit %></td>
-        <td><%= link_to 'Edit', edit_habit_path(habit) %></td>
-        <td><%= link_to 'Destroy', habit, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% unless current_user.role_before_type_cast < 2 %>
+           <td><%= link_to 'Edit', edit_habit_path(habit) %></td>
+           <td><%= link_to 'Destroy', habit, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
