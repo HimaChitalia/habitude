@@ -32,14 +32,10 @@ class UsersController < ApplicationController
 
   def update
     if authorize @user
-      if @user.authenticate(params[:user][:old_password])
-        if @user.update(user_params)
-          redirect_to @user, notice: 'User was successfully updated.'
-        else
-          render :edit
-        end
+      if @user.update(user_params)
+        redirect_to @user, notice: 'User was successfully updated.'
       else
-        render :edit, notice: "Please enter a valid password to update your profile, #{@user.name}"
+        render :edit
       end
     else
       redirect_to '/', notice: "You are not authorised to update profile of #{@user.name}"
@@ -73,9 +69,9 @@ class UsersController < ApplicationController
       params.require(:user).permit(:name, :email, :password, :password_confirmation)
     end
 
-    def skip_password_attribute
-    if params[:password].blank? && params[:password_validation].blank?
-      params.except!(:password, :password_validation)
-    end
-  end
+  #   def skip_password_attribute
+  #   if params[:password].blank? && params[:password_validation].blank?
+  #     params.except!(:password, :password_validation)
+  #   end
+  # end
 end

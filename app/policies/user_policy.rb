@@ -5,14 +5,14 @@ class UserPolicy < ApplicationPolicy
   end
 
   def show?
-    user.admin? || record == user || user.owner
+    user.admin? || record == user || user.owner? || user.moderator?
   end
 
   def update?
-    user.admin?
+    user.admin? 
   end
 
   def destroy?
-    user.admin? || user.owner
+    user.admin? || user.owner? || user.moderator?
   end
 end
