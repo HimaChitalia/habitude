@@ -51,3 +51,37 @@ categories.each do |category|
   c = Category.new(name: category)
   c.save
 end
+
+reading = Habit.new
+reading.name = "Reading"
+reading.category = Category.find_by(name: "Hobbies")
+reading.description = "Reading a book at least 2 pages everyday."
+reading.create_goal(description: "Should develop this in 3 weeks.")
+reading.user = User.find_by(name: "Hima")
+reading.goal.milestones.create(description: "Week 1")
+reading.goal.milestones.create(description: "Week 2")
+reading.goal.milestones.create(description: "Week 3")
+reading.save
+
+coding = Habit.new
+coding.name = "Coding"
+coding.category = Category.find_by(name: "Education")
+coding.description = "Learn coding to be web developer."
+coding.create_goal(description: "Should develop this in 4 months.")
+coding.user = User.find(12)
+coding.goal.milestones.create(description: "Month 1")
+coding.goal.milestones.create(description: "Month 2")
+coding.goal.milestones.create(description: "Month 3")
+coding.save
+
+planting = Habit.new
+planting.name = "Planting"
+planting.category = Category.find_by(name: "Outdoor Recreation")
+planting.description = "Give back to nature regularly"
+planting.create_goal(description: "Should develop this in 1 year")
+planting.user = User.find(13)
+planting.goal.milestones.create(description: "Month 3")
+planting.goal.milestones.create(description: "Month 6")
+planting.goal.milestones.create(description: "Month 9")
+planting.goal.milestones.create(description: "Month 12")
+planting.save

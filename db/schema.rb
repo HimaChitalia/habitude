@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170607162427) do
+ActiveRecord::Schema.define(version: 20170606204737) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 20170607162427) do
   end
 
   create_table "goals", force: :cascade do |t|
-    t.string   "discription"
+    t.string   "description"
     t.integer  "habit_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 20170607162427) do
 
   create_table "habits", force: :cascade do |t|
     t.string   "name"
-    t.string   "discription"
+    t.string   "description"
     t.integer  "category_id"
     t.integer  "user_id"
     t.datetime "created_at",  null: false
@@ -48,11 +48,11 @@ ActiveRecord::Schema.define(version: 20170607162427) do
   end
 
   create_table "milestones", force: :cascade do |t|
-    t.string   "discription"
-    t.integer  "habit_id"
+    t.string   "description"
+    t.integer  "goal_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.index ["habit_id"], name: "index_milestones_on_habit_id"
+    t.index ["goal_id"], name: "index_milestones_on_goal_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -62,7 +62,6 @@ ActiveRecord::Schema.define(version: 20170607162427) do
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.integer  "role"
-    t.string   "old_password"
   end
 
 end
