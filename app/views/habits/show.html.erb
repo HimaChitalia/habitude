@@ -1,4 +1,27 @@
 <p id="notice"><%= notice %></p>
 
+<%= @habit.name %>
+<%= @habit.description %>
+<%= @habit.category %>
+
+<h5>Add a goal to achieve!</h5>
+
+<%= form_tag ({controller: "goals", action: "search"}, method: "put") do %>
+  <input id="description" name="description" type="text" />
+<% end %>
+
+<%= form_tag @goal do |f| %>
+
+  <div class="field">
+    <%= f.label :description %>
+    <%= f.text_field :description %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+
+<% end %>
+
 <%= link_to 'Edit', edit_habit_path(@habit) %> |
 <%= link_to 'Back', habits_path %>

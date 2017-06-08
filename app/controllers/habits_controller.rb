@@ -6,6 +6,9 @@ class HabitsController < ApplicationController
   end
 
   def show
+    binding.pry
+    @goal = @habit.build_goal
+    binding.pry
   end
 
   def new
