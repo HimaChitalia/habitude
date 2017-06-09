@@ -6,9 +6,6 @@ class HabitsController < ApplicationController
   end
 
   def show
-    binding.pry
-    @goal = @habit.build_goal
-    binding.pry
   end
 
   def new
@@ -28,23 +25,16 @@ class HabitsController < ApplicationController
   end
 
   def update
-    respond_to do |format|
-      if @habit.update(habit_params)
-        format.html { redirect_to @habit, notice: 'Habit was successfully updated.' }
-        format.json { render :show, status: :ok, location: @habit }
-      else
-        format.html { render :edit }
-        format.json { render json: @habit.errors, status: :unprocessable_entity }
-      end
+    if @habit.update(habit_params)
+      redirect_to @habit, notice: 'Habit was successfully updated.'
+    else
+      render :edit
     end
   end
 
   def destroy
     @habit.destroy
-    respond_to do |format|
-      format.html { redirect_to habits_url, notice: 'Habit was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to habits_url, notice: 'Habit was successfully destroyed.'
   end
 
   private

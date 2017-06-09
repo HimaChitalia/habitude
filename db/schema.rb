@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170606204737) do
+ActiveRecord::Schema.define(version: 20170609222629) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -19,11 +19,23 @@ ActiveRecord::Schema.define(version: 20170606204737) do
   end
 
   create_table "goals", force: :cascade do |t|
-    t.string   "description"
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "goals_habits", force: :cascade do |t|
     t.integer  "habit_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.index ["habit_id"], name: "index_goals_on_habit_id"
+    t.integer  "goal_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "goals_milestones", force: :cascade do |t|
+    t.integer  "goal_id"
+    t.integer  "milestone_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "habits", force: :cascade do |t|
@@ -49,10 +61,8 @@ ActiveRecord::Schema.define(version: 20170606204737) do
 
   create_table "milestones", force: :cascade do |t|
     t.string   "description"
-    t.integer  "goal_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.index ["goal_id"], name: "index_milestones_on_goal_id"
   end
 
   create_table "users", force: :cascade do |t|

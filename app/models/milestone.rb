@@ -1,6 +1,6 @@
 class Milestone < ApplicationRecord
 
-  belongs_to :goal
-  delegate :habit, :to => :goal, :allow_nil => true
+  has_many :goals_milestones
+  has_and_belongs_to_many :goals
 
 end

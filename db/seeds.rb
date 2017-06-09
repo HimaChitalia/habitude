@@ -52,36 +52,51 @@ categories.each do |category|
   c.save
 end
 
+goals = ["Should develop this in 1 week.", "Should develop this in 2 weekS.", "Should develop this in 3 weeks.", "Should develop this in 4 weeks." ]
+
+goals.each do |goal|
+  g = Goal.new(name: goal)
+  g.save
+end
+
+milestones = ["Day 1", "Day 2", "Day 3", "Day 4", "Day 5", "Day 6", "Day 7", "Day 8", "Day 9", "Day 10", "Day 11", "Day 12", "Day 13", "Day 14",
+"Day 15", "Day 16", "Day 17", "Day 18", "Day 19", "Day 21", "Day 22", "Day 23", "Day 24", "Day 25", "Day 26", "Day 27",
+"Day 28", "Day 29", "Day 30", "Day 31 - The final day" "Week 1", "Week 2", "Week 3", "Week 4"]
+
+milestones.each do |milestone|
+  m = Milestone.new(description: milestone)
+  m.save
+end
+
 reading = Habit.new
 reading.name = "Reading"
 reading.category = Category.find_by(name: "Hobbies")
 reading.description = "Reading a book at least 2 pages everyday."
-reading.create_goal(description: "Should develop this in 3 weeks.")
 reading.user = User.find_by(name: "Hima")
-reading.goal.milestones.create(description: "Week 1")
-reading.goal.milestones.create(description: "Week 2")
-reading.goal.milestones.create(description: "Week 3")
+goal = Goal.find(1)
+reading.goals << goal
+milestone = Milestone.first
+reading.goals.first.milestones << milestone
 reading.save
 
 coding = Habit.new
 coding.name = "Coding"
 coding.category = Category.find_by(name: "Education")
 coding.description = "Learn coding to be web developer."
-coding.create_goal(description: "Should develop this in 4 months.")
 coding.user = User.find(12)
-coding.goal.milestones.create(description: "Month 1")
-coding.goal.milestones.create(description: "Month 2")
-coding.goal.milestones.create(description: "Month 3")
+goal = Goal.find(2)
+coding.goals << goal
+milestone = Milestone.last
+coding.goals.first.milestones << milestone
 coding.save
 
 planting = Habit.new
 planting.name = "Planting"
 planting.category = Category.find_by(name: "Outdoor Recreation")
 planting.description = "Give back to nature regularly"
-planting.create_goal(description: "Should develop this in 1 year")
+goal = Goal.find(3)
+planting.goals << goal
 planting.user = User.find(13)
-planting.goal.milestones.create(description: "Month 3")
-planting.goal.milestones.create(description: "Month 6")
-planting.goal.milestones.create(description: "Month 9")
-planting.goal.milestones.create(description: "Month 12")
+milestone = Milestone.find(31)
+planting.goals.first.milestones << milestone
 planting.save
