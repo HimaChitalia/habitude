@@ -2,7 +2,17 @@
 Name: <%= @habit.name %> <br> <br>
 Description: <%= @habit.description %>  <br> <br>
 Category: <%= @habit.category.name %>  <br> <br>
-Goal: <%=  @habit.goals.first.name %>
+<% if @habit.goals.size == 0 %>
+  Create goals for this habit!
+<%  elsif @habit.goals.size == 1 %>
+  Goal: <%=  @habit.goals.first.name %>
+<% else %>
+  Goals <br><br>
+  <% @habit.goals.each.with_index(1) do |goal, index|%>
+    <%= index %>.  <%=  goal.name %> <br>
+  <% end %> <br> <br>
+<% end %>
+
 
 
 <%= link_to 'Edit', edit_habit_path(@habit) %>
