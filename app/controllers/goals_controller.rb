@@ -28,6 +28,8 @@ class GoalsController < ApplicationController
   end
 
   def destroy
+    @goal.destroy
+    redirect_to @habit, :notice => "Goal Deleted"
   end
 
   def update_milestones
