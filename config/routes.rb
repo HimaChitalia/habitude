@@ -4,7 +4,9 @@ Rails.application.routes.draw do
 
   resources :habits do
     resources :goals do
-      resources :milestones
+      resources :milestones do
+        resources :statuses
+      end
     end
   end
 
@@ -28,6 +30,7 @@ Rails.application.routes.draw do
  put '/users/:id/change_role', to: 'users#change_role', as: 'change_role'
  get '/users/:id/habits', to: 'users#personal_habits', as: 'personal_habits'
  patch '/habits/:habit_id/goals/:id/addmilestones', to: 'goals#update_milestones', as: 'update_milestones'
+ patch '/habits/:habit_id/goals/:goal_id/:milestones/:id/addstatusestoms', to: 'goals#update_statuses', as: 'update_statuses'
 
 
 

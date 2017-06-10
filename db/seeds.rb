@@ -1,11 +1,3 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
-
 require 'faker'
 
 10.times do
@@ -66,6 +58,13 @@ milestones = ["Day 1", "Day 2", "Day 3", "Day 4", "Day 5", "Day 6", "Day 7", "Da
 milestones.each do |milestone|
   m = Milestone.new(description: milestone)
   m.save
+end
+
+statuses = ["Not as per expectations", "Much better than I expected.", "Awesome up till now", "Need to try harder", "NOt interested anymore"]
+
+statuses.each do |status|
+  s = Status.new(description: status)
+  s.save
 end
 
 reading = Habit.new
