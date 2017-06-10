@@ -16,7 +16,6 @@ class GoalsController < ApplicationController
   # end
   #
   def update
-    binding.pry
     if @goal.update(goal_params)
       binding.pry
       redirect_to habit_goal_path(@habit.id, @goal.id), notice: 'Goal was successfully updated.'
