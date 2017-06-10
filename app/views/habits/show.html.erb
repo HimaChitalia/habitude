@@ -24,7 +24,7 @@
   <% end %>
 
 <%  elsif @habit.goals.size == 1 %>
-  <h5>Goal: <%=  @habit.goals.first.name %></h5>
+  <h5>Goal: <%= link_to @habit.goals.first.name, habit_goal_path(@habit.id, @habit.goals.first.id)  %></h5>
 <% else %>
   <h5>Goals: </h5>
   <% @habit.goals.each.with_index(1) do |goal, index|%>
