@@ -26,12 +26,6 @@ class HabitsController < ApplicationController
 
   def update
     if @habit.update(habit_params)
-    #   if params[:language][:name].nil? || params[:language][:name].empty?
-    #     @tip.language_id = params[:tip][:language_id]
-    #   else
-    #     new_language = Language.create(name: params[:language][:name])
-    #     @tip.language_id = new_language.id
-    #   end
       redirect_to @habit, notice: 'Habit was successfully updated.'
     else
       render :edit

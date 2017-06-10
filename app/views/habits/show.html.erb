@@ -6,17 +6,21 @@
 
 
 <% if @habit.goals.size == 0 %>
-  <%= form_for @habit do |f| %>
-  <h5>You don't have any goal for this habit! Create one now!</h5>
-    <%= f.fields_for :goals, @habit.goals.build do |goal_builder| %>
-      <%= goal_builder.label :name %>
-      <%= goal_builder.text_field :name %>
-    <% end %><br>
+  <% if current_user.role_before_type_cast == 2 %>
+    <%= form_for @habit do |f| %>
+    <h5>You don't have any goal for this habit! Create one now!</h5>
+      <%= f.fields_for :goals, @habit.goals.build do |goal_builder| %>
+        <%= goal_builder.label :name %>
+        <%= goal_builder.text_field :name %>
+      <% end %><br>
 
-  <h5>Or Select from these!</h5>
-    <%= f.collection_select :goal_ids, Goal.order(:name), :id, :name %><br> <br>
+    <h5>Or Select from these!</h5>
+      <%= f.collection_select :goal_ids, Goal.order(:name), :id, :name %><br> <br>
 
-    <%= f.submit %>
+      <%= f.submit %>
+    <% end %>
+  <% else %>
+    <h5>There are no goals for this habit yet!</h5>
   <% end %>
 
 <%  elsif @habit.goals.size == 1 %>
@@ -28,8 +32,7 @@
   <% end %> <br>
 <% end %>
 
-
-
-<%= link_to 'Edit', edit_habit_path(@habit) %>
-|
+<% if current_user.role_before_type_cast >= 2 %>
+   <%= link_to 'Edit', edit_habit_path(@habit) %> |
+<% end %>
 <%= link_to 'Back', habits_path %>
