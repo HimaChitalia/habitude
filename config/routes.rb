@@ -3,8 +3,14 @@ Rails.application.routes.draw do
   resources :comments, :categories, :users
 
   resources :habits do
-    resources :goals
+    resources :goals do
+      resources :milestones
+    end
   end
+
+  # resources :goals do
+  #   resources :milestones
+  # end
 
  # get '/signup' => "registrations#new", as: :new_user
  # post '/registrations/create', to: "registrations#create", as: :create_new_user

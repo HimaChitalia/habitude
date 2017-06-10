@@ -32,9 +32,6 @@ class HabitsController < ApplicationController
     end
   end
 
-# <ActionController::Parameters {"utf8"=>"✓", "_method"=>"patch", "authenticity_token"=>"iCctuQ4TMeHw/fJWoXhslyAKaEtUJyghuuF357E5uGGc6PoOk6UTJoX4jS4JPAaLUhoH/eVCxnt5c8opVhD0gg==",
-#   "habit"=>{"goals_attributes"=>{"0"=>{"name"=>""}}, "goal_ids"=>"6"}, "commit"=>"Update Habit", "controller"=>"habits", "action"=>"update", "id"=>"7"} permitted: false>
-
   def destroy
     @habit.destroy
     redirect_to habits_url, notice: 'Habit was successfully destroyed.'

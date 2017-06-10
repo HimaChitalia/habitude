@@ -6,7 +6,7 @@
 
 
 <% if @habit.goals.size == 0 %>
-  <% if current_user.role_before_type_cast == 2 %>
+  <% if current_user == @habit.user %>
     <%= form_for @habit do |f| %>
     <h5>You don't have any goal for this habit! Create one now!</h5>
       <%= f.fields_for :goals, @habit.goals.build do |goal_builder| %>
@@ -30,9 +30,9 @@
   <% @habit.goals.each.with_index(1) do |goal, index|%>
     <h5><p><%= link_to "#{index}. #{goal.name}",  habit_goal_path(@habit.id, goal.id) %><p></h5>
   <% end %> <br>
-<% end %>
+<% end %> <br><br>
 
-<% if current_user.role_before_type_cast >= 2 %>
+<% if current_user.role_before_type_cast >= 2 || current_user == @habit.user%>
    <%= link_to 'Edit', edit_habit_path(@habit) %> |
 <% end %>
 <%= link_to 'Back', habits_path %>
