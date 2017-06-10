@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Habits</h1>
+<h1>List of all of the habits</h1>
 
 <table>
   <thead>
@@ -13,6 +13,7 @@
     <% @habits.each.with_index(1) do |habit, index| %>
       <tr>
         <td><%= index %>.  <%= link_to habit.name, habit %></td>
+        <td><%= link_to habit.user.name, habit.user %></td>
         <td><%= link_to 'Show', habit %></td>
         <% unless current_user.role_before_type_cast < 2 %>
            <td><%= link_to 'Edit', edit_habit_path(habit) %></td>

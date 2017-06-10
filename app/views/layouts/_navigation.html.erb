@@ -10,9 +10,18 @@
       <ul class="navbar-right nav navbar-nav pull-right">
         <% if logged_in? %>
           <li>
+            <%= link_to "Habits", habits_path %>
+          </li>
+          <li>
+            <%= link_to "#{current_user.name}'s Habits", personal_habits_path(current_user.id) %>
+          </li>
+          <li>
             <%= link_to "Log Out", destroy_session_path, :method => :delete %>
           </li>
         <% else %>
+          <li>
+            <%= link_to "Habits", habits_path %>
+          </li>
           <li>
             <%= link_to "Sign In", new_session_path %>
           </li>

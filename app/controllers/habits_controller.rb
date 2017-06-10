@@ -26,11 +26,20 @@ class HabitsController < ApplicationController
 
   def update
     if @habit.update(habit_params)
+    #   if params[:language][:name].nil? || params[:language][:name].empty?
+    #     @tip.language_id = params[:tip][:language_id]
+    #   else
+    #     new_language = Language.create(name: params[:language][:name])
+    #     @tip.language_id = new_language.id
+    #   end
       redirect_to @habit, notice: 'Habit was successfully updated.'
     else
       render :edit
     end
   end
+
+# <ActionController::Parameters {"utf8"=>"✓", "_method"=>"patch", "authenticity_token"=>"iCctuQ4TMeHw/fJWoXhslyAKaEtUJyghuuF357E5uGGc6PoOk6UTJoX4jS4JPAaLUhoH/eVCxnt5c8opVhD0gg==",
+#   "habit"=>{"goals_attributes"=>{"0"=>{"name"=>""}}, "goal_ids"=>"6"}, "commit"=>"Update Habit", "controller"=>"habits", "action"=>"update", "id"=>"7"} permitted: false>
 
   def destroy
     @habit.destroy
@@ -43,6 +52,6 @@ class HabitsController < ApplicationController
     end
 
     def habit_params
-      params.required(:habit).permit(:name, :description, :category_id)
+      params.required(:habit).permit(:name, :description, :category_id, :goal_ids, :goals_attributes => [:name])
     end
 end

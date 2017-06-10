@@ -1,17 +1,31 @@
+<h2>Details about habit <%= @habit.name.capitalize %></h2> <br> <br>
 
-Name: <%= @habit.name %> <br> <br>
-Description: <%= @habit.description %>  <br> <br>
-Category: <%= @habit.category.name %>  <br> <br>
+<h5>Description: <%= @habit.description %></h5><br><br>
+<h5>Category: <%= link_to @habit.category.name, @habit.category %></h5><br><br>
+<h5>User: <%= link_to @habit.user.name, @habit.user %></h5><br><br>
+
 
 <% if @habit.goals.size == 0 %>
-  Create goals for this habit!
+  <%= form_for @habit do |f| %>
+  <h5>You don't have any goal for this habit! Create one now!</h5>
+    <%= f.fields_for :goals, @habit.goals.build do |goal_builder| %>
+      <%= goal_builder.label :name %>
+      <%= goal_builder.text_field :name %>
+    <% end %><br>
+
+  <h5>Or Select from these!</h5>
+    <%= f.collection_select :goal_ids, Goal.order(:name), :id, :name %><br> <br>
+
+    <%= f.submit %>
+  <% end %>
+
 <%  elsif @habit.goals.size == 1 %>
-  Goal: <%=  @habit.goals.first.name %>
+  <h5>Goal: <%=  @habit.goals.first.name %></h5>
 <% else %>
-  Goals <br><br>
+  <h5>Goals: </h5>
   <% @habit.goals.each.with_index(1) do |goal, index|%>
-    <%= link_to "#{index}. #{goal.name}",  habit_goal_path(@habit.id, goal.id) %><br>
-  <% end %> <br> <br>
+    <h5><p><%= link_to "#{index}. #{goal.name}",  habit_goal_path(@habit.id, goal.id) %><p></h5>
+  <% end %> <br>
 <% end %>
 
 

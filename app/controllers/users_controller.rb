@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :personal_habits]
 
   def index
     @users = User.all
@@ -58,6 +58,10 @@ class UsersController < ApplicationController
       "There was an issue with this request!"
     end
     redirect_to users_path
+  end
+
+  def personal_habits
+    @user_habits = @user.habits
   end
 
   private

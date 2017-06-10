@@ -16,6 +16,8 @@ Rails.application.routes.draw do
 
 
  put '/users/:id/change_role', to: 'users#change_role', as: 'change_role'
+ get '/users/:id/habits', to: 'users#personal_habits', as: 'personal_habits'
+
 
  # get 'auth/google_oauth2/callback' => 'sessions#create'
  # get 'auth/:provider/callback', to: 'sessions#create'
