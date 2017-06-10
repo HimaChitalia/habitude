@@ -8,6 +8,10 @@ Rails.application.routes.draw do
     end
   end
 
+  # resources :habits do
+  #   resources :goals
+  # end
+
   # resources :goals do
   #   resources :milestones
   # end
@@ -23,6 +27,8 @@ Rails.application.routes.draw do
 
  put '/users/:id/change_role', to: 'users#change_role', as: 'change_role'
  get '/users/:id/habits', to: 'users#personal_habits', as: 'personal_habits'
+ patch '/habits/:habit_id/goals/:id/addmilestones', to: 'goals#update_milestones', as: 'update_milestones'
+
 
 
  # get 'auth/google_oauth2/callback' => 'sessions#create'
