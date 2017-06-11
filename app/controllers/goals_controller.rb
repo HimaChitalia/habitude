@@ -17,7 +17,6 @@ class GoalsController < ApplicationController
   #
   def update
     if @goal.update(goal_params)
-      binding.pry
       redirect_to habit_goal_path(@habit.id, @goal.id), notice: 'Goal was successfully updated.'
     else
       render :show
@@ -28,12 +27,23 @@ class GoalsController < ApplicationController
   end
 
   def destroy
-    @goal.destroy
+    goals_array = @habit.goals
+    if goals_array.size == 1
+      goals_array.clear
+      @habit.save
+    elsif
+      goals_array.each do |goal|
+        if goal.id == @goal.id
+          goals_array -= [goal]
+          @habit.goals = goals_array
+          @habit.save
+        end
+      end
+    end
     redirect_to @habit, :notice => "Goal Deleted"
   end
 
   def update_milestones
-    # binding.pry
     if params[:goal][:milestone_ids].present?
       milestone_id = params[:goal][:milestone_ids].to_i
       milestone = Milestone.find_by(id: milestone_id)

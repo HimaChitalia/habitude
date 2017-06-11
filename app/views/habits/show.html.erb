@@ -7,35 +7,31 @@
 
 <% if @habit.goals.size == 0 %>
   <% if current_user == @habit.user %>
-    <%= form_for @habit do |f| %>
-    <h5>You don't have any goal for this habit! Create one now!</h5>
-      <%= f.fields_for :goals, @habit.goals.build do |goal_builder| %>
-        <%= goal_builder.label :name %>
-        <%= goal_builder.text_field :name %>
-      <% end %><br>
-
-    <h5>Or Select from these!</h5>
-      <%= f.collection_select :goal_ids, Goal.order(:name), :id, :name %><br> <br>
-
-      <%= f.submit %>
-    <% end %>
+    <%= render 'build_goal' %>
   <% else %>
     <h5>There are no goals for this habit yet!</h5>
   <% end %>
 
 <%  elsif @habit.goals.size == 1 %>
-  <h5>Goal: <%= link_to @habit.goals.first.name, habit_goal_path(@habit.id, @habit.goals.first.id)  %></h5>
+  <h5>Goal: <%= link_to @habit.goals.first.name, habit_goal_path(@habit.id, @habit.goals.first.id)  %></h5> <br>
   <% if current_user == @habit.user %>
-     <%= link_to "delete",  habit_goal_path(@habit.id, @habit.goals.first.id), :method  => :delete %>
+      <%= button_to "Delete Goal", habit_goal_path(@habit.id, @habit.goals.first.id), :method  => :delete  %> <br><br>
+
+     <!-- <%= link_to "delete",  habit_goal_path(@habit.id, @habit.goals.first.id), :method  => :delete %> -->
   <% end %>
+  <%= render 'build_goal' %>
+
 <% else %>
   <h5>Goals: </h5>
   <% @habit.goals.each.with_index(1) do |goal, index|%>
     <h5><p><%= link_to "#{index}. #{goal.name}",  habit_goal_path(@habit.id, goal.id) %><p></h5>
     <% if current_user == @habit.user %>
-       <%= link_to "delete", [@habit, goal], :method  => :delete %>
+      <%= button_to "Delete Goal", [@habit, goal], :method  => :delete  %>
+       <!-- <%= link_to "delete", [@habit, goal], :method  => :delete %> -->
     <% end %>
   <% end %> <br>
+  <%= render 'build_goal' %>
+
 <% end %> <br><br>
 
 <% if current_user.role_before_type_cast >= 2 || current_user == @habit.user%>
