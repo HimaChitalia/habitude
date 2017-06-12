@@ -25,7 +25,7 @@ class MilestonesController < ApplicationController
         @goal.save
       elsif
         milestones_array.each do |milestone|
-          if milestone.id == @goal.id
+          if milestone.id == @milestone.id
             milestones_array -= [milestone]
             @goal.milestones = milestones_array
             @goal.save
@@ -63,7 +63,7 @@ class MilestonesController < ApplicationController
       @milestone.save
     end
 
-    redirect_to habit_goal_milestone_path(@habit.id, @goal.id, @milestone.id)
+    redirect_to habit_goal_milestone_path(@habit, @goal, @milestone)
   end
 
 
@@ -78,7 +78,6 @@ class MilestonesController < ApplicationController
     end
 
     def set_milestone
-      raise params[:id].inspect
       @milestone = Milestone.find(params[:id])
     end
 

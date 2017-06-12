@@ -13,14 +13,14 @@
   <% end %>
 
 <%  elsif @goal.milestones.size == 1 %>
-  <h5>Milestone: <%= link_to  @goal.milestones.first.description, habit_goal_milestone_path(@habit.id, @goal.id, @goal.milestones.first.id) %></h5> <br>
+  <h5>Milestone: <%= link_to  @goal.milestones.first.description, habit_goal_milestone_path(@habit, @goal, @goal.milestones.first) %></h5> <br>
   <%= render 'delete_milestone', milestone: @goal.milestones.first %> <br> <br>
   <%= render 'user' %>
 
 <% else %>
   <h5>Milestones: </h5>
   <% @goal.milestones.each.with_index(1) do |milestone, index|%>
-    <h5><p><%= link_to "#{index}. #{milestone.description}", habit_goal_milestone_path(@goal.id, milestone.id) %><p></h5>
+    <h5><p><%= link_to "#{index}. #{milestone.description}", habit_goal_milestone_path(@habit, @goal, milestone) %><p></h5>
       <%= render 'delete_milestone', milestone: milestone %>
   <% end %> <br><br>
   <%= render 'user' %>

@@ -1,0 +1,3 @@
+<% if current_user == @habit.user %>
+  <%= button_to "Delete Milestone", [@habit, @goal, milestone], :method  => :delete  %>
+<% end %>

@@ -1,0 +1,4 @@
+<% if current_user == @habit.user %>
+  <h4>Create more goals!</h4>
+  <%= render 'build_goal' %>
+<% end %>
