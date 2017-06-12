@@ -9,7 +9,11 @@ class HabitsController < ApplicationController
   end
 
   def new
-    @habit = Habit.new
+    if logged_in?
+      @habit = Habit.new
+    else
+      redirect_to '/login', notice: 'You must login to create a habit!'
+    end
   end
 
   def edit
@@ -56,7 +60,7 @@ class HabitsController < ApplicationController
     params[:habit][:goals_attributes].each do |key, value|
       value.each do |k, v|
         if v.present?
-          Milestone.find_or_create_by(description: v) do |goal|
+          Goal.find_or_create_by(name: v) do |goal|
             goal.name = v
             @habit.goals << goal
           end

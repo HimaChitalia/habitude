@@ -6,15 +6,6 @@ class GoalsController < ApplicationController
     @goals = @habit.goals
   end
 
-  # def new
-  # end
-  #
-  # def create
-  # end
-  #
-  # def edit
-  # end
-  #
   def update
     if @goal.update(goal_params)
       redirect_to habit_goal_path(@habit.id, @goal.id), notice: 'Goal was successfully updated.'

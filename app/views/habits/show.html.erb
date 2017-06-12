@@ -1,4 +1,4 @@
-<h2>Details about habit <%= @habit.name.capitalize %></h2> <br> <br>
+<h2>Habit name: <%= @habit.name.capitalize %></h2> <br> <br>
 
 <h5>Description: <%= @habit.description %></h5><br><br>
 <h5>Category: <%= link_to @habit.category.name, @habit.category %></h5><br><br>
@@ -7,30 +7,27 @@
 
 <% if @habit.goals.size == 0 %>
   <% if current_user == @habit.user %>
-    <%= render 'build_goal' %>
+    <h4>There are no goals for this habit. Create one now!</h4> <br> <br>
+    <%= render 'user' %>
   <% else %>
     <h5>There are no goals for this habit yet!</h5>
   <% end %>
 
 <%  elsif @habit.goals.size == 1 %>
   <h5>Goal: <%= link_to @habit.goals.first.name, habit_goal_path(@habit.id, @habit.goals.first.id)  %></h5> <br>
-  <% if current_user == @habit.user %>
-      <%= button_to "Delete Goal", habit_goal_path(@habit.id, @habit.goals.first.id), :method  => :delete  %> <br><br>
+  <%= render 'delete_goal', goal: @habit.goals.first %> <br> <br>
+  <h4>Create more goals!</h4>
+  <%= render 'user' %>
 
-     <!-- <%= link_to "delete",  habit_goal_path(@habit.id, @habit.goals.first.id), :method  => :delete %> -->
-  <% end %>
-  <%= render 'build_goal' %>
 
 <% else %>
   <h5>Goals: </h5>
   <% @habit.goals.each.with_index(1) do |goal, index|%>
     <h5><p><%= link_to "#{index}. #{goal.name}",  habit_goal_path(@habit.id, goal.id) %><p></h5>
-    <% if current_user == @habit.user %>
-      <%= button_to "Delete Goal", [@habit, goal], :method  => :delete  %>
-       <!-- <%= link_to "delete", [@habit, goal], :method  => :delete %> -->
-    <% end %>
+    <%= render 'delete_goal', goal: goal %>
   <% end %> <br>
-  <%= render 'build_goal' %>
+  <h4>Create more goals for this habit!</h4>
+  <%= render 'user' %>
 
 <% end %> <br><br>
 
