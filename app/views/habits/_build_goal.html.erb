@@ -1,0 +1,12 @@
+<%= form_for @habit, :as => :habit, :url => update_goals_path(@habit.id), method: :patch do |f| %>
+<h5>You don't have any goal for this habit! Create one now!</h5>
+  <%= f.fields_for :goals, @habit.goals.build do |goal_builder| %>
+    <%= goal_builder.label :name %>
+    <%= goal_builder.text_field :name %>
+  <% end %><br>
+
+<h5>Or Select from these!</h5>
+  <%= f.collection_select :goal_ids, Goal.order(:name), :id, :name %><br> <br>
+
+  <%= f.submit %>
+<% end %>

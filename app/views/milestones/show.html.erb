@@ -1,0 +1,29 @@
+<h2>Statuses of the milestone <%= @milestone.description %></h2> <br> <br>
+
+<% if @milestone.statuses.size == 0 %>
+
+  <% if current_user == @habit.user %>
+    <h5>You don't have any status update for this milestone! Create one now!</h5>
+    <%= render 'form', milestone: @milestone %>
+  <% else %>
+    <h5>There is no status update for this milestone yet!</h5>
+  <% end %>
+
+<%  elsif @milestone.statuses.size == 1 %>
+  <h5>Status: <%=  @milestone.statuses.first.description %></h5> <br>
+  <% if current_user == @habit.user %>
+    <h5>Write more status update for this milestone here!</h5>
+    <%= render 'form', milestone: @milestone %>
+  <% end %>
+
+<% else %>
+  <h5>Statuses: </h5>
+  <% @milestone.statuses.each.with_index(1) do |status, index|%>
+    <h5><p><%= index %>. <%= status.description%></p></h5>
+  <% end %> <br>
+  <% if current_user == @habit.user %>
+    <h5>Write more status update for this milestone here!</h5>
+    <%= render 'form', milestone: @milestone%>
+  <% end %>
+
+<% end %> <br><br>

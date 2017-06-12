@@ -1,0 +1,36 @@
+<h2>Milestones of the goal <%= @goal.name %></h2> <br> <br>
+
+<% if @goal.milestones.size == 0 %>
+
+  <% if current_user == @habit.user %>
+    <h5>You don't have any milestone for this goal! Create one now!</h5>
+    <%= render 'form', goal: @goal %>
+  <% else %>
+    <h5>There are no milestones for this habit yet!</h5>
+  <% end %>
+
+<%  elsif @goal.milestones.size == 1 %>
+  <h5>Milestone: <%= link_to  @goal.milestones.first.description, habit_goal_milestone_path(@habit.id, @goal.id, @goal.milestones.first.id) %></h5> <br>
+  <% if current_user == @habit.user %>
+    <h5>Create more Milestones here!</h5>
+    <%= render 'form' %>
+  <% end %>
+
+<% else %>
+  <h5>Milestones: </h5>
+  <% @goal.milestones.each.with_index(1) do |milestone, index|%>
+    <h5><p><%= link_to "#{index}. #{milestone.description}", habit_goal_milestone_path(@goal.id, milestone.id) %><p></h5>
+  <% end %> <br>
+  <% if current_user == @habit.user %>
+    <h5>create more Milestones here!</h5>
+    <%= render 'form'%>
+  <% end %>
+
+<% end %> <br><br>
+
+
+
+<% if current_user.role_before_type_cast >= 2 || current_user == @habit.user%>
+   <%= link_to 'Edit', edit_habit_goal_path(@habit.id, @goal.id) %> |
+<% end %>
+<%= link_to 'Back', habit_goals_path %>
