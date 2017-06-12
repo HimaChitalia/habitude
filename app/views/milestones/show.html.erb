@@ -1,4 +1,6 @@
-<h2>Statuses of the milestone <%= @milestone.description %></h2> <br> <br>
+<h2>Milestone Name: <%= @milestone.description %></h2> <br> <br>
+<h5>Milestone's Goal: <%= link_to @goal.name, habit_goal_path(@habit, @goal) %></h5> <br> <br>
+
 
 <% if @milestone.statuses.size == 0 %>
 
@@ -23,3 +25,6 @@
   <%= render 'user' %>
 
 <% end %> <br><br>
+
+
+<%= link_to 'Back', habits_path %>
