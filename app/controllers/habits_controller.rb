@@ -17,6 +17,7 @@ class HabitsController < ApplicationController
   end
 
   def edit
+    authorize_user(@habit)
   end
 
   def create
@@ -41,9 +42,6 @@ class HabitsController < ApplicationController
     @habit.destroy
     redirect_to habits_url, notice: 'Habit was successfully destroyed.'
   end
-
-  # milestone = goal
-  # goal = habit
 
   def update_goals
     if params[:habit][:goal_ids].present?

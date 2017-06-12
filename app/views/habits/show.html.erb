@@ -7,7 +7,6 @@
 
 <% if @habit.goals.size == 0 %>
   <% if current_user == @habit.user %>
-    <h4>There are no goals for this habit. Create one now!</h4> <br> <br>
     <%= render 'user' %>
   <% else %>
     <h5>There are no goals for this habit yet!</h5>
@@ -16,7 +15,6 @@
 <%  elsif @habit.goals.size == 1 %>
   <h5>Goal: <%= link_to @habit.goals.first.name, habit_goal_path(@habit.id, @habit.goals.first.id)  %></h5> <br>
   <%= render 'delete_goal', goal: @habit.goals.first %> <br> <br>
-  <h4>Create more goals!</h4>
   <%= render 'user' %>
 
 

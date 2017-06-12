@@ -1,12 +1,16 @@
 class GoalsController < ApplicationController
   before_action :set_goal, :set_habit, only: [:show, :update_milestones, :update, :edit, :destroy]
 
-
   def index
     @goals = @habit.goals
   end
 
+  def edit
+    authorize_user(@habit)
+  end
+
   def update
+    authorize_user(@habit)
     if @goal.update(goal_params)
       redirect_to habit_goal_path(@habit.id, @goal.id), notice: 'Goal was successfully updated.'
     else
@@ -18,20 +22,25 @@ class GoalsController < ApplicationController
   end
 
   def destroy
+    authorize_user(@habit)
     goals_array = @habit.goals
-    if goals_array.size == 1
-      goals_array.clear
-      @habit.save
-    elsif
-      goals_array.each do |goal|
-        if goal.id == @goal.id
-          goals_array -= [goal]
-          @habit.goals = goals_array
-          @habit.save
+    if goals_array.size > 0
+      if goals_array.size == 1
+        goals_array.clear
+        @habit.save
+      elsif
+        goals_array.each do |goal|
+          if goal.id == @goal.id
+            goals_array -= [goal]
+            @habit.goals = goals_array
+            @habit.save
+          end
         end
+        redirect_to @habit, :notice => "Goal Deleted"
       end
+    else
+      "An error occured."
     end
-    redirect_to @habit, :notice => "Goal Deleted"
   end
 
   def update_milestones

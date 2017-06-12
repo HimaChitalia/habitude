@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   include Pundit
   require 'pry'
 
-  helper_method :logged_in?, :current_user
+  helper_method :logged_in?, :current_user, :authorize_user
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   private
@@ -19,5 +19,11 @@ class ApplicationController < ActionController::Base
 
   def logged_in?
     !!current_user
+  end
+
+  def authorize_user(habit)
+    unless habit.user == current_user
+      redirect_to habit_path(habit.id), notice: "You are not authorized to perform this action!"
+    end
   end
 end
