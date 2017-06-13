@@ -8,8 +8,14 @@ class ApplicationController < ActionController::Base
 
   private
 
+  # def user_not_authorized(exception)
+  #   flash[:alert] = "You are not authorized to perform this action."
+  #   redirect_to(request.referrer || root_path)
+  # end
+
   def user_not_authorized(exception)
-    flash[:alert] = "You are not authorized to perform this action."
+    policy_name = exception.policy.class.to_s.underscore
+    flash[:warning] = t "#{policy_name}.#{exception.query}", scope: "pundit", default: :default
     redirect_to(request.referrer || root_path)
   end
 

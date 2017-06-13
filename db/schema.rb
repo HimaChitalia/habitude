@@ -10,12 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170610084403) do
+ActiveRecord::Schema.define(version: 20170612231416) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.text     "description"
+    t.integer  "habit_id"
+    t.integer  "user_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "goals", force: :cascade do |t|
@@ -47,16 +55,6 @@ ActiveRecord::Schema.define(version: 20170610084403) do
     t.datetime "updated_at",  null: false
     t.index ["category_id"], name: "index_habits_on_category_id"
     t.index ["user_id"], name: "index_habits_on_user_id"
-  end
-
-  create_table "ideas", force: :cascade do |t|
-    t.string   "content"
-    t.integer  "habit_id"
-    t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["habit_id"], name: "index_ideas_on_habit_id"
-    t.index ["user_id"], name: "index_ideas_on_user_id"
   end
 
   create_table "milestones", force: :cascade do |t|

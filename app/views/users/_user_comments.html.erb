@@ -1,6 +1,5 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Comments</h1>
 
 <table>
   <thead>
@@ -9,20 +8,16 @@
       <td>         </td>
       <th>Comment On</th>
       <td>         </td>
-      <th>Comment By</th>
-      <td>         </td>
       <th colspan="3"> </th>
     </tr>
   </thead>
 
   <tbody>
-    <% @comments.each.with_index(1) do |comment, index| %>
+    <% comments.each.with_index(1) do |comment, index| %>
       <tr>
         <td><%= index %>.  <%= link_to "#{comment.description}", comment %></td>
         <td>         </td>
         <td><%= link_to "#{comment.habit.name}", comment.habit%></td>
-        <td>         </td>
-        <td><%= link_to "#{comment.user.name}", comment.user%></td>
         <td>         </td>
         <td><%= link_to 'Show', comment %></td>
         <td><%= link_to 'Edit', edit_comment_path(comment) %></td>

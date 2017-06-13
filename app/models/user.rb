@@ -13,6 +13,8 @@ class User < ApplicationRecord
   has_many :goals, through: :habits
   has_many :ideas, through: :habits
 
+  has_many :comments
+
   def self.find_or_create_by_omniauth(auth_hash)
    self.where(email: auth_hash[:email]).first_or_create do |u|
      u.name = auth_hash[:name]

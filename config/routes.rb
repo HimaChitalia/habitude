@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :comments, :categories, :users
 
   resources :habits do
+    resources :comments
     resources :goals do
       resources :milestones do
         resources :statuses
@@ -11,15 +12,10 @@ Rails.application.routes.draw do
   end
 
   # resources :habits do
-  #   resources :goals
+  #   resources :comments
   # end
 
-  # resources :goals do
-  #   resources :milestones
-  # end
 
- # get '/signup' => "registrations#new", as: :new_user
- # post '/registrations/create', to: "registrations#create", as: :create_new_user
  get '/auth/facebook/callback' => 'sessions#create'
  get '/login' => "sessions#new", as: :new_session
  post '/login', to: "sessions#create", as: :create_new_session
@@ -33,12 +29,6 @@ Rails.application.routes.draw do
  patch '/habits/:id/addgoals', to: 'habits#update_goals', as: 'update_goals'
  patch '/habits/:habit_id/goals/:id/addmilestones', to: 'goals#update_milestones', as: 'update_milestones'
  patch '/habits/:habit_id/goals/:goal_id/:milestones/:id/addstatusestoms', to: 'milestones#update_statuses', as: 'update_statuses'
-
-
-
- # get 'auth/google_oauth2/callback' => 'sessions#create'
- # get 'auth/:provider/callback', to: 'sessions#create'
- # get 'auth/failure', to: redirect('/')
 
  root 'welcome#greeting'
 end

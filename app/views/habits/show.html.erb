@@ -27,7 +27,16 @@
   <h4>Create more goals for this habit!</h4>
   <%= render 'user' %>
 
-<% end %> <br><br>
+<% end %> <br>
+
+<%= render 'comments/all_comments', comments: @habit.comments if @habit.comments %>
+
+<br>
+
+<h5>Add your comment below! (You must be signed in) </h5>
+<%= render 'comments/form', comment: @habit.comments.new, habit: @habit%>
+
+<br><br>
 
 <% if current_user.role_before_type_cast >= 2 || current_user == @habit.user%>
    <%= link_to 'Edit', edit_habit_path(@habit) %> |

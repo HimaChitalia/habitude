@@ -12,6 +12,9 @@
       </ul>
       <ul class="navbar-right nav navbar-nav pull-right">
         <% if logged_in? %>
+        <li>
+          <%= link_to "#{current_user.name}'s Profile", user_path(current_user) %>
+        </li>
           <li>
             <%= link_to "Add New Habit", new_habit_path %>
           </li>

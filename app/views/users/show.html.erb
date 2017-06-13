@@ -1,9 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @user.name %>
-</p>
+<h4><%= @user.name.capitalize %>'s Profile</h4>
 
 <p>
   <strong>Email:</strong>
@@ -15,6 +12,11 @@
   <%= @user.role %>
 </p>
 
+<h4><%= @user.name.capitalize %>'s Habits:</h4>
+<%= render 'user_habits', habits: @user.habits %> <br><br>
+
+<h4><%= @user.name.capitalize %>'s Comments:</h4>
+<%= render 'user_comments', comments: @user.comments %>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>

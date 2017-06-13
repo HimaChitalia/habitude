@@ -6,7 +6,7 @@ class Habit < ApplicationRecord
   has_many :goals_habits
   has_and_belongs_to_many :goals
 
-  has_many :ideas, through: :user
+  has_many :comments
 
   accepts_nested_attributes_for :category, reject_if: lambda {|attributes| attributes['description'].blank?}
   accepts_nested_attributes_for :goals,

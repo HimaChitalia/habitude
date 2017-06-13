@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
+  before_action :set_habit, :set_user, only: [:new, :create, :destroy]
 
 
   def index
@@ -14,48 +15,51 @@ class CommentsController < ApplicationController
   end
 
   def edit
+    authorize @comment
   end
 
   def create
     @comment = Comment.new(comment_params)
-
-    respond_to do |format|
-      if @comment.save
-        format.html { redirect_to @comment, notice: 'Comment was successfully created.' }
-        format.json { render :show, status: :created, location: @comment }
-      else
-        format.html { render :new }
-        format.json { render json: @comment.errors, status: :unprocessable_entity }
-      end
+    authorize @comment
+    @comment.user = @user
+    @comment.habit = @habit
+    if @comment.save
+      redirect_to @habit, notice: 'Comment was successfully created.'
+    else
+      redirect_to comments_path, notice: 'Something went wrong, please try again.'
     end
   end
 
   def update
-    respond_to do |format|
-      if @comment.update(comment_params)
-        format.html { redirect_to @comment, notice: 'Comment was successfully updated.' }
-        format.json { render :show, status: :ok, location: @comment }
-      else
-        format.html { render :edit }
-        format.json { render json: @comment.errors, status: :unprocessable_entity }
-      end
+    authorize @comment
+    if @comment.update(comment_params)
+      redirect_to @comment, notice: 'Comment was successfully updated.'
+    else
+      render :edit
     end
   end
 
   def destroy
+    authorize @comment
     @comment.destroy
-    respond_to do |format|
-      format.html { redirect_to comments_url, notice: 'Comment was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to @habit, notice: 'Comment was successfully destroyed.'
   end
 
   private
+
+    def set_habit
+      @habit = Habit.find(params[:habit_id])
+    end
+
+    def set_user
+      @user = current_user
+    end
+
     def set_comment
       @comment = Comment.find(params[:id])
     end
 
     def comment_params
-      params.fetch(:comment, {})
+      params.required(:comment).permit(:description, :user_id, :habit_id)
     end
 end

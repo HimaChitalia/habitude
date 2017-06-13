@@ -1,0 +1,18 @@
+<h4> Comments: </h4>
+
+<% comments.each.with_index(1) do |comment, index| %>
+  <h6><%= index %>. User: <%= link_to comment.user.name, user_path(comment.user) %></h6>
+   <%= comment.description %> <br>
+  <% if current_page?("/users/#{comment.user.id}") && logged_in? %>
+    <p><%= link_to "Habit: #{comment.habit.name}", comment.habit %></p>
+  <% end %>
+
+  <% if logged_in? && policy(comment).destroy? %>
+    <%= link_to 'Edit', edit_habit_comment_path(comment.habit, comment), method: :edit %>
+  <% end %>
+
+  <% if logged_in? && policy(comment).destroy? %>
+    <%= link_to 'Delete', habit_comment_path(comment.habit, comment), method: :delete, data: { confirm: 'Are you sure?' } %>
+  <% end %> <br> <br>
+
+<% end %>
