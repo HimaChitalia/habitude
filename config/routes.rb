@@ -11,11 +11,6 @@ Rails.application.routes.draw do
     end
   end
 
-  # resources :habits do
-  #   resources :comments
-  # end
-
-
  get '/auth/facebook/callback' => 'sessions#create'
  get '/login' => "sessions#new", as: :new_session
  post '/login', to: "sessions#create", as: :create_new_session

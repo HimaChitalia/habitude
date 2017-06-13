@@ -1,4 +1,7 @@
 <p id="notice"><%= notice %></p>
 
+<%= @comment.description %>
+<%= @comment.user.name %>
+
 <%= link_to 'Edit', edit_comment_path(@comment) %> |
 <%= link_to 'Back', comments_path %>

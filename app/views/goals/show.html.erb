@@ -1,8 +1,6 @@
 <h2>Goal Name: <%= @goal.name %></h2> <br> <br>
 <h4>This goal is for the habit: <%= link_to "#{@habit.name}", habit_path(@habit) %></h4> <br> <br>
 
-<!-- <%= link_to 'Back', :back %> -->
-
 <% if @goal.milestones.size == 0 %>
 
   <% if current_user == @habit.user %>

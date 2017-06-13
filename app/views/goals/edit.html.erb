@@ -1,15 +1,6 @@
 <%= form_for edit_habit_goal_path(@goal) do |f| %>
-  <% if @goal.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@habit.errors.count, "error") %> prohibited this goal from being saved:</h2>
+<%= render 'layouts/errors', form: goal %>
 
-      <ul>
-      <% @goal.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
 
   <div class="field">
     <%= f.label :name %>
