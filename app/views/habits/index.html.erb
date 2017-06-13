@@ -15,7 +15,7 @@
         <td><%= index %>.  <%= link_to habit.name, habit %></td>
         <td><%= link_to habit.user.name, habit.user %></td>
         <td><%= link_to 'Show', habit %></td>
-        <% if current_user.role_before_type_cast > 1  || current_user == habit.user %>
+        <% if current_user && (current_user.role_before_type_cast > 1  || current_user == habit.user) %>
            <td><%= link_to 'Edit', edit_habit_path(habit) %></td>
            <td><%= link_to 'Destroy', habit, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <% end %>
