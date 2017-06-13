@@ -4,8 +4,9 @@ class CreateHabits < ActiveRecord::Migration[5.0]
       t.string :name
       t.string :description
 
-      t.references :category, index: true, foreign_key:true
-      t.references :user, index: true, foreign_key:true
+      t.integer :user_id
+      t.integer :category_id
+      
       t.timestamps
     end
   end
