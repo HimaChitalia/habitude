@@ -1,14 +1,3 @@
-require 'faker'
-
-10.times do
-  User.create(
-    name: Faker::Name.unique.name,
-    email: Faker::Internet.unique.email,
-    password: Faker::Internet.password(min_length = 8, max_length = 16),
-    role: [2, 3].sample
-  )
-end
-
 hima = User.new
 hima.name = "Hima"
 hima.email = "h@hima.com"
