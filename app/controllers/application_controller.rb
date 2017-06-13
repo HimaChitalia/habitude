@@ -1,7 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   include Pundit
-  require 'pry'
 
   helper_method :logged_in?, :current_user, :authorize_user
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
