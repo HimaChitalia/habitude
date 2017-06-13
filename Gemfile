@@ -33,7 +33,6 @@ gem 'jbuilder', '~> 2.5'
 gem 'bcrypt', '~> 3.1.7'
 
 gem 'omniauth'
-gem 'omniauth-google-oauth2'
 gem 'omniauth-facebook'
 
 gem 'figaro'

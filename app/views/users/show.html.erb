@@ -12,11 +12,19 @@
   <%= @user.role %>
 </p>
 
-<h4><%= @user.name.capitalize %>'s Habits:</h4>
-<%= render 'user_habits', habits: @user.habits %> <br><br>
+<% if @user.habits.size > 0 %>
+  <h4><%= @user.name.capitalize %>'s Habits:</h4>
+  <%= render 'user_habits', habits: @user.habits %>
+<% else %>
+  <h4>Create a <%= link_to 'habit', new_habit_path %> here!</h4>
+<% end %> <br><br>
 
-<h4><%= @user.name.capitalize %>'s Comments:</h4>
-<%= render 'user_comments', comments: @user.comments %>
+<% if @user.comments.size > 0 %>
+  <h4><%= @user.name.capitalize %>'s Comments:</h4>
+  <%= render 'user_comments', comments: @user.comments %>
+<% else %>
+  <h4>Uncover all of the interesting <%= link_to 'habits', habits_path %> here!</h4>
+<% end %> <br><br>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
