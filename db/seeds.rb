@@ -71,7 +71,7 @@ coding = Habit.new
 coding.name = "Coding"
 coding.category = Category.find_by(name: "Education")
 coding.description = "Learn coding to be web developer."
-coding.user = User.find(12)
+coding.user = User.find(2)
 goal = Goal.find(2)
 coding.goals << goal
 milestone = Milestone.last
@@ -84,7 +84,7 @@ planting.category = Category.find_by(name: "Outdoor Recreation")
 planting.description = "Give back to nature regularly"
 goal = Goal.find(3)
 planting.goals << goal
-planting.user = User.find(13)
+planting.user = User.find(3)
 milestone = Milestone.find(31)
 planting.goals.first.milestones << milestone
 planting.save
