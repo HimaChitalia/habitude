@@ -19,7 +19,7 @@ class User < ApplicationRecord
    self.where(email: auth_hash[:email]).first_or_create do |u|
      u.name = auth_hash[:name]
      u.password = SecureRandom.hex
-     u.role = 2
+     u.role = 1
      u.save
    end
   end
