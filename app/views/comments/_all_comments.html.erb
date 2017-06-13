@@ -8,7 +8,7 @@
   <% end %>
 
   <% if logged_in? && policy(comment).destroy? %>
-    <%= link_to 'Edit', edit_habit_comment_path(comment.habit, comment), method: :edit %>
+    <%= link_to 'Edit', edit_habit_comment_path(comment.habit, comment), method: :get %>
   <% end %>
 
   <% if logged_in? && policy(comment).destroy? %>
