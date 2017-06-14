@@ -23,7 +23,7 @@ class Habit < ApplicationRecord
       # where("category_id LIKE ?", search.to_i)
       # category = Category.find_by(name: search)
         # where("category_id LIKE ?", category_id)
-    search_result =  where("category_id::text Like ?", '{search}')
+    search_result =  where("category_id::text LIKE ?", 'search')
     end
 
 end
