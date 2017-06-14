@@ -7,6 +7,7 @@ class CategoriesController < ApplicationController
   end
 
   def show
+    @habits = @category.habits
   end
 
   def new

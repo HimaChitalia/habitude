@@ -20,10 +20,14 @@ class Habit < ApplicationRecord
     end
 
     def self.search(search)
+      if ActiveRecord::Base.connection.instance_values["config"][:adapter] == "postgresql"
+        where("category_id::text LIKE ?", search)
+      elsif ActiveRecord::Base.connection.instance_values["config"][:adapter] == "sqlite3"
+        where("category_id LIKE ?", search)
+      end
       # where("category_id LIKE ?", search.to_i)
       # category = Category.find_by(name: search)
         # where("category_id LIKE ?", category_id)
-    search_result =  where("category_id::text LIKE ?", search)
     end
 
 end

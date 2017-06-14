@@ -1,0 +1,12 @@
+<h2>Category Name:  <%= @category.name %></h2> <br> <br>
+<%  %>
+<% if @habits %>
+  <h4>List of all of the habits for the '<%= @category.name %>'</h4>
+  <% @habits.each.with_index(1) do |habit, index| %>
+    <%= link_to "#{index}. #{habit.name}", habit_path(habit) %>
+  <% end %>
+<% else %>
+  <h4>There are no habits for the category '<%= @category.name %>'</h4>
+<% end %> <br> <br>
+
+<%= button_to 'Create a New Habit', new_habit_path, :method => :get %>
