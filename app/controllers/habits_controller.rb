@@ -1,8 +1,19 @@
 class HabitsController < ApplicationController
   before_action :set_habit, only: [:show, :edit, :update, :destroy, :update_goals]
+  before_action :set_category, only: [:index]
 
   def index
-    @habits = Habit.all
+    # @habits = Habit.all
+    # if params[:search]
+    #   @habits = Habit.search(params[:search]).order("created_at DESC")
+    # else
+    #   @habits = Habit.all.order("created_at DESC")
+    # end
+    if params[:category_id]
+       @habits = Habit.search(params[:category_id])
+    else
+       @habits = Habit.all
+    end
   end
 
   def show
@@ -74,6 +85,10 @@ class HabitsController < ApplicationController
   private
     def set_habit
       @habit = Habit.find(params[:id])
+    end
+
+    def set_category
+      @category = Category.find(params[:category_id])
     end
 
     def habit_params

@@ -19,4 +19,10 @@ class Habit < ApplicationRecord
       update_attributes goals: self.goals.push(goal)
     end
 
+    def self.search(search)
+      # category = Category.find_by(name: search)
+      # where("category_id LIKE ?", category_id)
+      where("category_id LIKE ?", search)
+    end
+
 end

@@ -1,36 +1,42 @@
 <p id="notice"><%= notice %></p>
 
-<h1>List of all of the habits</h1>
+<% if @habits.blank? %>
+  <h2>There are no habits for the category "<%= @category.name %>".</h2> <br><br>
+<% else %>
 
-<table>
-  <thead>
-    <tr>
-      <th>Habit name</th>
-      <th>User name</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+  <h1>List of all of the habits</h1>
 
-  <tbody>
-    <% @habits.each.with_index(1) do |habit, index| %>
+  <table>
+    <thead>
       <tr>
-        <% if current_user %>
-          <td><%= index %>.  <%= link_to habit.name, habit %></td>
-          <td><%= link_to habit.user.name, habit.user %></td>
-          <td><%= link_to 'Show', habit %></td>
-          <% if current_user.role_before_type_cast > 1  || current_user == habit.user %>
-             <td><%= link_to 'Edit', edit_habit_path(habit) %></td>
-             <td><%= link_to 'Destroy', habit, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-          <% end %>
-        <% else %>
-          <td><%= index %>.  <%= habit.name %></td>
-          <td><%= habit.user.name %></td>
-        <% end %>
+        <th>Habit name</th>
+        <th>User name</th>
+        <th colspan="3"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
-<br>
+    <tbody>
+
+      <% @habits.each.with_index(1) do |habit, index| %>
+        <tr>
+          <% if current_user %>
+            <td><%= index %>.  <%= link_to habit.name, habit %></td>
+            <td><%= link_to habit.user.name, habit.user %></td>
+            <td><%= link_to 'Show', habit %></td>
+            <% if current_user.role_before_type_cast > 1  || current_user == habit.user %>
+               <td><%= link_to 'Edit', edit_habit_path(habit) %></td>
+               <td><%= link_to 'Destroy', habit, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <% end %>
+          <% else %>
+            <td><%= index %>.  <%= habit.name %></td>
+            <td><%= habit.user.name %></td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+  <br>
+
 
 <%= button_to 'New Habit', new_habit_path, :method => :get %>
