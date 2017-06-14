@@ -1,19 +1,27 @@
-<h2>Here is a list of all of your habits</h2> <br><br>
+<% if @user_habits.blank? %>
+  <h2>You don't have any habit for the for the category "<%= @category.name %>".</h2> <br><br>
+<% else %>
 
-<% @user_habits.each.with_index(1) do |personal_habit, index| %>
-  <h3><%= index %>. <%= link_to personal_habit.name, habit_path(personal_habit) %></h3> <br>
-  <h5>Description: <%= personal_habit.description %></h5><br>
-  <h5>Category: <%= link_to personal_habit.category.name, personal_habit.category %></h5><br>
+  <h2>Here is a list of all of your habits</h2> <br><br>
 
-  <% if personal_habit.goals.size == 0 %>
-    <h5>Create goals for this habit!</h5><br><br>
-  <%  elsif personal_habit.goals.size == 1 %>
-    <h5>Goal: <%=  link_to personal_habit.goals.first.name, habit_goal_path(personal_habit.goals.first) %></h5> <br><br>
-  <% else %>
-    <h5>Goals: </h5>
-    <% personal_habit.goals.each.with_index(1) do |goal, index|%>
-      <h5><%= index %>.  <%= link_to "#{goal.name}",  habit_goal_path(personal_habit.id, goal.id) %></h5>
-    <% end %> <br><br>
+  <% @user_habits.each.with_index(1) do |personal_habit, index| %>
+    <h3><%= index %>. <%= link_to personal_habit.name, habit_path(personal_habit) %></h3> <br>
+    <h5>Description: <%= personal_habit.description %></h5><br>
+    <h5>Category: <%= link_to personal_habit.category.name, personal_habit.category %></h5><br>
+
+    <% if personal_habit.goals.size == 0 %>
+      <h5>Create goals for this habit!</h5><br><br>
+    <%  elsif personal_habit.goals.size == 1 %>
+      <h5>Goal: <%=  link_to personal_habit.goals.first.name, habit_goal_path(personal_habit.goals.first) %></h5> <br><br>
+    <% else %>
+      <h5>Goals: </h5>
+      <% personal_habit.goals.each.with_index(1) do |goal, index|%>
+        <h5><%= index %>.  <%= link_to "#{goal.name}",  habit_goal_path(personal_habit.id, goal.id) %></h5>
+      <% end %> <br><br>
+    <% end %>
+
   <% end %>
 
-<% end %>
+<% end %> <br><br>
+
+<%= button_to 'New Habit', new_habit_path, :method => :get %>

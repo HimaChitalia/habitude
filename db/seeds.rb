@@ -26,7 +26,7 @@ vinit.password = "vinitpassword"
 vinit.role = 3
 vinit.save
 
-categories = ["Money", "Health and Fitness", "The Arts", "Outdoor Recreation", "Education", "Business", "Wellness", "Hobbies"]
+categories = ["Money", "Health and Fitness", "The Arts", "Outdoor Recreation", "Education", "Business", "Wellness", "Hobbies", "Relationship", "Productivity", "Professional", "Kick a Habit"]
 
 categories.each do |category|
   c = Category.new(name: category)

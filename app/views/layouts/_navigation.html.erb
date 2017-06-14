@@ -12,13 +12,7 @@
       </ul>
       <ul class="navbar-right nav navbar-nav pull-right">
         <% if logged_in? %>
-          <li>
-            <%= link_to "Add New Habit", new_habit_path %>
-          </li>
-          <li>
-            <%= link_to "#{current_user.name}'s Habits", personal_habits_path(current_user.id) %>
-          </li>
-          <li>
+          <li id="search">
           <%= form_tag(habits_path, :method => "get", id: "search-form") do %>
             <%= select_tag "category_id", options_from_collection_for_select(Category.all, "id", "name"), placeholder: "Search Habits for the Category"  %>
             <%= submit_tag "Search", :name => nil %>
@@ -27,6 +21,12 @@
               <%= text_field_tag :search, params[:search], placeholder: "Search Habits for the Category" %>
               <%= submit_tag "Search", :name => nil %>
           <% end %> -->
+          </li>
+          <li>
+            <%= link_to "Add New Habit", new_habit_path %>
+          </li>
+          <li>
+            <%= link_to "#{current_user.name}'s Habits", personal_habits_path(current_user.id) %>
           </li>
           <li>
             <%= link_to "#{current_user.name}'s Profile", user_path(current_user) %>

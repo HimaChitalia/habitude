@@ -10,6 +10,11 @@
   <%= @user.role %>
 </p>
 
+<%= form_tag(personal_habits_path, :method => "get", id: "search-form") do %>
+  <%= select_tag "category_id", options_from_collection_for_select(Category.all, "id", "name"), placeholder: "Search Your Habits for the Category"  %>
+  <%= submit_tag "Search", :name => nil %>
+<% end %> <br> <br>
+
 <% if @user.habits.size > 0 %>
   <h4><%= @user.name.capitalize %>'s Habits:</h4>
   <%= render 'user_habits', habits: @user.habits %>

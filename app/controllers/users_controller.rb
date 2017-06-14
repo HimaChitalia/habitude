@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy, :personal_habits]
+  before_action :set_category, only: [:personal_habits]
+
 
   def index
     @users = User.all
@@ -61,12 +63,21 @@ class UsersController < ApplicationController
   end
 
   def personal_habits
-    @user_habits = @user.habits
+    if params[:category_id]
+       @user_habits = @user.habits.search(params[:category_id])
+    else
+       @user_habits = @user.habits
+    end
+    # @user_habits = @user.habits
   end
 
   private
     def set_user
       @user = User.find(params[:id])
+    end
+
+    def set_category
+      @category = Category.find(params[:category_id]) if params[:category_id]
     end
 
     def user_params

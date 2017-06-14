@@ -88,7 +88,7 @@ class HabitsController < ApplicationController
     end
 
     def set_category
-      @category = Category.find(params[:category_id])
+      @category = Category.find(params[:category_id]) if params[:category_id]
     end
 
     def habit_params
