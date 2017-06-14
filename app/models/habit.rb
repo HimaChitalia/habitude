@@ -22,7 +22,7 @@ class Habit < ApplicationRecord
     def self.search(search)
       # category = Category.find_by(name: search)
       # where("category_id LIKE ?", category_id)
-      where("category_id LIKE ?", search)
+      where("category_id LIKE ?", search.to_i)
     end
 
 end
