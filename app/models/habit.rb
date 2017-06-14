@@ -20,9 +20,10 @@ class Habit < ApplicationRecord
     end
 
     def self.search(search)
+      # where("category_id LIKE ?", search.to_i)
       # category = Category.find_by(name: search)
-      # where("category_id LIKE ?", category_id)
-      where("category_id LIKE ?", search.to_i)
+        # where("category_id LIKE ?", category_id)
+    search_result =  where("category_id::text Like ?", '{search}')
     end
 
 end
