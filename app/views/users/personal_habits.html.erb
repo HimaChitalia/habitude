@@ -2,10 +2,10 @@
   <h2>You don't have any habit for the for the category "<%= @category.name %>".</h2> <br><br>
 <% elsif @category.present? %>
   <h2>Here is a list of all of your habits for the category <%= @category.name %></h2> <br><br>
-  <% render 'show_personal_habits' %>
+  <%= render 'show_personal_habits' %>
 <% else %>
   <h2>Here is a list of all of your habits.</h2> <br><br>
-  <% render 'show_personal_habits' %>
+  <%= render 'show_personal_habits' %>
 <% end %> <br><br>
 
 <%= button_to 'New Habit', new_habit_path, :method => :get %>
