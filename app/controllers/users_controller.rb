@@ -18,8 +18,12 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     @user.role = 1
     if @user.save
-      session[:user_id] = @user.id
-      redirect_to @user, notice: 'User was successfully created.'
+      if current_user
+        redirect_to users_path, notice: "#{@user.name.capitalize} was successfully created."
+      else
+        session[:user_id] = @user.id
+        redirect_to @user, notice: "#{@user.name.capitalize} your account is successfully created. We hope you enjoy Habitude."
+      end
     else
       render :new
     end
