@@ -64,9 +64,9 @@ class UsersController < ApplicationController
 
   def personal_habits
     if params[:category_id]
-       @user_habits = @user.habits.search(params[:category_id])
+       @user_habits = @user.habits.search(params[:category_id]).recent
     else
-       @user_habits = @user.habits
+       @user_habits = @user.habits.recent
     end
     # @user_habits = @user.habits
   end

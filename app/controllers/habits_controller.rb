@@ -3,16 +3,10 @@ class HabitsController < ApplicationController
   before_action :set_category, only: [:index]
 
   def index
-    # @habits = Habit.all
-    # if params[:search]
-    #   @habits = Habit.search(params[:search]).order("created_at DESC")
-    # else
-    #   @habits = Habit.all.order("created_at DESC")
-    # end
     if params[:category_id]
-       @habits = Habit.search(params[:category_id])
+       @habits = Habit.search(params[:category_id]).recent
     else
-       @habits = Habit.all
+       @habits = Habit.all.recent
     end
   end
 

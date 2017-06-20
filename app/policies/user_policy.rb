@@ -1,7 +1,7 @@
 class UserPolicy < ApplicationPolicy
 
   def index?
-    user.owner?
+    user.owner? || user.moderator?
   end
 
   def show?
@@ -9,7 +9,7 @@ class UserPolicy < ApplicationPolicy
   end
 
   def update?
-    user.admin? 
+    user.admin?
   end
 
   def destroy?

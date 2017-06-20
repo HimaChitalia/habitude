@@ -22,7 +22,7 @@
         <% if user.role_before_type_cast < 2 %>
           <td><%= link_to "Upgrade To Admin", { controller: 'users', id: user.id, role: 2, action: "change_role" }, method: :put %></td>
         <% elsif user.role_before_type_cast < 3%>
-          <td><%= link_to "Upgrade To Owner", { controller: 'users', id: user.id, role: 3, action: "change_role" }, method: :put %></td>
+          <td><%= link_to "Upgrade To Moderator", { controller: 'users', id: user.id, role: 3, action: "change_role" }, method: :put %></td>
         <% elsif user.role_before_type_cast == 3  %>
           <td><%= link_to "Downgrade To Admin", { controller: 'users', id: user.id, role: 2, action: "change_role" }, method: :put %></td>
         <% else %>
