@@ -39,7 +39,6 @@ class MilestonesController < ApplicationController
   end
 
   def update_statuses
-    # binding.pry
     if params[:milestone][:status_ids].present?
       status_id = params[:milestone][:status_ids].to_i
       status = Status.find_by(id: status_id)
@@ -47,6 +46,7 @@ class MilestonesController < ApplicationController
         "#{status.description} is already a status for the #{@milestone.description}"
       else
         @milestone.statuses << status
+        # status = []
         @milestone.save
       end
     end

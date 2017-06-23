@@ -1,4 +1,4 @@
-class MilestonesController < ApplicationController
+class StatusesController < ApplicationController
 
   before_action :set_habit, :set_goal, :set_milestone, :set_status, only: [:show, :update_statuses, :update, :edit, :destroy]
 
