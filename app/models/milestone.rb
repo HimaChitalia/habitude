@@ -1,10 +1,12 @@
 class Milestone < ApplicationRecord
 
   has_many :goals_milestones
-  has_and_belongs_to_many :goals
+  has_many :goals, through: :goals_milestones
+  has_many :habits, through: :goals
+  has_many :users, through: :habits
 
   has_many :milestones_statuses
-  has_and_belongs_to_many :statuses
+  has_many :statuses, through: :milestones_statuses
 
   accepts_nested_attributes_for :statuses, reject_if: lambda {|attributes| attributes['description'].blank?}
 

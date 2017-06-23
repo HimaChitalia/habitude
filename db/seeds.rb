@@ -33,7 +33,7 @@ categories.each do |category|
   c.save
 end
 
-goals = ["Should develop this in 1 week.", "Should develop this in 2 weekS.", "Should develop this in 3 weeks.", "Should develop this in 4 weeks." ]
+goals = ["Should develop this in 1 week.", "Should develop this in 2 weeks.", "Should develop this in 3 weeks.", "Should develop this in 4 weeks." ]
 
 goals.each do |goal|
   g = Goal.new(name: goal)

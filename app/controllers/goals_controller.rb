@@ -51,7 +51,7 @@ class GoalsController < ApplicationController
         "#{milestone.description} is already a milestone for the @#{@goal.name}"
       else
         @goal.milestones << milestone
-        # milestone.statuses = []
+        # @user.goals
         @goal.save
       end
     end
