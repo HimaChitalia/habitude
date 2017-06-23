@@ -1,5 +1,5 @@
 class HabitsController < ApplicationController
-  before_action :set_habit, only: [:show, :edit, :update, :destroy, :update_goals]
+  before_action :set_habit, :habit_owner, only: [:show, :edit, :update, :destroy, :update_goals]
   before_action :set_category, only: [:index]
 
   def index
@@ -56,7 +56,9 @@ class HabitsController < ApplicationController
         "#{goal.name} is already a goal for the @#{@habit.name}"
       else
         @habit.goals << goal
-        goal.milestones = []
+        # binding.pry
+        # @habit.goals.find(goal.id).milestones = []
+        # binding.pry
         @habit.save
       end
     end
@@ -67,7 +69,7 @@ class HabitsController < ApplicationController
           Goal.find_or_create_by(name: v) do |goal|
             goal.name = v
             @habit.goals << goal
-            goal.milestones = []
+            # @user.goals.find_by(goal.id).milestones = []
           end
         end
       end
@@ -81,6 +83,10 @@ class HabitsController < ApplicationController
   private
     def set_habit
       @habit = Habit.find(params[:id])
+    end
+
+    def habit_owner
+      @user = @habit.user
     end
 
     def set_category

@@ -11,7 +11,9 @@ class User < ApplicationRecord
 
   has_many :habits
   has_many :goals, through: :habits
-  has_many :ideas, through: :habits
+
+  has_many :milestones, through: :goals
+  has_many :statuses, through: :milestones
 
   has_many :comments
 

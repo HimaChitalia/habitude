@@ -51,7 +51,7 @@ class GoalsController < ApplicationController
         "#{milestone.description} is already a milestone for the @#{@goal.name}"
       else
         @goal.milestones << milestone
-        milestone.statuses = []
+        # milestone.statuses = []
         @goal.save
       end
     end
@@ -62,7 +62,7 @@ class GoalsController < ApplicationController
           Milestone.find_or_create_by(description: v) do |milestone|
             milestone.description = v
             @goal.milestones << milestone
-            milestone.statuses = []
+            # milestone.statuses = []
           end
         end
       end
