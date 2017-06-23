@@ -67,6 +67,7 @@ class HabitsController < ApplicationController
           Goal.find_or_create_by(name: v) do |goal|
             goal.name = v
             @habit.goals << goal
+            goal.milestones = []
           end
         end
       end

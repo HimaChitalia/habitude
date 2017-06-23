@@ -46,7 +46,6 @@ class MilestonesController < ApplicationController
         "#{status.description} is already a status for the #{@milestone.description}"
       else
         @milestone.statuses << status
-        # status = []
         @milestone.save
       end
     end
