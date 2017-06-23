@@ -72,7 +72,6 @@ class UsersController < ApplicationController
     else
        @user_habits = @user.habits.recent
     end
-    # @user_habits = @user.habits
   end
 
   private
@@ -88,9 +87,4 @@ class UsersController < ApplicationController
       params.require(:user).permit(:name, :email, :password, :password_confirmation)
     end
 
-  #   def skip_password_attribute
-  #   if params[:password].blank? && params[:password_validation].blank?
-  #     params.except!(:password, :password_validation)
-  #   end
-  # end
 end

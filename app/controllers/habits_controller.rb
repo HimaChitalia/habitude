@@ -49,19 +49,19 @@ class HabitsController < ApplicationController
   end
 
   def update_goals
-    if params[:habit][:goal_ids].present?
-      goal_id = params[:habit][:goal_ids].to_i
-      goal = Goal.find_by(id: goal_id)
-      if @habit.goals.include?(goal)
-        "#{goal.name} is already a goal for the @#{@habit.name}"
-      else
-        @habit.goals << goal
-        # binding.pry
-        # @habit.goals.find(goal.id).milestones = []
-        # binding.pry
-        @habit.save
-      end
-    end
+    # if params[:habit][:goal_ids].present?
+    #   goal_id = params[:habit][:goal_ids].to_i
+    #   goal = Goal.find_by(id: goal_id)
+    #   if @habit.goals.include?(goal)
+    #     "#{goal.name} is already a goal for the @#{@habit.name}"
+    #   else
+    #     @habit.goals << goal
+    #     # binding.pry
+    #     # @habit.goals.find(goal.id).milestones = []
+    #     # binding.pry
+    #     @habit.save
+    #   end
+    # end
 
     params[:habit][:goals_attributes].each do |key, value|
       value.each do |k, v|

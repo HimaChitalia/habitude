@@ -1,0 +1,11 @@
+<%= form_for @goal, :as => :goal, :url => update_statuses_path(@habit.id, @goal.id), method: :patch do |f| %>
+  <%= f.fields_for :statuses, @goal.statuses.build do |status_builder| %>
+    <%= status_builder.label :description %>
+    <%= status_builder.text_field :description %>
+  <% end %><br>
+
+<!-- <h5>Or Select from these!</h5>
+  <%= f.collection_select :milestone_ids, Milestone.order(:description), :id, :description %><br> <br> -->
+
+  <%= f.submit "Add Milestones"%>
+<% end %>

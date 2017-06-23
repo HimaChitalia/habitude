@@ -1,25 +1,25 @@
 <h2>Goal Name: <%= @goal.name %></h2> <br> <br>
 <h4>This goal is for the habit: <%= link_to "#{@habit.name}", habit_path(@habit) %></h4> <br> <br>
 
-<% if @goal.milestones.size == 0 %>
+<% if @goal.statuses.size == 0 %>
 
   <% if current_user == @habit.user %>
-    <h5>You don't have any milestone for this goal! Create one now!</h5>
-    <%= render 'build_milestone', goal: @goal %>
+    <h5>You don't have any status for this goal! Create one now!</h5>
+    <%= render 'build_status', goal: @goal %>
   <% else %>
-    <h5>There are no milestones for this habit yet!</h5>
+    <h5>There is no status update for this goal yet!</h5>
   <% end %>
 
-<%  elsif @goal.milestones.size == 1 %>
-  <h5>Milestone: <%= link_to  @goal.milestones.first.description, habit_goal_milestone_path(@habit, @goal, @goal.milestones.first) %></h5> <br>
-  <%= render 'delete_milestone', milestone: @goal.milestones.first %> <br> <br>
+<%  elsif @goal.statuses.size == 1 %>
+  <h5>Status: <%= @goal.statuses.first.description %></h5> <br>
+  <%= render 'delete_status', status: @goal.statuses.first %> <br> <br>
   <%= render 'user' %>
 
 <% else %>
-  <h5>Milestones: </h5>
-  <% @goal.milestones.each.with_index(1) do |milestone, index|%>
-    <h5><p><%= link_to "#{index}. #{milestone.description}", habit_goal_milestone_path(@habit, @goal, milestone) %><p></h5>
-      <%= render 'delete_milestone', milestone: milestone %>
+  <h5>Statuses: </h5>
+  <% @goal.statuses.each.with_index(1) do |status, index|%>
+    <h5><%=  "#{index}. #{status.description}" %></h5><br>
+      <%= render 'delete_status', status: status %>
   <% end %> <br><br>
   <%= render 'user' %>
 

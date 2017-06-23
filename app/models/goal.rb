@@ -1,19 +1,16 @@
 class Goal < ApplicationRecord
 
-has_many :goals_habits
-has_many :habits, through: :goals_habits
-has_many :users, through: :habits
+belongs_to :habit
+delegate :user, :to => :habit, :allow_nil => true
 
-has_many :goals_milestones
-has_many :milestones, through: :goals_milestones
-has_many :statuses, through: :milestones
+has_many :statuses
 
-accepts_nested_attributes_for :milestones, reject_if: lambda {|attributes| attributes['description'].blank?}
+accepts_nested_attributes_for :statuses, reject_if: lambda {|attributes| attributes['description'].blank?}
 
-def add_milestone(milestone)
+def add_status(status)
   # locations_will_change!
-  self.milestones = [] if self.milestones == nil
-  update_attributes milestones: self.milestones.push(milestone)
+  self.statuses = [] if self.statuses == nil
+  update_attributes milestones: self.statuses.push(status)
 end
 
 end

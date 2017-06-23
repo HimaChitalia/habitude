@@ -7,7 +7,8 @@
 
 <% if @habit.goals.size == 0 %>
   <% if current_user == @habit.user %>
-    <%= render 'user' %>
+    <h5>There are no goals for this habit yet! Create one.</h5> <br>
+    <%= render 'build_goal' %>
   <% else %>
     <h5>There are no goals for this habit yet!</h5>
   <% end %>
@@ -24,17 +25,18 @@
     <h5><p><%= link_to "#{index}. #{goal.name}",  habit_goal_path(@habit.id, goal.id) %><p></h5>
     <%= render 'delete_goal', goal: goal %>
   <% end %> <br>
-  <h4>Create more goals for this habit!</h4>
   <%= render 'user' %>
 
 <% end %> <br>
 
-<%= render 'comments/all_comments', comments: @habit.comments if @habit.comments %>
+<%= render 'comments/all_comments', comments: @habit.comments if @habit.comments.size > 0 %>
 
-<br>
+<% if @habit.user != current_user %>
+  <br>
 
-<h5>Add your comment below! (You must be signed in) </h5>
-<%= render 'comments/form', comment: @habit.comments.new, habit: @habit%>
+  <h5>Add your comment below! (You must be signed in) </h5>
+  <%= render 'comments/form', comment: @habit.comments.new, habit: @habit%>
+<% end %>
 
 <br><br>
 

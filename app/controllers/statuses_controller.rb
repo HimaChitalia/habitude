@@ -1,6 +1,6 @@
 class StatusesController < ApplicationController
 
-  before_action :set_habit, :set_goal, :set_milestone, :set_status, only: [:show, :update_statuses, :update, :edit, :destroy]
+  before_action :set_habit, :set_goal, :set_status, only: [:show, :update_statuses, :update, :edit, :destroy]
 
   def new
   end
@@ -18,24 +18,26 @@ class StatusesController < ApplicationController
   end
 
   def destroy
-    statuses_array = @milestone.statuses
-    if statuses_array.size > 0
-      if statuses_array.size == 1
-        statuses_array.clear
-        @milestone.save
-      elsif
-        statuses_array.each do |status|
-          if status.id == @status.id
-            statuses_array -= [status]
-            @milestone.statuses = statuses_array
-            @milestone.save
-          end
-        end
-      end
-      redirect_to habit_goal__milestone_path(@habit, @goal, @milestone), :notice => "Status Deleted"
-    else
-      "An error occured"
-    end
+    # statuses_array = @goal.statuses
+    # if statuses_array.size > 0
+    #   if statuses_array.size == 1
+    #     statuses_array.clear
+    #     @goal.save
+    #   elsif
+    #     statuses_array.each do |status|
+    #       if status.id == @status.id
+    #         statuses_array -= [status]
+    #         @goal.statuses = statuses_array
+    #         @goal.save
+    #       end
+    #     end
+    #   end
+    #   redirect_to habit_goal_path(@habit, @goal), :notice => "Status Deleted"
+    # else
+    #   "An error occured"
+    # end
+     @status.destroy
+     redirect_to habit_goal_path(@habit, @goal), :notice => "Status Deleted"
   end
 
 
@@ -49,9 +51,9 @@ class StatusesController < ApplicationController
       @goal = Goal.find(params[:goal_id])
     end
 
-    def set_milestone
-      @milestone = Milestone.find(params[:milestone_id])
-    end
+    # def set_milestone
+    #   @milestone = Milestone.find(params[:milestone_id])
+    # end
 
     def set_status
       @status = Status.find(params[:id])
@@ -64,6 +66,5 @@ class StatusesController < ApplicationController
     def status_params
       params.required(:status).permit(:description, :milestone_id)
     end
-
 
 end

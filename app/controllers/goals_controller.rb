@@ -23,55 +23,83 @@ class GoalsController < ApplicationController
 
   def destroy
     authorize_user(@habit)
-    goals_array = @habit.goals
-    if goals_array.size > 0
-      if goals_array.size == 1
-        goals_array.clear
-        @habit.save
-      elsif
-        goals_array.each do |goal|
-          if goal.id == @goal.id
-            goals_array -= [goal]
-            @habit.goals = goals_array
-            @habit.save
-          end
-        end
-        redirect_to @habit, :notice => "Goal Deleted"
-      end
-    else
-      "An error occured."
-    end
+    # goals_array = @habit.goals
+    # if goals_array.size > 0
+    #   if goals_array.size == 1
+    #     goals_array.clear
+    #     @habit.save
+    #   elsif
+    #     goals_array.each do |goal|
+    #       if goal.id == @goal.id
+    #         goals_array -= [goal]
+    #         @habit.goals = goals_array
+    #         @habit.save
+    #       end
+    #     end
+    #     redirect_to @habit, :notice => "Goal Deleted"
+    #   end
+    # else
+    #   "An error occured."
+    # end
+    @goal.destroy
+    redirect_to @habit, :notice => "Goal Deleted"
   end
 
-  def update_milestones
-    if params[:goal][:milestone_ids].present?
-      milestone_id = params[:goal][:milestone_ids].to_i
-      milestone = Milestone.find_by(id: milestone_id)
-      if @goal.milestones.include?(milestone)
-        "#{milestone.description} is already a milestone for the @#{@goal.name}"
-      else
-        @goal.milestones << milestone
-        # @user.goals
-        @goal.save
-      end
-    end
+  # def update_milestones
+  #   if params[:goal][:milestone_ids].present?
+  #     milestone_id = params[:goal][:milestone_ids].to_i
+  #     milestone = Milestone.find_by(id: milestone_id)
+  #     if @goal.milestones.include?(milestone)
+  #       "#{milestone.description} is already a milestone for the @#{@goal.name}"
+  #     else
+  #       @goal.milestones << milestone
+  #       # @user.goals
+  #       @goal.save
+  #     end
+  #   end
+  #
+  #   params[:goal][:milestones_attributes].each do |key, value|
+  #     value.each do |k, v|
+  #       if v.present?
+  #         Milestone.find_or_create_by(description: v) do |milestone|
+  #           milestone.description = v
+  #           @goal.milestones << milestone
+  #           # milestone.statuses = []
+  #         end
+  #       end
+  #     end
+  #     @goal.save
+  #   end
+  #
+  #   redirect_to habit_goal_path(@habit.id, @goal.id)
+  # end
 
-    params[:goal][:milestones_attributes].each do |key, value|
+  def update_statuses
+    # if params[:milestone][:status_ids].present?
+    #   status_id = params[:milestone][:status_ids].to_i
+    #   status = Status.find_by(id: status_id)
+    #   if @milestone.statuses.include?(status)
+    #     "#{status.description} is already a status for the #{@milestone.description}"
+    #   else
+    #     @milestone.statuses << status
+    #     @milestone.save
+    #   end
+    # end
+
+    params[:goal][:statuses_attributes].each do |key, value|
       value.each do |k, v|
         if v.present?
-          Milestone.find_or_create_by(description: v) do |milestone|
-            milestone.description = v
-            @goal.milestones << milestone
-            # milestone.statuses = []
+          Status.find_or_create_by(description: v) do |status|
+            status.description = v
+            @goal.statuses << status
           end
         end
       end
       @goal.save
     end
 
-    redirect_to habit_goal_path(@habit.id, @goal.id)
+    redirect_to habit_goal_milestone_path(@habit, @goal, @milestone)
   end
-
 
   private
 
@@ -88,6 +116,6 @@ class GoalsController < ApplicationController
     end
 
     def goal_params
-      params.required(:goal).permit(:description, :habit_id, :milestone_ids => [], :milestones_attributes => [:description])
+      params.required(:goal).permit(:description, :habit_id, :statuses_attributes => [:description])
     end
 end

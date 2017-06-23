@@ -3,11 +3,8 @@ class Habit < ApplicationRecord
   belongs_to :user
   belongs_to :category
 
-  has_many :goals_habits
-  has_many :goals, through: :goals_habits
-  has_many :milestones, through: :goals
-  has_many :statuses, through: :milestones
-
+  has_many :goals
+  has_many :statuses, through: :goals
 
   has_many :comments
 

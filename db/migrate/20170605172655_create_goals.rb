@@ -3,6 +3,7 @@ class CreateGoals < ActiveRecord::Migration[5.0]
     create_table :goals do |t|
       t.string :name
 
+      t.integer :habit_id
 
       t.timestamps
     end

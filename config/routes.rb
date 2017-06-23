@@ -5,9 +5,7 @@ Rails.application.routes.draw do
   resources :habits do
     resources :comments
     resources :goals do
-      resources :milestones do
         resources :statuses
-      end
     end
   end
 
@@ -22,8 +20,8 @@ Rails.application.routes.draw do
  get '/users/:id/habits', to: 'users#personal_habits', as: 'personal_habits'
 
  patch '/habits/:id/addgoals', to: 'habits#update_goals', as: 'update_goals'
- patch '/habits/:habit_id/goals/:id/addmilestones', to: 'goals#update_milestones', as: 'update_milestones'
- patch '/habits/:habit_id/goals/:goal_id/:milestones/:id/addstatusestoms', to: 'milestones#update_statuses', as: 'update_statuses'
+ # patch '/habits/:habit_id/goals/:id/addmilestones', to: 'goals#update_milestones', as: 'update_milestones'
+ patch '/habits/:habit_id/:goals/:id/addstatuses', to: 'goals#update_statuses', as: 'update_statuses'
 
  root 'welcome#greeting'
 end

@@ -28,22 +28,9 @@ ActiveRecord::Schema.define(version: 20170612231416) do
 
   create_table "goals", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "goals_habits", force: :cascade do |t|
     t.integer  "habit_id"
-    t.integer  "goal_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "goals_milestones", force: :cascade do |t|
-    t.integer  "goal_id"
-    t.integer  "milestone_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
   end
 
   create_table "habits", force: :cascade do |t|
@@ -55,21 +42,9 @@ ActiveRecord::Schema.define(version: 20170612231416) do
     t.datetime "updated_at",  null: false
   end
 
-  create_table "milestones", force: :cascade do |t|
-    t.string   "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
-
-  create_table "milestones_statuses", force: :cascade do |t|
-    t.integer  "milestone_id"
-    t.integer  "status_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-  end
-
   create_table "statuses", force: :cascade do |t|
     t.string   "description"
+    t.integer  "goal_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
