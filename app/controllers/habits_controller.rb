@@ -56,6 +56,7 @@ class HabitsController < ApplicationController
         "#{goal.name} is already a goal for the @#{@habit.name}"
       else
         @habit.goals << goal
+        goal.milestones = []
         @habit.save
       end
     end
