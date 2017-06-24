@@ -1,5 +1,6 @@
 class GoalsController < ApplicationController
-  before_action :set_goal, :set_habit, only: [:show, :update_milestones, :update, :edit, :destroy]
+  # before_action :set_goal, :set_habit, :update_statuses, only: [:show, :update_milestones, :update, :edit, :destroy]
+  before_action :set_goal, :set_habit,  only: [:show, :update_statuses, :update, :edit, :destroy]
 
   def index
     @goals = @habit.goals
@@ -23,83 +24,47 @@ class GoalsController < ApplicationController
 
   def destroy
     authorize_user(@habit)
-    # goals_array = @habit.goals
-    # if goals_array.size > 0
-    #   if goals_array.size == 1
-    #     goals_array.clear
-    #     @habit.save
-    #   elsif
-    #     goals_array.each do |goal|
-    #       if goal.id == @goal.id
-    #         goals_array -= [goal]
-    #         @habit.goals = goals_array
-    #         @habit.save
-    #       end
-    #     end
-    #     redirect_to @habit, :notice => "Goal Deleted"
-    #   end
-    # else
-    #   "An error occured."
-    # end
     @goal.destroy
     redirect_to @habit, :notice => "Goal Deleted"
   end
 
-  # def update_milestones
-  #   if params[:goal][:milestone_ids].present?
-  #     milestone_id = params[:goal][:milestone_ids].to_i
-  #     milestone = Milestone.find_by(id: milestone_id)
-  #     if @goal.milestones.include?(milestone)
-  #       "#{milestone.description} is already a milestone for the @#{@goal.name}"
-  #     else
-  #       @goal.milestones << milestone
-  #       # @user.goals
-  #       @goal.save
-  #     end
-  #   end
-  #
-  #   params[:goal][:milestones_attributes].each do |key, value|
+  # def update_statuses
+  #   params[:goal][:statuses_attributes].each do |key, value|
+  #   # params[:goal].each do |key, value|
+  #     # raise params.inspect
   #     value.each do |k, v|
   #       if v.present?
-  #         Milestone.find_or_create_by(description: v) do |milestone|
-  #           milestone.description = v
-  #           @goal.milestones << milestone
-  #           # milestone.statuses = []
+  #         Status.find_or_create_by(description: v) do |status|
+  #           status.description = v
+  #           @goal.statuses << status
   #         end
   #       end
   #     end
   #     @goal.save
   #   end
-  #
-  #   redirect_to habit_goal_path(@habit.id, @goal.id)
+  #   redirect_to habit_goal_path(@habit, @goal)
   # end
 
   def update_statuses
-    # if params[:milestone][:status_ids].present?
-    #   status_id = params[:milestone][:status_ids].to_i
-    #   status = Status.find_by(id: status_id)
-    #   if @milestone.statuses.include?(status)
-    #     "#{status.description} is already a status for the #{@milestone.description}"
-    #   else
-    #     @milestone.statuses << status
-    #     @milestone.save
-    #   end
-    # end
-
     params[:goal][:statuses_attributes].each do |key, value|
       value.each do |k, v|
-        if v.present?
-          Status.find_or_create_by(description: v) do |status|
-            status.description = v
-            @goal.statuses << status
-          end
-        end
+        status = Status.new
+        status.description = v
+        @goal.statuses << status
+        @goal.save
+        # else
+        # , notice: "An error occured. Please try again."
+        redirect_to habit_goal_path(@habit, @goal)
       end
-      @goal.save
     end
-
-    redirect_to habit_goal_milestone_path(@habit, @goal, @milestone)
   end
+
+  # <ActionController::Parameters {"0"=>{"description"=>"Awesome"}} permitted: false>
+
+  # <ActionController::Parameters {"utf8"=>"✓", "_method"=>"patch",
+  #   "authenticity_token"=>"i30IzdOYv13Qc7xuzN1UCWRe1cABj1DICJlC4uFan/YrfbFTyhgqEDwI/a2tyuVu8mmWw8Ic3mkEdCNbbmXGJg==",
+  #   "goal"=>{"statuses_attributes"=>{"0"=>{"description"=>"Awesome"}}}, "commit"=>"Add a current status of this goal!",
+  #  "controller"=>"goals", "action"=>"update_statuses", "habit_id"=>"2", "id"=>"3"} permitted: false>
 
   private
 
@@ -109,10 +74,6 @@ class GoalsController < ApplicationController
 
     def set_habit
       @habit = Habit.find(params[:habit_id])
-    end
-
-    def set_user
-      @user = @habit.user
     end
 
     def goal_params

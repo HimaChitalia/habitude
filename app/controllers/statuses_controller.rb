@@ -1,6 +1,6 @@
 class StatusesController < ApplicationController
 
-  before_action :set_habit, :set_goal, :set_status, only: [:show, :update_statuses, :update, :edit, :destroy]
+  before_action :set_habit, :set_goal,:set_status, only: [:show, :update_statuses, :update, :edit, :destroy]
 
   def new
   end
@@ -56,7 +56,7 @@ class StatusesController < ApplicationController
     # end
 
     def set_status
-      @status = Status.find(params[:id])
+      @status = Status.find(params[:id]) if params[:id]
     end
 
     def set_user

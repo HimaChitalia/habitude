@@ -21,7 +21,7 @@ Rails.application.routes.draw do
 
  patch '/habits/:id/addgoals', to: 'habits#update_goals', as: 'update_goals'
  # patch '/habits/:habit_id/goals/:id/addmilestones', to: 'goals#update_milestones', as: 'update_milestones'
- patch '/habits/:habit_id/:goals/:id/addstatuses', to: 'goals#update_statuses', as: 'update_statuses'
+ patch '/habits/:habit_id/goals/:id/addstatuses', to: 'goals#update_statuses', as: 'update_statuses'
 
  root 'welcome#greeting'
 end
