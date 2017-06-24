@@ -28,6 +28,7 @@ class HabitsController < ApplicationController
   def create
     @habit = Habit.new(habit_params)
     @habit.user_id = current_user.id if current_user
+    binding.pry
     if @habit.save
       redirect_to @habit, notice: 'Habit was successfully created.'
     else
@@ -78,6 +79,6 @@ class HabitsController < ApplicationController
     end
 
     def habit_params
-      params.required(:habit).permit(:name, :description, :category_id, :goal_ids, :goals_attributes => [:name])
+      params.required(:habit).permit(:name, :description, :goal_ids, :goals_attributes => [:name], category_ids: [])
     end
 end

@@ -5,7 +5,6 @@ class CreateHabits < ActiveRecord::Migration[5.0]
       t.string :description
 
       t.integer :user_id
-      t.integer :category_id
       
       t.timestamps
     end

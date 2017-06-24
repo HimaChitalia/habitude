@@ -179,3 +179,7 @@ a:hover {
 a:active {
     color: orange;
 }
+
+.checkbox_container input {
+  display: inline;
+}

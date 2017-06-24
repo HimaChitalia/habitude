@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <% if @habits.blank? %>
-  <h2>There are no habits for the category "<%= @category.name %>".</h2> <br><br>
+  <h2>There are no habits for the category "<%= @category.name if @category%>".</h2> <br><br>
 <% else %>
 
   <h1>List of all of the habits</h1>

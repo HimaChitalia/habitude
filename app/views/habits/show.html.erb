@@ -1,7 +1,14 @@
 <h2>Habit name: <%= @habit.name.capitalize %></h2> <br> <br>
 
 <h5>Description: <%= @habit.description %></h5><br><br>
-<h5>Category: <%= link_to @habit.category.name, @habit.category %></h5><br><br>
+<% if @habit.categories.size == 1 %>
+  <h5>Category: <%= link_to @habit.categories.first.name, @habit.categories.first %></h5><br><br>
+<% else %>
+  <h5>Categories: </h5><br>
+  <% @habit.categories.each.with_index(1) do |category, index| %>
+    <%= link_to "#{index}. #{category.name}", category %> <br>
+  <% end %>
+<% end %> <br> <br>
 <h5>User: <%= link_to @habit.user.name, @habit.user %></h5><br><br>
 
 
@@ -14,7 +21,7 @@
   <% end %>
 
 <%  elsif @habit.goals.size == 1 %>
-  <h5>Goal: <%= link_to @habit.goals.first.name, habit_goal_path(@habit.id, @habit.goals.first.id)  %></h5> <br>
+  <h5>Goal: <%= link_to @habit.goals.first.name, habit_goal_path(@habit.id, @habit.goals.first.id)  %></h5>
   <%= render 'delete_goal', goal: @habit.goals.first %> <br> <br>
   <%= render 'user' %>
 

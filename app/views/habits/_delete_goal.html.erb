@@ -1,4 +1,3 @@
 <% if current_user == @habit.user %>
-  <%= link_to "Delete Goal", [@habit, goal], :method  => :delete  %>  |
-  <%= link_to 'Edit', edit_habit_goal_path(@habit.id, goal.id) %> 
+  <%= link_to "Delete Goal", [@habit, goal], :method  => :delete  %>
 <% end %>

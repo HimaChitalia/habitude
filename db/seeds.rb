@@ -56,35 +56,35 @@ end
 #   s.save
 # end
 
-reading = Habit.new
-reading.name = "Reading"
-reading.category = Category.find_by(name: "Hobbies")
-reading.description = "Reading a book at least 2 pages everyday."
-reading.user = User.find_by(name: "Hima")
+# reading = Habit.new
+# reading.name = "Reading"
+# reading.category = Category.find_by(name: "Hobbies")
+# reading.description = "Reading a book at least 2 pages everyday."
+# reading.user = User.find_by(name: "Hima")
 # goal = Goal.find(1)
 # reading.goals << goal
 # milestone = Milestone.first
 # reading.goals.first.milestones << milestone
-reading.save
+# reading.save
 
-coding = Habit.new
-coding.name = "Coding"
-coding.category = Category.find_by(name: "Education")
-coding.description = "Learn coding to be web developer."
-coding.user = User.find(3)
+# coding = Habit.new
+# coding.name = "Coding"
+# coding.category = Category.find_by(name: "Education")
+# coding.description = "Learn coding to be web developer."
+# coding.user = User.find(3)
 # goal = Goal.find(2)
 # coding.goals << goal
 # milestone = Milestone.last
 # coding.goals.first.milestones << milestone
-coding.save
-
-planting = Habit.new
-planting.name = "Planting"
-planting.category = Category.find_by(name: "Outdoor Recreation")
-planting.description = "Give back to nature regularly"
+# coding.save
+#
+# planting = Habit.new
+# planting.name = "Planting"
+# planting.category = Category.find_by(name: "Outdoor Recreation")
+# planting.description = "Give back to nature regularly"
 # goal = Goal.find(3)
 # planting.goals << goal
-planting.user = User.find(1)
+# planting.user = User.find(1)
 # milestone = Milestone.find(31)
 # planting.goals.first.milestones << milestone
-planting.save
+# planting.save

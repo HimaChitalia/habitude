@@ -1,8 +1,9 @@
 <h2>Goal edit form for the ""<%= @goal.name %>""</h2> <br> <br>
 
-<%= form_for(@habit, @goal), :url => { :action => "update" } do |f| %>
 <%= render 'layouts/errors', form: @goal %>
 
+<%= form_for habit_goal_path(@habit, @goal) do |f| %>
+<!-- <input name="_method" type="hidden" value="patch" /> -->
 
   <div class="field">
     <%= f.label :name %>

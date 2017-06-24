@@ -9,8 +9,13 @@
     <%= f.text_field :description %>
   </div>
 
-  Select a Category:
-  <%= f.collection_select :category_id, Category.order(:name),:id,:name %>
+  <h4>Select a Category: </h4>
+  <%= f.collection_check_boxes(:category_ids, Category.all, :id, :name) do |b| %>
+        <%= b.label class:"label-checkbox" do %>
+         <%=b.check_box + b.text%>
+        <%end%>
+  <% end %>
+
   <br/> <br/>
 
   <div class="actions">
