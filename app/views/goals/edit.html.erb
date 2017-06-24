@@ -1,10 +1,12 @@
-<%= form_for edit_habit_goal_path(@goal) do |f| %>
-<%= render 'layouts/errors', form: goal %>
+<h2>Goal edit form for the ""<%= @goal.name %>""</h2> <br> <br>
+
+<%= form_for(@habit, @goal), :url => { :action => "update" } do |f| %>
+<%= render 'layouts/errors', form: @goal %>
 
 
   <div class="field">
     <%= f.label :name %>
-    <%= f.text_field :name %>
+    <%= f.text_field :name, :value => "#{@goal.name}" %>
   </div>
 
   <div class="actions">
