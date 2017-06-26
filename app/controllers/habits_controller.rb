@@ -4,7 +4,8 @@ class HabitsController < ApplicationController
 
   def index
     if params[:category_id]
-       @habits = Habit.search(params[:category_id]).recent
+      habits_array = Habit.joins(:categories_habits).where("categories_habits.category_id == ?", params[:category_id])
+      @habits = habits_array.recent
     else
        @habits = Habit.all.recent
     end

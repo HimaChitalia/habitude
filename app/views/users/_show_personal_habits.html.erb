@@ -1,7 +1,15 @@
 <% @user_habits.each.with_index(1) do |personal_habit, index| %>
   <h3><%= index %>. <%= link_to personal_habit.name, habit_path(personal_habit) %></h3> <br>
   <h5>Description: <%= personal_habit.description %></h5><br>
-  <h5>Category: <%= link_to personal_habit.category.name, personal_habit.category %></h5><br>
+  <% if personal_habit.categories.size == 1 %>
+    <h5>Category: <%= link_to personal_habit.categories.first.name, personal_habit.categories.first %></h5><br>
+  <% else %>
+    <h4>Categories: </h4>
+    <% personal_habit.categories.each do |category| %>
+    <h5><%= link_to "- #{category.name}", category %></h5>
+    <% end %>
+  <% end %> <br> <br>
+
 
   <% if personal_habit.goals.size == 0 %>
     <h5>Create goals for this habit!</h5><br><br>

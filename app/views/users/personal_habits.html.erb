@@ -1,8 +1,12 @@
-<% if @user_habits.blank? %>
-  <h2>You don't have any habit for the for the category "<%= @category.name %>".</h2> <br><br>
-<% elsif @category.present? %>
-  <h2>Here is a list of all of your habits for the category <%= @category.name %></h2> <br><br>
-  <%= render 'show_personal_habits' %>
+<% if @category.present? %>
+  <% if @user_habits.blank? %>
+    <h2>You don't have any habit for the for the category "<%= @category.name if @category %>".</h2> <br><br>
+  <% else %>
+    <h2>Here is a list of all of your habits for the category <%= @category.name %></h2> <br><br>
+    <%= render 'show_personal_habits' %>
+  <% end %>
+<% elsif @category.blank? &&  @user_habits.blank? %>
+  <h2>You don't have any habit. Start developing a new one.</h2> <br><br>
 <% else %>
   <h2>Here is a list of all of your habits.</h2> <br><br>
   <%= render 'show_personal_habits' %>

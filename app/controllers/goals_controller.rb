@@ -34,8 +34,6 @@ class GoalsController < ApplicationController
         status.description = v
         @goal.statuses << status
         @goal.save
-        # else
-        # , notice: "An error occured. Please try again."
         redirect_to habit_goal_path(@habit, @goal)
       end
     end
