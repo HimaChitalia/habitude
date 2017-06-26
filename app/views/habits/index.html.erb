@@ -1,8 +1,8 @@
 <p id="notice"><%= notice %></p>
 
-<% if @habits.blank? && if @category.present? %>
-  <h2>There are no habits for the category "<%= @category.name if @category%>".</h2> <br><br>
-<% elsif @habits.blank? && if @category.blank? %>
+<% if @habits.blank? && @category.present? %>
+  <h2>There are no habits for the category "<%= @category.name %>".</h2> <br><br>
+<% elsif @habits.blank? && @category.blank? %>
   <h2>There are no habits yet. Create a new habit to develop it!".</h2> <br><br>
 <% else %>
 
