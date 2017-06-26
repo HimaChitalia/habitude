@@ -69,10 +69,10 @@ class UsersController < ApplicationController
   def personal_habits
     if params[:category_id]
       if ActiveRecord::Base.connection.instance_values["config"][:adapter] == "postgresql"
-        habits_array = Habit.joins(:categories_habits).where("categories_habits.category_id::text == ?", params[:category_id])
+        habits_array = Habit.joins(:categories_habits).where("category_id::text LIKE ?", params[:category_id])
         @user_habits = habits_array.find_all {|h| h.user_id == current_user.id}
       elsif ActiveRecord::Base.connection.instance_values["config"][:adapter] == "sqlite3"
-        habits_array = Habit.joins(:categories_habits).where("categories_habits.category_id == ?", params[:category_id])
+        habits_array = Habit.joins(:categories_habits).where("category_id LIKE ?", params[:category_id])
         @user_habits = habits_array.find_all {|h| h.user_id == current_user.id}
       end
     else
