@@ -68,7 +68,6 @@ class UsersController < ApplicationController
 
   def personal_habits
     if params[:category_id]
-      # binding.pry
       habits_array = Habit.joins(:categories_habits).where("categories_habits.category_id == ?", params[:category_id])
       @user_habits = habits_array.find_all {|h| h.user_id == current_user.id}
     else

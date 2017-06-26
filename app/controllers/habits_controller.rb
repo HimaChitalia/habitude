@@ -29,7 +29,6 @@ class HabitsController < ApplicationController
   def create
     @habit = Habit.new(habit_params)
     @habit.user_id = current_user.id if current_user
-    binding.pry
     if @habit.save
       redirect_to @habit, notice: 'Habit was successfully created.'
     else
