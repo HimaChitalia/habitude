@@ -1,56 +1,61 @@
-# Habitude-helper * Rails APP
+# Habitude-helper - Rails APP
 
 this app is to help you develop any habit, within goals you set!
 
 You can create a habit that you want to develop, add goals and status update to it and also look and comment at other user's habit for inspiration!
 
-**You can see it live on heroku:**
+
+## You can see it live on heroku:
 
 https://habitude-helper.herokuapp.com/
 
-**Or see this repo in your local Rails Server:**
+
+## Or see this repo in your local Rails Server:
 
 * Fork the repo
 * Bundle install with command - ```bundle``` or ```bundle install```
 * Run rails s and see it on http://localhost:3000
 
-**Current Features**
 
-##GENERAL FEATURES:
+## Current Features:
+
+**GENERAL FEATURES:**
 * Create an Account
 * Login
 * Basic admin panel (remove habits, view list of registered members & email addresses, delete users)
 * Change account settings (username, password, email address).
 
-## HABIT TRACKING:
+**HABIT TRACKING:**
 * Add new habit (set habit name, length).
 * Should save a new habit.
 * Should be able to add goals and status update to it.
 * Edit/remove habit.
 
-## SOCIAL / COMMUNITY:
+**SOCIAL / COMMUNITY:**
 * Create, publish, and edit habits.
 * Comment on habits.
 
-## OWNER FEATURES:
+**OWNER FEATURES:**
 * Can change roles of users
 * Can destroy any user.
 
-**Yet to implement features:**
 
-## HABIT TRACKING:
+## Yet to implement features:
+
+**HABIT TRACKING:**
 * Select a public/private status for habit.
 
-## SOCIAL / COMMUNITY:
+**SOCIAL / COMMUNITY:**
 * Change profile picture.
 * Follow other users.
 * Like habits.
+
 
 ## Contributions
 
 Any contributions you make to this effort **are of course greatly appreciated**.
 
-To contribute:
+**To contribute:**
 
 * Fork the project.
 * Run bundle
@@ -60,9 +65,9 @@ To contribute:
 
 ## License & Copyright
 
-The MIT License (MIT)
+**The MIT License (MIT)
 
-Copyright © 2017 Hebitude, https://habitude-helper.herokuapp.com/
+Copyright © 2017 Hebitude, https://habitude-helper.herokuapp.com/**
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
