@@ -1,6 +1,9 @@
+<a href="#" class="js-next" data-id="<%=@habit.id%>">Next Habit</a>
+
 <h2 class="habitName">Habit name: <%= @habit.name.capitalize %></h2> <br> <br>
 
 <h5 class="habitDes">Description: <%= @habit.description %></h5><br><br>
+
 <% if @habit.categories.size == 1 %>
   <h5>Category: <%= link_to @habit.categories.first.name, @habit.categories.first %></h5><br><br>
 <% else %>
@@ -9,6 +12,7 @@
     <%= link_to "#{index}. #{category.name}", category %> <br>
   <% end %>
 <% end %> <br> <br>
+
 <h5 class="habitUser">User: <%= link_to @habit.user.name, @habit.user %></h5><br><br>
 
 
@@ -51,3 +55,27 @@
    <%= link_to 'Edit', edit_habit_path(@habit) %> |
 <% end %>
 <%= link_to 'Back', habits_path %>
+
+
+<script type="text/javascript" charset="utf-8">
+$(function () {
+  $(".js-next").on("click", function() {
+    var nextId = parseInt($(".js-next").attr("data-id")) + 1;
+    debugger;
+    path = Routes.habit_path(nextId);
+    debugger;
+    $.get(path + ".json", function(data) {
+      debugger;
+      var hName = "<h2 class='habitName'>Habit name: " + data.name + "</h2> <br> <br>"
+      var uPath = Routes.user_path(data.user.id)
+      var uName = "<h5 class='habitUser'>User: <a href='"+ uPath + "'>" + data.user.name + "</a></h5><br><br>"
+      var hDes = "<h5 class='habitDes'>Description: " + data.description + "</h5><br><br>"
+      $(".habitUser").html(uName);
+      $(".habitName").html(hName);
+      $(".habitDes").html(hDes);
+      // re-set the id to current on the link
+      $(".js-next").attr("data-id", data["id"]);
+    });
+  });
+});
+</script>
