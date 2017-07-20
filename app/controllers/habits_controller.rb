@@ -14,9 +14,17 @@ class HabitsController < ApplicationController
     else
        @habits = Habit.all.recent
     end
+    respond_to do |format|
+     format.html { render :index }
+     format.json { render json: @habits}
+   end
   end
 
   def show
+      respond_to do |format|
+       format.html { render :show }
+       format.json { render json: @habit}
+     end
   end
 
   def new

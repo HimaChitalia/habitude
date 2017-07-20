@@ -1,0 +1,108 @@
+* [33m1e43d07[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mtemp[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;31mheroku/master[m[33m, [m[1;32mmaster[m[33m)[m Using serializer and javascript to reder user's habits
+* [33md7f8c0e[m Fixed typo in README.md
+* [33m5a072de[m Made changes to the styling of README.md
+* [33m9b9f010[m Improved README.md
+* [33m2ab77ef[m MAde changes to user controller to make both of the databases work
+* [33mde51c18[m SOlving Heroku bug
+* [33mc73d77e[m Fixed Heroku typecast error
+* [33m624d4be[m Getting pry error on Heroku
+* [33mfb233a3[m[33m ([m[1;31morigin/solving-a-bug[m[33m)[m Made required changes in habit and user controller to make search work
+* [33ma2a3114[m Changed active record relationship
+* [33m98515b3[m Fixing templates
+* [33m775dfa2[m SOlving errors
+* [33m21be41a[m MAking changesd to all of the files
+* [33meb42456[m Trying to solve a database bug
+* [33m7c6e6b7[m TRying to poslish active record relaytionships
+* [33maf7bf82[m Fixing bugs
+* [33m7b0524f[m Corrected name of controller
+* [33m0a1c961[m Fixing a bug with milestones
+* [33m130dda7[m Modified Index Page to redirect new user properly
+* [33m1a31869[m Made few changes to links on users index page
+* [33m3cc3ec9[m Added more navigation options
+* [33m4017d74[m Added scope recent to habits and made other small changes
+* [33m7822966[m Cleaning up socpe
+* [33m48cdb0b[m Trying to dry up function
+* [33m38b7f39[m Added condition to show search form on user's profile
+* [33mf027218[m Fixing typo in a view file
+* [33mf5303cc[m Adding missing file
+* [33m129f372[m Fixed category show page and class method on Habit model to work on both of the databases
+* [33m12c3a6f[m STill working with Heroku search bug
+* [33me067a1d[m Trying to fix Heroku Serch bug
+* [33m4e28f86[m TRying to fix Heroku Serch form
+* [33m84a0ab5[m Fixing Heroku bugs for search form
+* [33m5d0d111[m Added a search form for only User's habit
+* [33m602805d[m Added search field for the habits
+* [33m8d9d171[m FIxed 422 error page
+* [33m452151a[m Add files via upload
+* [33mc073e4f[m Delete 422.PNG
+* [33m88eb64c[m Fixed 500 error pages
+* [33mc4ea3f5[m Delete 500.png
+* [33m45d8e49[m Delete 422.PNG
+* [33m9d3a72f[m Add files via upload
+* [33m125ff4a[m Fixed 404 error page
+* [33mbf3061c[m Add files via upload
+* [33mb0abfb7[m Changes to omniauth file to avoid error
+* [33m6c77105[m FIxing typo on home page
+* [33mcc35e06[m Fixed few links
+* [33mfcfd00f[m FIxing small bugs
+* [33ma684071[m fixing bug on habit index page
+* [33m9c3a749[m CHanging user's role when they sign up
+* [33m2f0561b[m CHanging seed file
+* [33m486079b[m Changed seed data
+* [33mb619e05[m TRying to change bin file for heroku
+* [33mfa85af7[m REmoving requiring pry
+* [33mc8b4e3f[m Trying to fix heroku
+* [33me3f212e[m Trying to make HEroku work
+* [33me9d9612[m Config env for heroku
+* [33mf0e162d[m fixed bug with omniauth
+* [33m0dc1c12[m REfactored errors
+* [33m0ffe0a0[m Added links to user's habit page
+* [33mda3b475[m corrected login links
+* [33mb05c67a[m Worked on comments vies and controller and user's profile
+* [33m8f29432[m Cleaningup files
+* [33m9ae972a[m Added functionality to delete status and added partials to milestone views
+* [33m9a753dd[m Fixed bugs with milestones and goals controllers
+* [33mc19127c[m Refectoring goals views
+* [33mf1b663c[m Fixed a bug in habit comtroller and refactored views
+* [33m8de7d68[m Added links to welcome controller
+* [33m5170d96[m Adding untracked files for milestone and status models
+* [33m114e080[m Improved habit controller
+* [33m59c31c2[m Added delete function for the goals of habit
+* [33mc3d2670[m Added forms to add statuses for milestone
+* [33m12a5eab[m Adding statuses to Milestones
+* [33m2dcee0d[m Added liks in habits show page
+* [33m6ba54fc[m Addded custom method to add milestone in goals
+* [33m2111cc4[m Adding milestone for goal
+* [33m44ffc83[m Adding conditions to edit habits
+* [33m6e8eb40[m Nested forms for goals and habits
+* [33m66eefc7[m Links to goal show page from habit show page
+* [33m1591397[m Worked on Habit show page
+* [33mec3e1e9[m Created joint tables, necessary models and rectified ActiveREcord Relationships
+* [33mef81dc2[m Cleaning up comments controller
+* [33m67af9de[m Wrapping up for the day
+* [33me5df7cb[m Working on a nested forms
+* [33m489ab00[m Added seed data for habit model
+* [33ma46bb72[m Categories are ready with views, routs, controller and model
+* [33m5729a04[m Adding category content
+* [33me8eee99[m fixed a button on Index page
+* [33mbf5feef[m Fixed user authorization for Index
+* [33m939ba7d[m Updated password validations
+* [33m44633e4[m Bug with updating user
+* [33m8c8c994[m Fixing User update
+* [33m1e7cbf0[m Trying to fix Omniauth
+* [33m26f33ee[m Facebook Authentication
+* [33me5fdd3c[m Omniauth Fcebook
+* [33m7e1ac93[m Omniauth not working
+* [33m54bb207[m Need to fix a bug
+* [33md05ef20[m Done for the day
+* [33m67b52b6[m A bug with Oamniauth
+* [33m8d471d9[m Omniauth Google
+* [33ma2595ba[m Fixed authentication system
+* [33m272b7a3[m Setting layout with bootstarp
+* [33mb52e4eb[m Add files via upload
+* [33m33128bd[m Add files via upload
+* [33m74f31bf[m Basic site navigation
+* [33m578ab86[m Basic User Model
+* [33m1934067[m Add files via upload
+* [33mf003b4c[m Added notes
+* [33m8ccaa63[m New Ruby on Rails App

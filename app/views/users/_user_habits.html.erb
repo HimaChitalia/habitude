@@ -1,22 +1,9 @@
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<br><br>
 
-  <tbody>
-    <% habits.each.with_index(1) do |habit, index| %>
-      <tr>
-        <td><%= index %>.  <%= link_to habit.name, habit %></td>
-        <td><%= link_to 'Show', habit %></td>
-        <% if current_user.role_before_type_cast > 1  || current_user == habit.user %>
-           <td><%= link_to 'Edit', edit_habit_path(habit) %></td>
-           <td><%= link_to 'Destroy', habit, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <% end %>
-      </tr>
+    <% habits.each do |habit| %>
+      <%= render partial: "habits/habit", locals: {habit: habit}  %>
     <% end %>
-  </tbody>
-</table>
+
+
 
 <br>

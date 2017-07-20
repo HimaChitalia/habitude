@@ -31,6 +31,10 @@ class UsersController < ApplicationController
 
   def show
     authorize @user
+    respond_to do |f|
+      f.html { render :show }
+      f.json { render json: @user }
+    end
   end
 
   def edit
@@ -78,6 +82,10 @@ class UsersController < ApplicationController
     else
        @user_habits = @user.habits.recent
     end
+    respond_to do |format|
+     format.html { render :personal_habits }
+     format.json { render json: @user_habits}
+   end
   end
 
   private
