@@ -1,0 +1,23 @@
+
+<h5 class="habitName-<%= habit.id %>" data-url=<%= habit_path(habit).to_json %>> </h5>
+<h5 class="habitDes-<%= habit.id %>"> </h5>
+
+<% if habit.categories.length > 1 %>
+  <h5 class="habitCategories"></h5>
+<% else  %>
+  <h5 class="habitCategory"></h5>
+<% end %>
+
+<% habit.categories.each do |category| %>
+  <h5 class="categoryName-<%= category.id %>"></h5>
+<% end %>
+
+<% if habit.goals.length > 1 %>
+  <h5 class="habitGoals"></h5>
+<% elsif habit.goals.length == 1  %>
+  <h5 class="habitGoal"></h5>
+<% end %>
+
+<% habit.goals.each do |goal| %>
+  <h5 class="goalName-<%= goal.id %>"></h5>
+<% end %> <br>
