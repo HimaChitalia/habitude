@@ -59,15 +59,17 @@
 
 <script type="text/javascript" charset="utf-8">
 $(function () {
-  $(".js-next").on("click", function() {
+  $(".js-next").on("click", function(element) {
+    element.preventDefault();
     var nextId = parseInt($(".js-next").attr("data-id")) + 1;
-    debugger;
+    // debugger;
     path = Routes.habit_path(nextId);
-    debugger;
+    // debugger;
     $.get(path + ".json", function(data) {
-      debugger;
+      // debugger;
       var hName = "<h2 class='habitName'>Habit name: " + data.name + "</h2> <br> <br>"
       var uPath = Routes.user_path(data.user.id)
+      // debugger;
       var uName = "<h5 class='habitUser'>User: <a href='"+ uPath + "'>" + data.user.name + "</a></h5><br><br>"
       var hDes = "<h5 class='habitDes'>Description: " + data.description + "</h5><br><br>"
       $(".habitUser").html(uName);
@@ -75,6 +77,7 @@ $(function () {
       $(".habitDes").html(hDes);
       // re-set the id to current on the link
       $(".js-next").attr("data-id", data["id"]);
+      // debugger;
     });
   });
 });
