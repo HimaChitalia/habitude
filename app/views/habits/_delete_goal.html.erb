@@ -1,3 +1,3 @@
 <% if current_user == @habit.user %>
-  <%= link_to "Delete Goal", [@habit, goal], :method  => :delete  %>
+  <h5 class="goalName-<%= @habit.goals.first.id %>"></h5><%= link_to "Delete Goal", [@habit, goal], :method  => :delete  %>
 <% end %>
