@@ -83,7 +83,7 @@ $(function () {
         var categoryId = this.id;
         var path = Routes.category_path(categoryId)
         var cName = "<a href='"+ path + "'> » Name: " + this.name + "</a>";
-        $(".categoryName-" + categoryId).text(cName);
+        $(".categoryName-" + categoryId).html(cName);
         debugger;
       });
 
@@ -97,7 +97,7 @@ $(function () {
           var goalId = this.id;
           var goalPath = Routes.habit_goal_path(hId, goalId)
           var gName = "<a href='"+ goalPath + "'> » Name: " + this.name + "</a>";
-          $(".goalName-" + goalId).text(gName);
+          $(".goalName-" + goalId).html(gName);
           debugger;
         });
       } else {
