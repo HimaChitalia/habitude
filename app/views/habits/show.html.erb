@@ -6,17 +6,18 @@
 <h5 class="habitDes">Description: <%= @habit.description %></h5><br>
 
 <% if @habit.categories.size == 1 %>
+  <!-- <div class="categories-list" > -->
   <h5 class="habitCategory">Category: </h5>
   <div class="categories-list" >
-  <h5 class="categoryName-<%= @habit.categories.first.id %>"><%= link_to @habit.categories.first.name, @habit.categories.first %></h5>
-  </div>
+    <h5 class="categoryName"><%= link_to @habit.categories.first.name, @habit.categories.first %></h5>
+  <!-- </div> -->
 <% else %>
   <h5 class="habitCategories">Categories: </h5><br>
-  <div class="categories-list" >
+  <!-- <div class="categories-list" > -->
   <% @habit.categories.each.with_index(1) do |category, index| %>
-    <h5 class="categoryName-<%= category.id %>"><%= link_to "#{index}. #{category.name}", category %> </h5> <br>
+    <h5 class="categoryName"><%= link_to "#{index}. #{category.name}", category %> </h5> <br>
   <% end %>
-  </div>
+  <!-- </div> -->
 <% end %> <br> <br>
 
 <h5 class="habitUser">User: <%= link_to @habit.user.name, @habit.user %></h5><br><br>
@@ -24,29 +25,43 @@
 
 <% if @habit.goals.size == 0 %>
   <% if current_user == @habit.user %>
+    <div class="goalTitle">
     <h5 class="buildGoal">There are no goals for this habit yet! Create one.</h5> <br>
-    <%= render 'build_goal' %>
+  </div>
   <% else %>
+  <div class="goalTitle">
     <h5 class="noGoal">There are no goals for this habit yet!</h5>
+  </div>
   <% end %>
 
+<div class="viewGoals" >
 <%  elsif @habit.goals.size == 1 %>
+  <div class="goalTitle">
   <h5 class="habitGoal" >Goal: </h5>
-  <h5 class="goalName-<%= @habit.goals.first.id %>"> <%= link_to @habit.goals.first.name, habit_goal_path(@habit.id, @habit.goals.first.id)  %></h5>
+  </div>
+  <h5 class="goalName"> <%= link_to @habit.goals.first.name, habit_goal_path(@habit.id, @habit.goals.first.id)  %></h5>
   <%= render 'delete_goal', goal: @habit.goals.first %> <br> <br>
   <%= render 'user' %>
 
 
 <% else %>
+  <div class="goalTitle">
   <h5 class="habitGoals">Goals: </h5>
+  </div>
   <% @habit.goals.each.with_index(1) do |goal, index|%>
-    <h5 class="goalName-<%= goal.id %>"><%= link_to "#{index}. #{goal.name}",  habit_goal_path(@habit.id, goal.id) %></h5>
+    <h5 class="goalName"><%= link_to "#{index}. #{goal.name}",  habit_goal_path(@habit.id, goal.id) %></h5>
     <%= render 'delete_goal', goal: goal %>
   <% end %> <br>
   <%= render 'user' %>
-
+</div>
 <% end %> <br>
 </div>
+
+<br> <br>
+<% if @habit.user == current_user %>
+  <%= render 'build_goal' %>
+<% end %>
+
 <%= render 'comments/all_comments', comments: @habit.comments if @habit.comments.size > 0 %>
 
 <% if @habit.user != current_user %>
@@ -72,49 +87,58 @@ $(function () {
     path = Routes.habit_path(nextId);
     $.get(path + ".json", function(data) {
       console.log(data);
-      var hName = "<h2 class='habitName'>Habit name: " + data.name + "</h2> <br> <br>"
+      var hName = "<h2 class='habitName'>Habit name: " + data.name + "</h2>"
       var hId = data.id
       var uPath = Routes.user_path(data.user.id)
-      var uName = "<h5 class='habitUser'>User: <a href='"+ uPath + "'>" + data.user.name + "</a></h5><br><br>"
-      var hDes = "<h5 class='habitDes'>Description: " + data.description + "</h5><br><br>"
+      var uName = "<h5 class='habitUser'>User: <a href='"+ uPath + "'>" + data.user.name + "</a></h5>"
+      var hDes = "<h5 class='habitDes'>Description: " + data.description + "</h5>"
       $(".habitUser").html(uName);
       $(".habitName").html(hName);
       $(".habitDes").html(hDes);
 
       var c = data.categories;
-      console.log(c)
       var categories = $(c)
       $(".habitCategories").text("Categories: ")
       $(".habitCategory").text("Category: ")
+      var catNames = []
       categories.each(function( index ) {
-        console.log(index)
         var categoryId = this.id;
         var path = Routes.category_path(categoryId)
         var cName = "<a href='"+ path + "'> » " + this.name + "</a>";
-        $(".categories-list").append(cName);
-        // debugger;
+        catNames.push(cName);
+        var b = "<br/>"
+        catNames.push(b)
       });
+      $(".categoryName").html(catNames);
+
 
       var g = data.goals;
       var goals = $(g)
+      var habitGoalsNames = [];
+      $(".goalTitle").text("")
       if (goals.length >= 1) {
-        $(".habitGoals").text("Goals: ")
-        $(".habitGoal").text("Goal: ")
+        if (goals.length === 1) {
+        $(".goalTitle").append("Goal: ")
+      } else {
+        $(".goalTitle").append("Goals: ")
+      }
         goals.each(function(index ) {
-          // debugger;
           var goalId = this.id;
           var goalPath = Routes.habit_goal_path(hId, goalId)
           var gName = "<a href='"+ goalPath + "'> » " + this.name + "</a>";
-          $(".goalName-" + goalId).html(gName);
-          // debugger;
+          habitGoalsNames.push(gName)
+          var b = "<br/>"
+          habitGoalsNames.push(b)
         });
+        $(".buildGoal").text("")
+        $(".noGoal").text("")
+        $(".viewGoals").append(habitGoalsNames);
       } else {
         $(".buildGoal").html("<h5 class='buildGoal'>There are no goals for this habit yet! Create one.</h5>")
         $(".noGoal").html("<h5 class='noGoal'>There are no goals for this habit yet!</h5>")
       };
 
       $(".js-next").attr("data-id", data["id"]);
-      // debugger;
     });
   });
 });
