@@ -1,3 +1,4 @@
+<div class="habit-div">
 <a href="#" class="js-next" data-id="<%=@habit.id%>">Next Habit</a>
 
 <h2 class="habitName">Habit name: <%= @habit.name.capitalize %></h2> <br>
@@ -6,12 +7,16 @@
 
 <% if @habit.categories.size == 1 %>
   <h5 class="habitCategory">Category: </h5>
+  <div class="categories-list" >
   <h5 class="categoryName-<%= @habit.categories.first.id %>"><%= link_to @habit.categories.first.name, @habit.categories.first %></h5>
+  </div>
 <% else %>
   <h5 class="habitCategories">Categories: </h5><br>
+  <div class="categories-list" >
   <% @habit.categories.each.with_index(1) do |category, index| %>
     <h5 class="categoryName-<%= category.id %>"><%= link_to "#{index}. #{category.name}", category %> </h5> <br>
   <% end %>
+  </div>
 <% end %> <br> <br>
 
 <h5 class="habitUser">User: <%= link_to @habit.user.name, @habit.user %></h5><br><br>
@@ -41,7 +46,7 @@
   <%= render 'user' %>
 
 <% end %> <br>
-
+</div>
 <%= render 'comments/all_comments', comments: @habit.comments if @habit.comments.size > 0 %>
 
 <% if @habit.user != current_user %>
@@ -66,6 +71,7 @@ $(function () {
     var nextId = parseInt($(".js-next").attr("data-id")) + 1;
     path = Routes.habit_path(nextId);
     $.get(path + ".json", function(data) {
+      console.log(data);
       var hName = "<h2 class='habitName'>Habit name: " + data.name + "</h2> <br> <br>"
       var hId = data.id
       var uPath = Routes.user_path(data.user.id)
@@ -76,15 +82,17 @@ $(function () {
       $(".habitDes").html(hDes);
 
       var c = data.categories;
+      console.log(c)
       var categories = $(c)
       $(".habitCategories").text("Categories: ")
       $(".habitCategory").text("Category: ")
       categories.each(function( index ) {
+        console.log(index)
         var categoryId = this.id;
         var path = Routes.category_path(categoryId)
-        var cName = "<a href='"+ path + "'> » Name: " + this.name + "</a>";
-        $(".categoryName-" + categoryId).html(cName);
-        debugger;
+        var cName = "<a href='"+ path + "'> » " + this.name + "</a>";
+        $(".categories-list").append(cName);
+        // debugger;
       });
 
       var g = data.goals;
@@ -93,12 +101,12 @@ $(function () {
         $(".habitGoals").text("Goals: ")
         $(".habitGoal").text("Goal: ")
         goals.each(function(index ) {
-          debugger;
+          // debugger;
           var goalId = this.id;
           var goalPath = Routes.habit_goal_path(hId, goalId)
-          var gName = "<a href='"+ goalPath + "'> » Name: " + this.name + "</a>";
+          var gName = "<a href='"+ goalPath + "'> » " + this.name + "</a>";
           $(".goalName-" + goalId).html(gName);
-          debugger;
+          // debugger;
         });
       } else {
         $(".buildGoal").html("<h5 class='buildGoal'>There are no goals for this habit yet! Create one.</h5>")

@@ -45,6 +45,7 @@ $(function () {
         var id = this.id;
         var path = Routes.habit_path(id)
         var hName = "<a href='"+ path + "'>" + "‣ " + "Name: " + this.name + "</a>";
+        console.log(hName)
         $(".habitName-" + id).html(hName);
         var des = "Description: " + this.description;
         $(".habitDes-" + id).text(des);
