@@ -78,7 +78,6 @@
 <% end %>
 <%= link_to 'Back', habits_path %>
 
-
 <script type="text/javascript" charset="utf-8">
 $(function () {
   $(".js-next").on("click", function(element) {
@@ -118,9 +117,9 @@ $(function () {
       $(".goalTitle").text("")
       if (goals.length >= 1) {
         if (goals.length === 1) {
-        $(".goalTitle").append("Goal: ")
+        $(".goalTitle").append("<h5 class='habitGoals'>Goal: </h5>")
       } else {
-        $(".goalTitle").append("Goals: ")
+        $(".goalTitle").append("<h5 class='habitGoals'>Goals: </h5>")
       }
         goals.each(function(index ) {
           var goalId = this.id;
