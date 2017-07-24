@@ -9,13 +9,13 @@
   <!-- <div class="categories-list" > -->
   <h5 class="habitCategory">Category: </h5>
   <div class="categories-list" >
-    <h5 class="categoryName"><%= link_to @habit.categories.first.name, @habit.categories.first %></h5>
+    <h5 class="categoryName"><%= link_to "» #{@habit.categories.first.name}", @habit.categories.first %></h5>
   <!-- </div> -->
 <% else %>
   <h5 class="habitCategories">Categories: </h5><br>
   <!-- <div class="categories-list" > -->
-  <% @habit.categories.each.with_index(1) do |category, index| %>
-    <h5 class="categoryName"><%= link_to "#{index}. #{category.name}", category %> </h5> <br>
+  <% @habit.categories.each do |category| %>
+    <h5 class="categoryName"><%= link_to "» #{category.name}", category %> </h5> <br>
   <% end %>
   <!-- </div> -->
 <% end %> <br> <br>
@@ -39,7 +39,7 @@
   <div class="goalTitle">
   <h5 class="habitGoal" >Goal: </h5>
   </div>
-  <h5 class="goalName"> <%= link_to @habit.goals.first.name, habit_goal_path(@habit.id, @habit.goals.first.id)  %></h5>
+  <h5 class="goalName"> <%= link_to "» #{@habit.goals.first.name}", habit_goal_path(@habit.id, @habit.goals.first.id)  %></h5>
   <%= render 'delete_goal', goal: @habit.goals.first %> <br> <br>
   <%= render 'user' %>
 
@@ -48,8 +48,8 @@
   <div class="goalTitle">
   <h5 class="habitGoals">Goals: </h5>
   </div>
-  <% @habit.goals.each.with_index(1) do |goal, index|%>
-    <h5 class="goalName"><%= link_to "#{index}. #{goal.name}",  habit_goal_path(@habit.id, goal.id) %></h5>
+  <% @habit.goals.each do |goal|%>
+    <h5 class="goalName"><%= link_to "» #{goal.name}",  habit_goal_path(@habit.id, goal.id) %></h5>
     <%= render 'delete_goal', goal: goal %>
   <% end %> <br>
   <%= render 'user' %>
@@ -103,10 +103,8 @@ $(function () {
       categories.each(function( index ) {
         var categoryId = this.id;
         var path = Routes.category_path(categoryId)
-        var cName = "<a href='"+ path + "'> » " + this.name + "</a>";
+        var cName = "<h5 class='categoryName'><a href='"+ path + "'> » " + this.name + "</a></h5>";
         catNames.push(cName);
-        var b = "<br/>"
-        catNames.push(b)
       });
       $(".categoryName").html(catNames);
 
@@ -124,10 +122,8 @@ $(function () {
         goals.each(function(index ) {
           var goalId = this.id;
           var goalPath = Routes.habit_goal_path(hId, goalId)
-          var gName = "<a href='"+ goalPath + "'> » " + this.name + "</a>";
+          var gName = "<h5 class='goalName'><a href='"+ goalPath + "'> » " + this.name + "</a></h5>";
           habitGoalsNames.push(gName)
-          var b = "<br/>"
-          habitGoalsNames.push(b)
         });
         $(".buildGoal").text("")
         $(".noGoal").text("")
