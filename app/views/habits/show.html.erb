@@ -10,14 +10,14 @@
   <h5 class="habitCategory">Category: </h5>
   <div class="categories-list" >
     <h5 class="categoryName"><%= link_to "» #{@habit.categories.first.name}", @habit.categories.first %></h5>
-  <!-- </div> -->
+  </div>
 <% else %>
   <h5 class="habitCategories">Categories: </h5><br>
-  <!-- <div class="categories-list" > -->
+  <div class="categories-list" >
   <% @habit.categories.each do |category| %>
     <h5 class="categoryName"><%= link_to "» #{category.name}", category %> </h5> <br>
   <% end %>
-  <!-- </div> -->
+  </div>
 <% end %> <br> <br>
 
 <h5 class="habitUser">User: <%= link_to @habit.user.name, @habit.user %></h5><br><br>
@@ -106,7 +106,9 @@ $(function () {
         var cName = "<h5 class='categoryName'><a href='"+ path + "'> » " + this.name + "</a></h5>";
         catNames.push(cName);
       });
-      $(".categoryName").html(catNames);
+      $(".categories-list").text("")
+      $(".categories-list").append(catNames);
+      // $(".categoryName").html(catNames);
 
 
       var g = data.goals;
