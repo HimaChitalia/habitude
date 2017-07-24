@@ -6,3 +6,19 @@
 
   <%= f.submit value="Add a goal"%>
 <% end %>
+
+<script type="text/javascript" charset="utf-8">
+  $(function () {
+    $('form').submit(function(event) {
+      event.preventDefault();
+      var values = $(this).serialize();
+      var myString = this.action
+      var path = myString.replace('http://localhost:3000/habits/','');
+      var posting = $.post(path, values);
+      var goalValue = $("input[id=habit_goals_attributes_0_name]").val()
+      posting.success(function(data) {
+        alert("Awesome! You have new goal for this habit -" + goalValue)
+      });
+    });
+  });
+</script>

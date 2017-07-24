@@ -89,7 +89,6 @@ $(function () {
     var nextId = parseInt($(".js-next").attr("data-id")) + 1;
     path = Routes.habit_path(nextId);
     $.get(path + ".json", function(data) {
-      console.log(data);
       var hName = "<h2 class='habitName'>Habit name: " + data.name + "</h2>"
       var hId = data.id
       var uPath = Routes.user_path(data.user.id)
