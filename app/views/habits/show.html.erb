@@ -25,21 +25,23 @@
 
 <% if @habit.goals.size == 0 %>
   <% if current_user == @habit.user %>
-    <div class="goalTitle">
+    <div class="goalTitle goals-list">
     <h5 class="buildGoal">There are no goals for this habit yet! Create one.</h5> <br>
   </div>
   <% else %>
-  <div class="goalTitle">
+  <div class="goalTitle goals-list">
     <h5 class="noGoal">There are no goals for this habit yet!</h5>
   </div>
   <% end %>
 
-<div class="viewGoals" >
+<!-- <div class="viewGoals" > -->
 <%  elsif @habit.goals.size == 1 %>
   <div class="goalTitle">
   <h5 class="habitGoal" >Goal: </h5>
   </div>
-  <h5 class="goalName"> <%= link_to "» #{@habit.goals.first.name}", habit_goal_path(@habit.id, @habit.goals.first.id)  %></h5>
+  <div class="goals-list" >
+    <h5 class="goalName"> <%= link_to "» #{@habit.goals.first.name}", habit_goal_path(@habit.id, @habit.goals.first.id)  %></h5>
+  </div>
   <%= render 'delete_goal', goal: @habit.goals.first %> <br> <br>
   <%= render 'user' %>
 
@@ -48,14 +50,16 @@
   <div class="goalTitle">
   <h5 class="habitGoals">Goals: </h5>
   </div>
+  <div class="goals-list" >
   <% @habit.goals.each do |goal|%>
     <h5 class="goalName"><%= link_to "» #{goal.name}",  habit_goal_path(@habit.id, goal.id) %></h5>
     <%= render 'delete_goal', goal: goal %>
   <% end %> <br>
+  </div>
   <%= render 'user' %>
-</div>
+<!-- </div> -->
 <% end %> <br>
-</div>
+<!-- </div> -->
 
 <br> <br>
 <% if @habit.user == current_user %>
@@ -129,7 +133,7 @@ $(function () {
         });
         $(".buildGoal").text("")
         $(".noGoal").text("")
-        $(".viewGoals").append(habitGoalsNames);
+        $(".goals-list").append(habitGoalsNames);
       } else {
         $(".buildGoal").html("<h5 class='buildGoal'>There are no goals for this habit yet! Create one.</h5>")
         $(".noGoal").html("<h5 class='noGoal'>There are no goals for this habit yet!</h5>")
