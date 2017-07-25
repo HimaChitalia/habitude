@@ -1,18 +1,23 @@
 <h4> Comments: </h4>
 
-<% comments.each.with_index(1) do |comment, index| %>
-  <h6><%= index %>. User: <%= link_to comment.user.name, user_path(comment.user) %></h6>
-   <%= comment.description %> <br>
+<% comments.each do |comment| %>
+  <h5> » <%= comment.description %> </h5>
+  <h5>User: <%= link_to comment.user.name, user_path(comment.user) %></h5>
+
+    <br>
   <% if current_page?("/users/#{comment.user.id}") && logged_in? %>
     <p><%= link_to "Habit: #{comment.habit.name}", comment.habit %></p>
   <% end %>
 
-  <% if logged_in? && policy(comment).destroy? %>
-    <%= link_to 'Edit', edit_habit_comment_path(comment.habit, comment), method: :get %>
+  <% if logged_in? && policy(comment).update? %>
+    <% habit_id = comment.habit.id %>
+    <% comment_id = comment.id %>
+    <a href="/habits/<%= habit_id %>/comments/<%= comment_id %>/edit"  data-method="get">Edit</a>
   <% end %>
 
   <% if logged_in? && policy(comment).destroy? %>
-    <%= link_to 'Delete', habit_comment_path(comment.habit, comment), method: :delete, data: { confirm: 'Are you sure?' } %>
+    <% habit_id = comment.habit.id %>
+    <% comment_id = comment.id %>
+    <a href="/habits/<%= habit_id %>/comments/<%= comment_id %>" data-confirm="Destroy Comment: '<%= comment.description %>'?" data-method="delete" rel="nofollow">Delete</a>
   <% end %> <br> <br>
-
 <% end %>

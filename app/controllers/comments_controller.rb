@@ -24,7 +24,7 @@ class CommentsController < ApplicationController
     @comment.user = @user
     @comment.habit = @habit
     if @comment.save
-      redirect_to @habit, notice: 'Comment was successfully created.'
+      render json: @comment
     else
       redirect_to comments_path, notice: 'Something went wrong, please try again.'
     end

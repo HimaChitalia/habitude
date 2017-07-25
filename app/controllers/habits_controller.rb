@@ -69,12 +69,13 @@ class HabitsController < ApplicationController
           Goal.find_or_create_by(name: v) do |goal|
             goal.name = v
             @habit.goals << goal
+            @goal = goal
           end
         end
       end
       @habit.save
     end
-    redirect_to habit_path(@habit.id)
+    render json: @habit
   end
 
 

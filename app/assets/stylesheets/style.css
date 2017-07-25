@@ -183,3 +183,8 @@ a:active {
 .checkbox_container input {
   display: inline;
 }
+
+
+.disable-link{
+    pointer-events: none;
+}

@@ -1,3 +1,5 @@
 <% if current_user == @habit.user %>
-  <h5 class="goalName-<%= @habit.goals.first.id %>"></h5><%= link_to "Delete Goal", [@habit, goal], :method  => :delete  %>
+  <% habit_id = @habit.id %>
+  <% goal_id = goal.id %>
+  <a href="/habits/<%= habit_id %>/goals/<%= goal_id %>" data-confirm="Destroy gaol: '<%= goal.name %>'?" data-method="delete" class="jquery-postback" rel="nofollow">Delete Goal</a>
 <% end %>
