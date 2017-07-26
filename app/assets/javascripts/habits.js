@@ -72,7 +72,7 @@ var buildGoal = function (form){
           var goalId = newGoal.id;
           var goalPath = Routes.habit_goal_path(hId, goalId)
           var gName = "<h5 class='goalName'><a href='"+ goalPath + "'> » " + newGoal.name + "</a></h5>"
-          var gDelete = `<a href="${goalPath}" data-confirm="Destroy Goal: '${newGoal.name}'?" data-method="delete" class="jquery-postback" rel="nofollow">Delete Goal</a>`
+          var gDelete = `<a href="${goalPath}" data-confirm="Destroy Goal: '${newGoal.name}'?" class="js-delete-goal">Delete Goal</a>`
           $('div.goals-list').append(gName);
           $('div.goals-list').append(gDelete);
        })
