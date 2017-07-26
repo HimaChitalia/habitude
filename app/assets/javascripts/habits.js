@@ -71,12 +71,23 @@ var buildGoal = function (form){
           var newGoal = goalArray.pop()
           var goalId = newGoal.id;
           var goalPath = Routes.habit_goal_path(hId, goalId)
+          var children = $("div.goals-list > div").length
+          var title = ""
+          console.log(children)
+          debugger;
           var goalDiv =  `
                           <div class="goalDiv-${newGoal.id}">
                           <h5 class="goalName"><a href='${goalPath}'> » ${newGoal.name}</a></h5>
                           <a href="${goalPath}" data-confirm="Destroy Goal: '${newGoal.name}'?" class="js-delete-goal">Delete Goal</a></div>`
           $('div.goals-list').append(goalDiv);
-          // $('div.goals-list').append(gDelete);
+
+          if (children >= 1){
+            title = "<h5 class='habitGoals'>Goals: </h5>"
+            $("div.goalTitle").html(title)
+          } else if (children === 0) {
+            title = "<h5 class='habitGoal'>Goal: </h5>"
+            $("div.goalTitle").html(title)
+          }
        })
        .error(function(error) {
         $('div.goals-list').before("there has been an error, try again")
