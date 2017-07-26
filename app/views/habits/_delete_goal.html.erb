@@ -1,5 +1,5 @@
 <% if current_user == @habit.user %>
   <% habit_id = @habit.id %>
   <% goal_id = goal.id %>
-  <a href="/habits/<%= habit_id %>/goals/<%= goal_id %>" data-no-goals="<%=@habit.goals.length%>" data-confirm="Destroy gaol: '<%= goal.name %>'?" class="js-delete-goal" >Delete Goal</a>
+  <a href="/habits/<%= habit_id %>/goals/<%= goal_id %>" data-confirm="Destroy gaol: '<%= goal.name %>'?" class="js-delete-goal" >Delete Goal</a>
 <% end %>
