@@ -40,8 +40,10 @@
   <h5 class="habitGoal" >Goal: </h5>
   </div>
   <div class="goals-list" >
-    <h5 class="goalName"> <%= link_to "» #{@habit.goals.first.name}", habit_goal_path(@habit.id, @habit.goals.first.id)  %></h5>
-    <%= render 'delete_goal', goal: @habit.goals.first %> <br> <br>
+    <div class="goalDiv-<%= @habit.goals.first.id %>">
+      <h5 class="goalName"> <%= link_to "» #{@habit.goals.first.name}", habit_goal_path(@habit.id, @habit.goals.first.id)  %></h5>
+      <%= render 'delete_goal', goal: @habit.goals.first %> <br> <br>
+    </div>
   </div>
   <!-- <%= render 'user' %> -->
 
@@ -52,8 +54,10 @@
   </div>
   <div class="goals-list" >
   <% @habit.goals.each do |goal|%>
-    <h5 class="goalName"><%= link_to "» #{goal.name}",  habit_goal_path(@habit.id, goal.id) %></h5>
-    <%= render 'delete_goal', goal: goal %>
+    <div class="goalDiv-<%= goal.id %>">
+      <h5 class="goalName"><%= link_to "» #{goal.name}",  habit_goal_path(@habit.id, goal.id) %></h5>
+      <%= render 'delete_goal', goal: goal %>
+    </div>
   <% end %> <br/>
   </div>
   <!-- <%= render 'user' %> -->
