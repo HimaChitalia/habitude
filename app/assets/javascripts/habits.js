@@ -64,8 +64,10 @@ var buildGoal = function (form){
   var myString = form.attr("action")
   var path = myString.replace('http://localhost:3000/habits/','');
   var goalValue = $("input[id=habit_goals_attributes_0_name]").val();
+  var textEmpty = $("input[id=habit_goals_attributes_0_name]")
   $.post(path, values)
       .done(function(data) {
+          textEmpty.val('');
           var hId = data.id
           var goalArray = data.goals
           var newGoal = goalArray.pop()
@@ -73,8 +75,6 @@ var buildGoal = function (form){
           var goalPath = Routes.habit_goal_path(hId, goalId)
           var children = $("div.goals-list > div").length
           var title = ""
-          console.log(children)
-          debugger;
           var goalDiv =  `
                           <div class="goalDiv-${newGoal.id}">
                           <h5 class="goalName"><a href='${goalPath}'> » ${newGoal.name}</a></h5>
