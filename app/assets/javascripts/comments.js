@@ -10,8 +10,6 @@ var buildComment = function (object){
        textEmpty.val('');
        var children = $("div.allComments > div").length
        var title = ""
-       console.log(children)
-       debugger;
        if (children >= 2){
          title = "<h5 class='commentTitle'> Comments: </h5><br/>"
          $("div.commentHeader").html(title)
@@ -63,8 +61,6 @@ $(document).on("click", 'a.js-delete-comment', function(event){
   var comment = this
   var children = $("div.allComments > div").length
   var title = ""
-  console.log(children)
-  debugger;
   if (children > 3){
     title = "<h5 class='commentTitle'> Comments: </h5> <br/>"
     $("div.commentHeader").html(title)
@@ -75,7 +71,6 @@ $(document).on("click", 'a.js-delete-comment', function(event){
     title = "<h5 class='commentTitle'>There are no comments for this Habit yet! </h5>"
     $("div.commentHeader").html(title)
   }
-  // debugger;
   comment.parentElement.remove()
   $.ajax({
         type: 'DELETE',

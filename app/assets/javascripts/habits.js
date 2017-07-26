@@ -26,8 +26,6 @@ $(function () {
       });
       $(".categories-list").text("")
       $(".categories-list").append(catNames);
-      // $(".categoryName").html(catNames);
-
 
       var g = data.goals;
       var goals = $(g)
@@ -99,6 +97,5 @@ $(function() {
     e.preventDefault();
     var form = $(this)
     buildGoal(form)
-    console.log(form)
   });
 })
