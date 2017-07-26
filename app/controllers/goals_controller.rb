@@ -24,7 +24,7 @@ class GoalsController < ApplicationController
   def destroy
     authorize_user(@habit)
     @goal.destroy
-    redirect_to @habit, :notice => "Goal Deleted"
+    flash[:notice] = "Goal has been deleted"
   end
 
   def update_statuses
