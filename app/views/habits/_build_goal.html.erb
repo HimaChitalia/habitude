@@ -2,6 +2,7 @@
   <%= f.fields_for :goals, @habit.goals.build do |goal_builder| %>
     <%= goal_builder.label :name %>
     <%= goal_builder.text_field :name %>
+    <%= f.hidden_field :habit_id, :value => @habit.id %>
   <% end %><br>
 
   <%= f.submit "Add a goal", data: { disable_with: false } %>

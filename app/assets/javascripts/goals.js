@@ -14,7 +14,6 @@ $(document).on("click", 'a.js-delete-goal', function(event){
     title = "<h5 class='buildGoal'>There are no goals for this habit yet! Create one.</h5>"
     $("div.goalTitle").html(title)
   }
-  debugger;
   goal.parentElement.remove()
   $.ajax({
         type: 'DELETE',

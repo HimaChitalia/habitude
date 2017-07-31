@@ -40,16 +40,18 @@ $(function () {
         goals.each(function(index ) {
           var goalId = this.id;
           var goalPath = Routes.habit_goal_path(hId, goalId)
-          var gName = "<h5 class='goalName'><a href='"+ goalPath + "'> » " + this.name + "</a></h5>";
-          habitGoalsNames.push(gName)
+          var gInfo = `<h5 class='goalName'><a href="${goalPath}"> » ${this.name}</a></h5>
+          <a href="/habits/${hId}/goals/${goalId}" data-confirm="Destroy gaol: '${this.name}'?" class="js-delete-goal" >Delete Goal</a>
+          `
+          habitGoalsNames.push(gInfo)
         });
         $(".buildGoal").text("")
         $(".noGoal").text("")
         $(".goals-list").text("")
         $(".goals-list").append(habitGoalsNames);
       } else {
-        $(".buildGoal").html("<h5 class='buildGoal'>There are no goals for this habit yet! Create one.</h5>")
-        $(".noGoal").html("<h5 class='noGoal'>There are no goals for this habit yet!</h5>")
+        $(".goals-list").text("")
+        $(".goalTitle").html("<h5 class='noGoal'>There are no goals for this habit yet!</h5>")
       };
 
       $(".js-next").attr("data-id", data["id"]);
@@ -57,10 +59,14 @@ $(function () {
   });
 });
 
+path = "/habits/2/addgoals"
+
+
+
 var buildGoal = function (form){
   var values = form.serialize();
-  var myString = form.attr("action")
-  var path = myString.replace('http://localhost:3000/habits/','');
+  var habitIdforGoal = $(".js-next").attr("data-id")
+  var path = "/habits/" + habitIdforGoal + "/addgoals"
   var goalValue = $("input[id=habit_goals_attributes_0_name]").val();
   var textEmpty = $("input[id=habit_goals_attributes_0_name]")
   $.post(path, values)
