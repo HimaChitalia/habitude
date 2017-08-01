@@ -69,7 +69,7 @@ $(function () {
           </form>
         `
 
-        $('.viewGoals').html(formHTML);
+        $('.renderForm').html(formHTML);
         debugger;
       }
       $(".js-next").attr("data-id", data["id"]);
@@ -113,7 +113,7 @@ var buildGoal = function (form){
 }
 
 $(function() {
-  $('form#add_goal').on("submit", function(e){
+  $("body").on('submit', '#add_goal', function(e){
     e.preventDefault();
     var form = $(this)
     buildGoal(form)

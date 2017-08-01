@@ -59,9 +59,11 @@
   <% end %> <br>
 
   <br> <br>
-  <% if @habit.user == current_user %>
-    <%= render 'build_goal' %>
-  <% end %>
+  <div class="renderForm">
+    <% if @habit.user == current_user %>
+      <%= render 'build_goal' %>
+    <% end %>
+  </div>
 </div>
 
 <div class="allComments">
