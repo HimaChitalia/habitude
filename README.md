@@ -1,10 +1,15 @@
-# Habitude-helper - Rails APP
+# Habit-helper - Rails APP
 
-this app is to help you develop any habit, within goals you set!
+This app is to help you develop any habit, within goals you set!
 
 You can create a habit that you want to develop, add goals and status update to it and also look and comment at other user's habit for inspiration!
 
-## See this repo in your local Rails Server:
+## You can see it live on heroku:
+
+https://habit-helper.herokuapp.com/
+
+
+## Or see this repo in your local Rails Server:
 
 * Fork the repo
 * Bundle install with command - ```bundle``` or ```bundle install```
