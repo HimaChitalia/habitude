@@ -54,12 +54,23 @@ $(function () {
         goals.each(function(index ) {
           var goalId = this.id;
           var goalPath = Routes.habit_goal_path(hId, goalId)
-          var gInfo = `
-          <div class="goalDiv-${goalId}">
-          <h5 class='goalName'><a href="${goalPath}"> » ${this.name}</a></h5>
-          <a href="/habits/${hId}/goals/${goalId}" data-confirm="Destroy gaol: '${this.name}'?" class="js-delete-goal" >Delete Goal</a>
-          </div>
-          `
+          var gInfo = ""
+          
+          if (currentUser === userName){
+            gInfo = `
+            <div class="goalDiv-${goalId}">
+            <h5 class='goalName'><a href="${goalPath}"> » ${this.name}</a></h5>
+            <a href="/habits/${hId}/goals/${goalId}" data-confirm="Destroy gaol: '${this.name}'?" class="js-delete-goal" >Delete Goal</a>
+            </div>
+            `
+          } else {
+            gInfo = `
+            <div class="goalDiv-${goalId}">
+            <h5 class='goalName'><a href="${goalPath}"> » ${this.name}</a></h5>
+            </div>
+            `
+          }
+
           habitGoalsNames.push(gInfo)
         });
         $(".buildGoal").text("")
