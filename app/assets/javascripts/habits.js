@@ -2,11 +2,13 @@ $(function () {
   $(".js-next").on("click", function(element) {
     element.preventDefault();
     var nextId = parseInt($(".js-next").attr("data-id")) + 1;
+    var currentUser = ($(".js-next").attr("data-current-user"))
     path = Routes.habit_path(nextId);
     $.get(path + ".json", function(data) {
       var hName = "<h2 class='habitName'>Habit name: " + data.name + "</h2>"
       var hId = data.id
       var uPath = Routes.user_path(data.user.id)
+      userName = data.user.name
       var uName = "<h5 class='habitUser'>User: <a href='"+ uPath + "'>" + data.user.name + "</a></h5>"
       var hDes = "<h5 class='habitDes'>Description: " + data.description + "</h5>"
       $(".habitUser").html(uName);
@@ -53,15 +55,27 @@ $(function () {
         $(".goals-list").text("")
         $(".goalTitle").html("<h5 class='noGoal'>There are no goals for this habit yet!</h5>")
       };
+      debugger;
+      if (currentUser === userName){
+        var csrfValue = $("meta[name='csrf-token']").attr('content');
+        var formHTML = `<form id="add_goal" class="edit_habit" action="/habits/${hId}/addgoals" accept-charset="UTF-8" method="post">
+            <input name="utf8" type="hidden" value="✓">
+            <input type="hidden" name="_method" value="patch">
+            		<input type="hidden" name="authenticity_token" value="${csrfValue}">
+            <label for="habit_goals_attributes_0_name">Name</label>
+            <input type="text" name="habit[goals_attributes][0][name]" id="habit_goals_attributes_0_name">
+            <br>
+            <input type="submit" name="commit" value="Add a goal">
+          </form>
+        `
 
+        $('.viewGoals').html(formHTML);
+        debugger;
+      }
       $(".js-next").attr("data-id", data["id"]);
     });
   });
 });
-
-path = "/habits/2/addgoals"
-
-
 
 var buildGoal = function (form){
   var values = form.serialize();

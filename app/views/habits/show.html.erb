@@ -1,12 +1,11 @@
 <div class="habit-div">
-<a href="#" class="js-next" data-id="<%=@habit.id%>">Next Habit</a>
+<a href="#" class="js-next" data-id="<%=@habit.id%>" data-current-user="<%=current_user.name%>">Next Habit</a>
 
 <h2 class="habitName">Habit name: <%= @habit.name.capitalize %></h2> <br>
 
 <h5 class="habitDes">Description: <%= @habit.description %></h5><br>
 
 <% if @habit.categories.size == 1 %>
-  <!-- <div class="categories-list" > -->
   <h5 class="habitCategory">Category: </h5>
   <div class="categories-list" >
     <h5 class="categoryName"><%= link_to "» #{@habit.categories.first.name}", @habit.categories.first %></h5>
@@ -44,8 +43,6 @@
         <%= render 'delete_goal', goal: @habit.goals.first %> <br> <br>
       </div>
     </div>
-    <!-- <%= render 'user' %> -->
-
 
   <% else %>
     <div class="goalTitle">
@@ -59,15 +56,13 @@
       </div>
     <% end %> <br/>
     </div>
-    <!-- <%= render 'user' %> -->
-  <!-- </div> -->
   <% end %> <br>
-</div>
 
-<br> <br>
-<% if @habit.user == current_user %>
-  <%= render 'build_goal' %>
-<% end %>
+  <br> <br>
+  <% if @habit.user == current_user %>
+    <%= render 'build_goal' %>
+  <% end %>
+</div>
 
 <div class="allComments">
   <%= render 'comments/all_comments', comments: @habit.comments if @habit.comments.size > 0 %>
