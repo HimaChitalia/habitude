@@ -28,7 +28,7 @@ var buildComment = function (object){
 }
 
 $(function() {
-   $('form#new_comment').on("submit", function(e){
+   $("body").on('submit', '#new_comment', function(e){
      e.preventDefault();
      buildComment(this)
    });

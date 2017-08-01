@@ -75,13 +75,14 @@
   <% end %>
 </div>
 
-<% if @habit.user != current_user %>
-  <br>
+<div class="renderCommentForm" >
+  <% if @habit.user != current_user %>
+    <br>
 
-  <h5>Add your comment below! </h5>
-  <%= render 'comments/form', comment: @habit.comments.new, habit: @habit%>
-<% end %>
-
+    <h5>Add your comment below! </h5>
+    <%= render 'comments/form', comment: @habit.comments.new, habit: @habit%>
+  <% end %>
+</div>
 <br><br>
 
 <% if current_user.role_before_type_cast >= 2 || current_user == @habit.user%>

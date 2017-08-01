@@ -1,3 +1,4 @@
+<h5 class="createGoals">Create a new Goal for your habit <%= @habit.name.capitalize %>!</h5>
 <%= form_for @habit, :as => :habit, :url => update_goals_path(@habit.id), method: :patch, :html=> {:id => 'add_goal'} do |f| %>
   <%= f.fields_for :goals, @habit.goals.build do |goal_builder| %>
     <%= goal_builder.label :name %>

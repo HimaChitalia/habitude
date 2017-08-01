@@ -3,6 +3,8 @@ $(function () {
     element.preventDefault();
     var nextId = parseInt($(".js-next").attr("data-id")) + 1;
     var currentUser = ($(".js-next").attr("data-current-user"))
+    var csrfValue = $("meta[name='csrf-token']").attr('content');
+
     path = Routes.habit_path(nextId);
     $.get(path + ".json", function(data) {
       var hName = "<h2 class='habitName'>Habit name: " + data.name + "</h2>"
@@ -60,8 +62,9 @@ $(function () {
       };
 
       if (currentUser === userName){
-        var csrfValue = $("meta[name='csrf-token']").attr('content');
-        var formHTML = `<form id="add_goal" class="edit_habit" action="/habits/${hId}/addgoals" accept-charset="UTF-8" method="post">
+        var formHTML = `
+            <h5 class="createGoals">Create a new Goal for your habit ${data.name}</h5>
+            <form id="add_goal" class="edit_habit" action="/habits/${hId}/addgoals" accept-charset="UTF-8" method="post">
             <input name="utf8" type="hidden" value="✓">
             <input type="hidden" name="_method" value="patch">
             		<input type="hidden" name="authenticity_token" value="${csrfValue}">
@@ -75,7 +78,25 @@ $(function () {
       } else {
         $('.renderForm').html("");
       }
-      
+
+      if (currentUser !== userName){
+        var commentFormHTML = `
+            <h5>Add your comment below! </h5>
+
+            <form class="new_comment" id="new_comment" action="/habits/${hId}/comments" accept-charset="UTF-8" method="post">
+            <input name="utf8" type="hidden" value="✓">
+            <input type="hidden" name="authenticity_token" value="${csrfValue}">
+
+              Description: <textarea name="comment[description]" id="comment_description" cols="10" rows="5"></textarea> <br>
+              <input value="Hima" type="hidden" name="comment[user_name]" id="comment_user_name">
+              <input type="submit" name="commit" value="Create Comment">
+            </form>
+        `
+        $('.renderCommentForm').html(commentFormHTML);
+      } else {
+        $('.renderCommentForm').html("");
+      }
+
       $(".js-next").attr("data-id", data["id"]);
     });
   });
