@@ -42,8 +42,11 @@ $(function () {
         goals.each(function(index ) {
           var goalId = this.id;
           var goalPath = Routes.habit_goal_path(hId, goalId)
-          var gInfo = `<h5 class='goalName'><a href="${goalPath}"> » ${this.name}</a></h5>
+          var gInfo = `
+          <div class="goalDiv-${goalId}">
+          <h5 class='goalName'><a href="${goalPath}"> » ${this.name}</a></h5>
           <a href="/habits/${hId}/goals/${goalId}" data-confirm="Destroy gaol: '${this.name}'?" class="js-delete-goal" >Delete Goal</a>
+          </div>
           `
           habitGoalsNames.push(gInfo)
         });
@@ -55,7 +58,7 @@ $(function () {
         $(".goals-list").text("")
         $(".goalTitle").html("<h5 class='noGoal'>There are no goals for this habit yet!</h5>")
       };
-      debugger;
+
       if (currentUser === userName){
         var csrfValue = $("meta[name='csrf-token']").attr('content');
         var formHTML = `<form id="add_goal" class="edit_habit" action="/habits/${hId}/addgoals" accept-charset="UTF-8" method="post">
@@ -68,10 +71,11 @@ $(function () {
             <input type="submit" name="commit" value="Add a goal">
           </form>
         `
-
         $('.renderForm').html(formHTML);
-        debugger;
+      } else {
+        $('.renderForm').html("");
       }
+      
       $(".js-next").attr("data-id", data["id"]);
     });
   });

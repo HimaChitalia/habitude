@@ -3,7 +3,6 @@ $(document).on("click", 'a.js-delete-goal', function(event){
   var goal = this
   var children = $("div.goals-list > div").length
   var title = ""
-  console.log(children)
   if (children > 2){
     title = "<h5 class='habitGoals'>Goals: </h5>"
     $("div.goalTitle").html(title)
@@ -14,7 +13,9 @@ $(document).on("click", 'a.js-delete-goal', function(event){
     title = "<h5 class='buildGoal'>There are no goals for this habit yet! Create one.</h5>"
     $("div.goalTitle").html(title)
   }
+
   goal.parentElement.remove()
+
   $.ajax({
         type: 'DELETE',
         url: goal.href,
