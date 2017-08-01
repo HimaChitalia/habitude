@@ -1,7 +1,17 @@
 $(function () {
   $(".js-next").on("click", function(element) {
     element.preventDefault();
-    var nextId = parseInt($(".js-next").attr("data-id")) + 1;
+
+    var totalHabits = $('div.habitsCount').attr('data-info')
+    var firstHabitId = $('div.firstHabit').attr('data-info')
+    var jsNextID = $(".js-next").attr("data-id")
+
+    if (jsNextID === totalHabits){
+      var nextId = parseInt(firstHabitId);
+    } else {
+      var nextId = parseInt($(".js-next").attr("data-id")) + 1;
+    }
+
     var currentUser = ($(".js-next").attr("data-current-user"))
     var csrfValue = $("meta[name='csrf-token']").attr('content');
 
@@ -96,6 +106,7 @@ $(function () {
       } else {
         $('.renderCommentForm').html("");
       }
+
 
       $(".js-next").attr("data-id", data["id"]);
     });
