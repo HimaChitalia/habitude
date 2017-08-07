@@ -3,4 +3,5 @@ class HabitSerializer < ActiveModel::Serializer
   belongs_to :user
   has_many :goals
   has_many :categories
+  has_many :comments
 end

@@ -1,3 +1,3 @@
 class HabitCategorySerializer < ActiveModel::Serializer
-  attributes :name
+  attributes :description
 end

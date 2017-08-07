@@ -8,6 +8,7 @@ class CommentsController < ApplicationController
   end
 
   def show
+    render json: @comment
   end
 
   def new
