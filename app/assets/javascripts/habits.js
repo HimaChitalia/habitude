@@ -74,6 +74,7 @@ $(function () {
 
           habitGoalsNames.push(gInfo)
         });
+
         $(".buildGoal").text("")
         $(".noGoal").text("")
         $(".goals-list").text("")
