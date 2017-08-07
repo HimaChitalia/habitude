@@ -24,6 +24,7 @@ class CommentsController < ApplicationController
     authorize @comment
     @comment.user = @user
     @comment.habit = @habit
+    @comment.user_name = @user.name
     if @comment.save
       render json: @comment
     else

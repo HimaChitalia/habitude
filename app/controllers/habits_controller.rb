@@ -58,6 +58,8 @@ class HabitsController < ApplicationController
   end
 
   def destroy
+    binding.pry
+    authorize @habit
     @habit.destroy
     redirect_to habits_url, notice: 'Habit was successfully destroyed.'
   end

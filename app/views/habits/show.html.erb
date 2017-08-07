@@ -75,10 +75,17 @@
     <div class="commentHeader">
       <h5 class="commentTitle">There are no comments for this Habit yet! </h5>
     </div>
-  <% end %>
-  <div class="onlyComments" >
+    <div class="onlyComments" ></div>
+  <% elsif @habit.comments.size > 1 %>
+    <div class="commentHeader">
+      <h5 class="commentTitle"> Comments: </h5>
+    </div>
+  <% elsif @habit.comments.size == 1 %>
+    <div class="commentHeader">
+      <h5 class="commentTitle"> Comment: </h5>
+    </div>
+  <% end %> <br>
     <%= render 'comments/all_comments', comments: @habit.comments if @habit.comments.size > 0 %>
-  </div>
 </div>
 
 <div class="renderCommentForm" >

@@ -8,19 +8,20 @@ var buildComment = function (object){
  $.post(path, values)
      .done(function(data) {
        textEmpty.val('');
-       var children = $("div.allComments > div").length
+       var children = $("div.onlyComments > div").length
        var title = ""
-       if (children >= 2){
+       console.log(children)
+       if (children >= 1){
          title = "<h5 class='commentTitle'> Comments: </h5><br/>"
          $("div.commentHeader").html(title)
-       } else if (children === 1) {
+       } else if (children === 0) {
          title = "<h5 class='commentTitle'> Comment: </h5><br/>"
          $("div.commentHeader").html(title)
        }
 
          data.user_name = userName
          var comment = new Comment(data)
-         $('div.allComments').append(comment.showComment())
+         $('div.onlyComments').append(comment.showComment())
       })
       .error(function(error) {
         $('div.allComments').before("there has been an error, try again")
@@ -59,15 +60,17 @@ Comment.prototype.showComment = function(){
 $(document).on("click", 'a.js-delete-comment', function(event){
   event.preventDefault();
   var comment = this
-  var children = $("div.allComments > div").length
+  var children = $("div.onlyComments > div").length
+  console.log(children)
+  debugger;
   var title = ""
-  if (children > 3){
+  if (children > 2){
     title = "<h5 class='commentTitle'> Comments: </h5> <br/>"
     $("div.commentHeader").html(title)
-  } else if (children === 3) {
+  } else if (children === 2) {
     title = "<h5 class='commentTitle'> Comment: </h5> <br/>"
     $("div.commentHeader").html(title)
-  }else if (children === 2) {
+  }else {
     title = "<h5 class='commentTitle'>There are no comments for this Habit yet! </h5>"
     $("div.commentHeader").html(title)
   }
