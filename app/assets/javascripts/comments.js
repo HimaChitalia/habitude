@@ -73,6 +73,7 @@ $(document).on("click", 'a.js-delete-comment', function(event){
     $("div.commentHeader").html(title)
   }
   comment.parentElement.remove()
+  debugger;
   $.ajax({
         type: 'DELETE',
         url: comment.href,

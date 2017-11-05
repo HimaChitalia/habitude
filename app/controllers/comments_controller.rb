@@ -43,7 +43,7 @@ class CommentsController < ApplicationController
   def destroy
     authorize @comment
     @comment.destroy
-    redirect_to @habit, notice: 'Comment was successfully destroyed.'
+    flash[:notice] = "Comment has been deleted"
   end
 
   private
