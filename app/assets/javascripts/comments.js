@@ -21,9 +21,7 @@ var buildComment = function (object){
 
          data.user_name = userName
          var comment = new Comment(data)
-         debugger;
          $('div.allComments').append(comment.showComment())
-         debugger;
       })
       .error(function(error) {
         $('div.allComments').before("there has been an error, try again")

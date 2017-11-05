@@ -5,10 +5,10 @@ class CommentPolicy < ApplicationPolicy
   end
 
   def update?
-    user.owner? || user.moderator?
+    user.user? || user.owner? || user.moderator?
   end
 
   def destroy?
-    user.owner? || user.moderator?
+    user.user? || user.owner? || user.moderator?
   end
 end
