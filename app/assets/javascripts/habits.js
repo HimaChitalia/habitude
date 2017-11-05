@@ -120,42 +120,35 @@ $(function () {
       }
 
       var c = data.comments;
-      debugger;
       var comments = $(c)
       var habitCommentsNames = [];
       $(".commentHeader").text("")
-      debugger;
       if (comments.length >= 1) {
-        debugger;
         if (comments.length === 1) {
         $(".commentHeader").append("<h5 class='commentTitle'> Comment: </h5>")
       } else {
         $(".commentHeader").append("<h5 class='commentTitle'> Comments: </h5>")
       }
-      debugger;
         comments.each(function(index ) {
           var commentId = this.id;
           var commentlPath = Routes.habit_comment_path(hId, commentId)
           var cInfo = ""
           var commentUserId = this.user_id
-          debugger;
           if (Number(currentUserId) === commentUserId){
             cInfo = `
             <div class="commentDiv-${commentId}">
-            <h5> » ${this.description}</h5>
-            <h5>User: <a href="/users/${commentUserId}">${currentUser}</a></h5>
-            <a href="/habits/${hId}/comments/${commentId}/edit" data-method="get">Edit</a>
-            <a href="/habits/${hId}/comments/${commentId}" class="js-delete-comment" data-confirm="Destroy Comment: '${this.description}'?">Delete</a>
+              <h5> » ${this.description}</h5>
+              <h5>User: <a href="/users/${commentUserId}">${currentUser}</a></h5>
+              <a href="/habits/${hId}/comments/${commentId}/edit" data-method="get">Edit</a>
+              <a href="/habits/${hId}/comments/${commentId}" class="js-delete-comment" data-confirm="Destroy Comment: '${this.description}'?">Delete</a>
             </div>
             `
-            debugger;
           } else {
             cInfo = `
             <div class="commentDiv-${commentId}">
             <h5> » ${this.description}</h5>
             </div>
             `
-            debugger;
           }
 
           habitCommentsNames.push(cInfo)

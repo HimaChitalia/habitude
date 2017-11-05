@@ -8,19 +8,22 @@ var buildComment = function (object){
  $.post(path, values)
      .done(function(data) {
        textEmpty.val('');
-       var children = $("div.allComments > div").length
+       var children = $("div.onlyComments > div").length
        var title = ""
-       if (children >= 2){
+       if (children >= 1){
+         $("div.commentHeader").text('')
          title = "<h5 class='commentTitle'> Comments: </h5><br/>"
          $("div.commentHeader").html(title)
-       } else if (children === 1) {
+       } else if (children === 0) {
          title = "<h5 class='commentTitle'> Comment: </h5><br/>"
          $("div.commentHeader").html(title)
        }
 
          data.user_name = userName
          var comment = new Comment(data)
+         debugger;
          $('div.allComments').append(comment.showComment())
+         debugger;
       })
       .error(function(error) {
         $('div.allComments').before("there has been an error, try again")
@@ -46,10 +49,10 @@ function Comment(comment){
 Comment.prototype.showComment = function(){
   let commentHtml = `
   <div class="commentDiv-${this.id}">
-  <h5> » ${this.description}</h5>
-  <h5> User: ${this.user_name}</h5>
-  <a href="/habits/${this.habit_id}/comments/${this.id}/edit"  data-method="get">Edit</a>
-  <a href="/habits/${this.habit_id}/comments/${this.id}" class="js-delete-comment" data-confirm="Destroy Comment: '${this.description}'?" >Delete</a>
+    <h5> » ${this.description}</h5>
+    <h5> User: ${this.user_name}</h5>
+    <a href="/habits/${this.habit_id}/comments/${this.id}/edit"  data-method="get">Edit</a>
+    <a href="/habits/${this.habit_id}/comments/${this.id}" class="js-delete-comment" data-confirm="Destroy Comment: '${this.description}'?" >Delete</a>
   </div>
   `
   return commentHtml
