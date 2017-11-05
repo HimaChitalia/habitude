@@ -1,6 +1,7 @@
 
-<%= @comment.description %> on <%= link_to @comment.habit.name, habit_path(@comment.habit) %><br><br>
-By - <%= link_to @comment.user.name, @comment.user %> <br><br>
+<h2>Comment: <%= @comment.description %></h2>
+<h4>Comment on Habit: <%= link_to @comment.habit.name, habit_path(@comment.habit) %></h4>
+<h4>By - <%= link_to @comment.user.name, @comment.user %></h4> <br><br>
 
 <%= link_to 'Edit', edit_comment_path(@comment) %> |
 <%= link_to 'Back', comments_path %>
