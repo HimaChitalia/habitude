@@ -21,6 +21,7 @@ class HabitsController < ApplicationController
   end
 
   def show
+      @habits = Habit.all.map { |e| e.id }
       respond_to do |format|
        format.html { render :show }
        format.json { render json: @habit}

@@ -2,7 +2,8 @@
 <div class="habit-div">
 <div class="habitsCount" data-info="<%= Habit.all.length %>"></div>
 <div class="firstHabit" data-info="<%= Habit.first.id %>"></div>
-
+<div class="lastHabit" data-info="<%= Habit.last.id %>"></div>
+<div class="habits" data-info="<%= @habits %>"></div>
 <h5><a href="#" class="js-next" data-id="<%=@habit.id%>" data-current-user="<%=current_user.name%>" data-current-user-id="<%=current_user.id%>">Next Habit</a></h5> <br>
 
 <h2 class="habitName">Habit name: <%= @habit.name.capitalize %></h2> <br>

@@ -2,21 +2,28 @@ $(function () {
   $(".js-next").on("click", function(element) {
     element.preventDefault();
 
-    var totalHabits = $('div.habitsCount').attr('data-info')
-    var firstHabitId = $('div.firstHabit').attr('data-info')
-    var jsNextID = $(".js-next").attr("data-id")
-
-    if (jsNextID === totalHabits){
-      var nextId = parseInt(firstHabitId);
+    var totalHabits = $('div.habitsCount').attr('data-info');
+    var firstHabitId = $('div.firstHabit').attr('data-info');
+    var jsNextID = $(".js-next").attr("data-id");
+    var allHabits = $(".habits").attr("data-info");
+    var lastHabitId = $('div.lastHabit').attr('data-info')
+    
+    if (jsNextID === lastHabitId ){
+      jsNextID = parseInt(firstHabitId);
     } else {
-      var nextId = parseInt($(".js-next").attr("data-id")) + 1;
+      for(let i = parseInt(jsNextID) + 1; i <= lastHabitId; i++ ){
+        if(allHabits.includes(i)){
+          jsNextID = i;
+          break;
+        }
+      }
     }
-
+    
     var currentUser = ($(".js-next").attr("data-current-user"))
     var currentUserId = ($(".js-next").attr("data-current-user-id"))
     var csrfValue = $("meta[name='csrf-token']").attr('content');
 
-    path = Routes.habit_path(nextId);
+    path = Routes.habit_path(jsNextID);
     $.get(path + ".json", function(data) {
       var hName = "<h2 class='habitName'>Habit name: " + data.name + "</h2>"
       var hId = data.id
