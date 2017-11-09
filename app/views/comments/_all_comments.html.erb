@@ -1,33 +1,24 @@
-<% if comments.size > 1 %>
-  <div class="commentHeader">
-    <h5 class="commentTitle"> Comments: </h5>
-  </div>
-<% elsif comments.size == 1 %>
-  <div class="commentHeader">
-    <h5 class="commentTitle"> Comment: </h5>
-  </div>
-<% end %> <br>
+<div class="onlyComments" >
+  <% comments.each do |comment| %>
+    <div class="commentDiv-<%= comment.id %>">
+      <h5> » <%= comment.description %> </h5>
+      <h5>User: <%= link_to comment.user.name, user_path(comment.user) %></h5>
 
+      <% if current_page?("/users/#{comment.user.id}") && logged_in? %>
+        <p><%= link_to "Habit: #{comment.habit.name}", comment.habit %></p>
+      <% end %>
 
-<% comments.each do |comment| %>
-  <div class="commentDiv-<%= comment.id %>">
-    <h5> » <%= comment.description %> </h5>
-    <h5>User: <%= link_to comment.user.name, user_path(comment.user) %></h5>
+      <% if logged_in? && policy(comment).update? %>
+        <% habit_id = comment.habit.id %>
+        <% comment_id = comment.id %>
+        <a href="/habits/<%= habit_id %>/comments/<%= comment_id %>/edit"  data-method="get">Edit</a>
+      <% end %>
 
-    <% if current_page?("/users/#{comment.user.id}") && logged_in? %>
-      <p><%= link_to "Habit: #{comment.habit.name}", comment.habit %></p>
-    <% end %>
-
-    <% if logged_in? && policy(comment).update? %>
-      <% habit_id = comment.habit.id %>
-      <% comment_id = comment.id %>
-      <a href="/habits/<%= habit_id %>/comments/<%= comment_id %>/edit"  data-method="get">Edit</a>
-    <% end %>
-
-    <% if logged_in? && policy(comment).destroy? %>
-      <% habit_id = comment.habit.id %>
-      <% comment_id = comment.id %>
-      <a href="/habits/<%= habit_id %>/comments/<%= comment_id %>" class="js-delete-comment" data-confirm="Destroy Comment: '<%= comment.description %>'?">Delete</a>
-    <% end %> <br> <br>
-  </div>
-<% end %> <br>
+      <% if logged_in? && policy(comment).destroy? %>
+        <% habit_id = comment.habit.id %>
+        <% comment_id = comment.id %>
+        <a href="/habits/<%= habit_id %>/comments/<%= comment_id %>" class="js-delete-comment" data-confirm="Destroy Comment: '<%= comment.description %>'?">Delete</a>
+      <% end %> <br> <br>
+    </div>
+  <% end %> <br>
+</div>

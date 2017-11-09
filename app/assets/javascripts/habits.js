@@ -81,6 +81,7 @@ $(function () {
 
           habitGoalsNames.push(gInfo)
         });
+
         $(".buildGoal").text("")
         $(".noGoal").text("")
         $(".goals-list").text("")
@@ -132,9 +133,9 @@ $(function () {
       $(".commentHeader").text("")
       if (comments.length >= 1) {
         if (comments.length === 1) {
-        $(".commentHeader").append("<h5 class='commentTitle'> Comment: </h5>")
+        $(".commentHeader").append("<h5 class='commentTitle'> Comment: </h5><br />")
       } else {
-        $(".commentHeader").append("<h5 class='commentTitle'> Comments: </h5>")
+        $(".commentHeader").append("<h5 class='commentTitle'> Comments: </h5><br />")
       }
         comments.each(function(index ) {
           var commentId = this.id;
@@ -144,16 +145,24 @@ $(function () {
           if (Number(currentUserId) === commentUserId){
             cInfo = `
             <div class="commentDiv-${commentId}">
+<<<<<<< HEAD
               <h5> » ${this.description}</h5>
               <h5>User: <a href="/users/${commentUserId}">${currentUser}</a></h5>
               <a href="/habits/${hId}/comments/${commentId}/edit" data-method="get">Edit</a>
               <a href="/habits/${hId}/comments/${commentId}" class="js-delete-comment" data-confirm="Destroy Comment: '${this.description}'?">Delete</a>
+=======
+            <h5> » ${this.description}</h5>
+            <h5>User: <a href="/users/${this.user_id}">${this.user_name}</a></h5>
+            <a href="/habits/${hId}/comments/${commentId}/edit" data-method="get">Edit</a>
+            <a href="/habits/${hId}/comments/${commentId}" class="js-delete-comment" data-confirm="Destroy Comment: '${this.description}'?">Delete</a>
+>>>>>>> 22160926f3974fe4a77f326fbb612352abde65c6
             </div>
             `
           } else {
             cInfo = `
             <div class="commentDiv-${commentId}">
             <h5> » ${this.description}</h5>
+            <h5>User: <a href="/users/${this.user_id}">${this.user_name}</a></h5>
             </div>
             `
           }
@@ -162,6 +171,7 @@ $(function () {
         });
         $(".onlyComments").text("")
         $(".onlyComments").append(habitCommentsNames);
+        $(".onlyComments").append("<br />");
       } else {
         $(".onlyComments").text("")
         $(".commentHeader").html("<h5 class='commentTitle'>There are no comments for this Habit yet! </h5>")
